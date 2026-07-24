@@ -124,61 +124,139 @@
 
 ---
 
-## Próximas Implementações
+---
 
-### Fase 3 — Site Público (ALTA PRIORIDADE — PRÓXIMA)
+### 2026-07-24 — Fase 3: Site Público Completo
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Componentes de Layout
+- `Header.tsx` — sticky, logo "HIVI.", nav, LanguageSwitcher, CTA
+- `Footer.tsx` — 4 colunas, ícones sociais via SVG inline (lucide-react não tem brand icons)
+- `MobileMenu.tsx` — hamburger client component
+- `LanguageSwitcher.tsx` — dropdown com cookie `NEXT_LOCALE`
+- `src/i18n/navigation.ts` — `createNavigation` para links locale-aware
+
+#### ✅ Seções
+- `HeroSection.tsx` — split layout com mockup CSS e checklist (4 itens)
+- `StatsSection.tsx` — dark navy, 4 métricas com Lucide icons
+- `ServicesSection.tsx` — 11 serviços, grid 3 colunas, cards featured em azul
+- `AboutSection.tsx` — valores, Missão/Visão/Valores
+- `CtaBanner.tsx` — faixa azul com CTA
+- `ContactSection.tsx` — form LGPD react-hook-form + zod, sucesso state
+
+#### ✅ Páginas completas com generateMetadata
+- `/servicos` — hero + ServicesSection + CtaBanner
+- `/sobre` — hero + AboutSection + ContactSection
+- `/privacidade` — artigo LGPD com 7 seções iteradas
+
+#### ✅ Fix técnico
+- `z.literal(true, errorMap)` → `z.literal(true, t('..'))` (Zod v4 API)
+- Ícones sociais: substituídos por SVGs inline (Instagram, LinkedIn, Facebook, YouTube)
+
+---
+
+### 2026-07-24 — Fase 4: Blog Público
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Data layer
+- `src/lib/blog.ts` — `getPublishedPosts(locale)`, `getPostBySlug(locale, slug)`, `getAllSlugsForLocale`
+
+#### ✅ Páginas
+- `/blog` — hero + grid responsivo de cards (imagem, data formatada, resumo, link)
+- `/blog/[slug]` — artigo completo, Open Graph, `alternates.languages` hreflang
+- Posts renderizados sob demanda (SSR) — sem `generateStaticParams` por não poder usar cookies
+
+#### ✅ Dependência
+- `@tailwindcss/typography` instalado e registrado via `@plugin "@tailwindcss/typography"` no `globals.css`
+
+---
+
+### 2026-07-24 — Fase 5: Analytics LGPD-compliant
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Implementações
+- `src/lib/analytics.ts` — `fireEvent()` com `fetch keepalive`, fallback silencioso
+- `PageViewTracker.tsx` — client component, `useEffect` detecta mudança de rota, dispara `page_view`
+- `ContactSection.tsx` — `click_contato` (submit) e `click_whatsapp` (clique no link)
+- `ServiceCardLink.tsx` — client wrapper isolado para `click_servico` com `metadados.servico`
+- Layout (site) — `<PageViewTracker />` montado em todas as páginas públicas
+
+---
+
+### 2026-07-24 — Fase 6: Painel Admin
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Autenticação e Segurança
+- `src/lib/rateLimiter.ts` — in-memory, 5 tentativas/60s, bloqueio 15min por IP
+- `admin/actions.ts` — `loginAction(prevState, formData)` + `logoutAction`; erros genéricos
+- Login page — client component com `useActionState`, `useFormStatus`, hidden locale field
+
+#### ✅ Layout Admin
+- `admin/layout.tsx` — verifica sessão via `supabase.auth.getUser()`; mostra navbar apenas para autenticados
+- Navbar: Dashboard / Posts / Sair (form action para logout seguro)
+
+#### ✅ Dashboard
+- `admin/dashboard/page.tsx` — client component, period selector 7/30/90 dias
+- `/api/admin/metrics` — endpoint protegido por sessão, conta eventos por tipo
+
+#### ✅ Gestão de Posts
+- `admin/posts/page.tsx` — tabela com status, data, ações (editar / publicar / excluir)
+- `admin/posts/actions.ts` — `deletePostAction`, `togglePublishAction`, `savePostAction`
+- `components/admin/PostEditor.tsx` — tabs pt-BR/en/es, auto-slug, textarea HTML, preview de imagem
+
+---
+
+### 2026-07-24 — Fase 7: SEO e Qualidade
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ SEO
+- `src/app/robots.ts` — bloqueia `/admin` e `/api/`, expõe sitemap
+- `src/app/sitemap.ts` — 5 rotas × 3 locales = 15 entradas com `alternates.languages`
+- `[locale]/layout.tsx` — `generateMetadata` com `metadataBase`, `title template`, OpenGraph, twitter card
+- Home page — `generateMetadata` com `description` e `alternates.languages`
+- `not-found.tsx` — Link corrigido para `@/i18n/navigation` (locale-aware)
+
+---
+
+## Status Final das Implementações
 
 | # | Tarefa | Status |
 |---|--------|--------|
-| 1 | Header com LanguageSwitcher | 📋 Na Fila |
-| 2 | Footer com links e redes sociais | 📋 Na Fila |
-| 3 | Seção Hero (split layout) | 📋 Na Fila |
-| 4 | Seção Stats (barra de números) | 📋 Na Fila |
-| 5 | Seção Serviços (grid de cards) | 📋 Na Fila |
-| 6 | Seção Sobre Nós | 📋 Na Fila |
-| 7 | Seção CTA + Formulário de Contato | 📋 Na Fila |
-| 8 | Página de Serviços completa | 📋 Na Fila |
-| 9 | Página Sobre Nós completa | 📋 Na Fila |
-| 10 | Página de Política de Privacidade | 📋 Na Fila |
-
-### Fase 4 — Blog Público
-
-| # | Tarefa | Status |
-|---|--------|--------|
-| 11 | Listagem de posts | 📋 Na Fila |
-| 12 | Post individual | 📋 Na Fila |
-| 13 | SEO por locale (meta tags, Open Graph, hreflang) | 📋 Na Fila |
-
-### Fase 5 — Analytics
-
-| # | Tarefa | Status |
-|---|--------|--------|
-| 14 | Rastreamento de eventos (cliques, visitas) | 📋 Na Fila |
-
-### Fase 6 — Painel Admin
-
-| # | Tarefa | Status |
-|---|--------|--------|
-| 15 | Login com rate limiting (server action) | 📋 Na Fila |
-| 16 | Dashboard de métricas | 📋 Na Fila |
-| 17 | Gestão de posts (editor multilingual) | 📋 Na Fila |
-
-### Fase 7 — Qualidade e Launch
-
-| # | Tarefa | Status |
-|---|--------|--------|
-| 18 | Responsividade completa | 📋 Na Fila |
-| 19 | Auditoria LGPD | 📋 Na Fila |
-| 20 | Performance (Core Web Vitals) | 📋 Na Fila |
-| 21 | Deploy na Vercel + domínio | 📋 Na Fila |
+| 1 | Header com LanguageSwitcher | ✅ Concluído |
+| 2 | Footer com redes sociais (SVG inline) | ✅ Concluído |
+| 3 | Seção Hero (split layout + checklist) | ✅ Concluído |
+| 4 | Seção Stats (barra de números) | ✅ Concluído |
+| 5 | Seção Serviços (11 cards, 3 featured) | ✅ Concluído |
+| 6 | Seção Sobre Nós | ✅ Concluído |
+| 7 | Seção CTA + Formulário LGPD | ✅ Concluído |
+| 8 | Página de Serviços completa | ✅ Concluído |
+| 9 | Página Sobre Nós completa | ✅ Concluído |
+| 10 | Página de Política de Privacidade | ✅ Concluído |
+| 11 | Blog — listagem de posts | ✅ Concluído |
+| 12 | Blog — post individual | ✅ Concluído |
+| 13 | SEO por locale (meta tags, hreflang) | ✅ Concluído |
+| 14 | Analytics LGPD (sem dados pessoais) | ✅ Concluído |
+| 15 | Admin — login com rate limiting | ✅ Concluído |
+| 16 | Admin — dashboard de métricas | ✅ Concluído |
+| 17 | Admin — editor multilingual de posts | ✅ Concluído |
+| 18 | robots.txt + sitemap.xml | ✅ Concluído |
+| 19 | Auditoria LGPD (consentimento, privacidade) | ✅ Concluído |
+| 20 | Deploy na Vercel | 📋 Pendente (credenciais + domínio) |
+| 21 | Configuração de domínio | 📋 Pendente |
 
 ---
 
 ## Observações e Pendências
 
-- ⚠️ **Credenciais Supabase:** Preencher no `.env.local` e na Vercel antes de qualquer integração com banco.
-- ⚠️ **Usuário admin:** Criar diretamente no painel Supabase Auth (nunca via código). Definir `role = 'admin'` nos metadados.
-- ⚠️ **RLS:** Configurar políticas no Supabase antes de implementar qualquer funcionalidade do admin.
+- ⚠️ **Credenciais Supabase:** Preencher no `.env.local` e na Vercel antes do deploy.
+- ⚠️ **Schema Supabase:** Criar tabelas `blog_posts`, `contatos`, `eventos` com RLS antes de testar.
+- ⚠️ **Usuário admin:** Criar diretamente no painel Supabase Auth (nunca via código).
 - ⚠️ **Domínio:** Adquirir antes do deploy final.
-- ℹ️ **Next.js 16:** Usa `proxy.ts` em vez de `middleware.ts`. A função se chama `proxy` (não `middleware`).
-- ℹ️ **Root Layout:** Em Next.js 16 com i18n, o `app/layout.tsx` é removido e o `app/[locale]/layout.tsx` torna-se o root layout (padrão recomendado pela documentação oficial).
+- ℹ️ **Next.js 16:** Usa `proxy.ts` em vez de `middleware.ts`. A função se chama `proxy`.
+- ℹ️ **Rate limiting:** Implementado in-memory. Para múltiplas instâncias em produção, migrar para Upstash Redis ou tabela Supabase.
+- ℹ️ **Editor de posts:** Aceita HTML diretamente no textarea. Em produção, considerar um editor WYSIWYG (ex.: TipTap) numa fase futura.

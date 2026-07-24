@@ -62,32 +62,50 @@ hiago01z/HIVI-Tecnologia/
 │   │   │   │   └── not-found.tsx      # 404 traduzida
 │   │   │   │
 │   │   │   ├── api/               # API Routes (sem locale — internas)
-│   │   │   │   ├── contato/route.ts
-│   │   │   │   └── eventos/route.ts
+│   │   │   │   ├── contato/route.ts        # POST — formulário LGPD
+│   │   │   │   ├── eventos/route.ts        # POST — analytics sem dados pessoais
+│   │   │   │   └── admin/
+│   │   │   │       └── metrics/route.ts    # GET — métricas (requer sessão)
 │   │   │   │
-│   │   │   ├── layout.tsx             # Layout HTML raiz
-│   │   │   └── globals.css
+│   │   │   ├── robots.ts              # Gerador robots.txt (bloqueia /admin, /api)
+│   │   │   ├── sitemap.ts             # Gerador sitemap.xml (5 rotas × 3 locales)
+│   │   │   ├── layout.tsx             # Layout HTML raiz (sem arquivo)
+│   │   │   └── globals.css            # Tailwind + @plugin typography
 │   │   │
 │   │   ├── components/
 │   │   │   ├── ui/
-│   │   │   │   └── LanguageSwitcher.tsx   # Botão de troca de idioma
-│   │   │   ├── layout/            # Header, Footer, Navigation
-│   │   │   ├── sections/          # Hero, Services, Stats, CTA...
-│   │   │   ├── blog/
+│   │   │   │   └── LanguageSwitcher.tsx   # Dropdown de idioma — salva cookie NEXT_LOCALE
+│   │   │   ├── layout/
+│   │   │   │   ├── Header.tsx             # Sticky, logo, nav, CTA
+│   │   │   │   ├── Footer.tsx             # 4 colunas, SVG sociais, legal
+│   │   │   │   └── MobileMenu.tsx         # Hamburger client component
+│   │   │   ├── sections/
+│   │   │   │   ├── HeroSection.tsx        # Split layout, mockup, checklist
+│   │   │   │   ├── StatsSection.tsx       # Dark navy, 4 métricas
+│   │   │   │   ├── ServicesSection.tsx    # 11 serviços, grid 3 colunas
+│   │   │   │   ├── ServiceCardLink.tsx    # Client wrapper p/ click_servico
+│   │   │   │   ├── AboutSection.tsx       # Valores, Missão/Visão
+│   │   │   │   ├── CtaBanner.tsx          # Faixa CTA azul
+│   │   │   │   └── ContactSection.tsx     # Formulário LGPD react-hook-form + zod
+│   │   │   ├── analytics/
+│   │   │   │   └── PageViewTracker.tsx    # Rastreador de page_view por rota
 │   │   │   └── admin/
+│   │   │       └── PostEditor.tsx         # Editor multilingual com tabs de locale
 │   │   │
-│   │   ├── proxy.ts                   # i18n (locale) + auth (admin) — Next.js 16 renomeou middleware → proxy
+│   │   ├── proxy.ts                   # i18n (locale) + auth (admin) — Next.js 16
 │   │   ├── lib/
 │   │   │   ├── supabase/
-│   │   │   │   ├── client.ts
-│   │   │   │   └── server.ts
-│   │   │   └── utils.ts
+│   │   │   │   ├── client.ts              # Browser client (anon key)
+│   │   │   │   └── server.ts              # SSR client + createAdminClient
+│   │   │   ├── analytics.ts               # fireEvent() com keepalive
+│   │   │   ├── blog.ts                    # getPublishedPosts, getPostBySlug
+│   │   │   └── rateLimiter.ts             # In-memory rate limit (5/min, 15min block)
 │   │   ├── types/
-│   │   │   ├── blog.ts
-│   │   │   └── contato.ts
+│   │   │   ├── blog.ts                    # BlogPost, BlogPostPreview, LocalizedText
+│   │   │   └── contato.ts                 # ContatoPayload, EventoPayload
 │   │   └── constants/
-│   │       ├── services.ts            # Chaves i18n dos serviços (não texto)
-│   │       └── navigation.ts          # Chaves i18n da navegação
+│   │       ├── services.ts                # SERVICE_KEYS, FEATURED_SERVICES
+│   │       └── navigation.ts              # NAV_LINKS, FOOTER_LEGAL_LINKS
 │   │
 │   ├── .env.local
 │   ├── .env.example
@@ -221,29 +239,30 @@ Requisição do usuário
 
 | Rota (pt-BR) | Rota (en) | Descrição | Status |
 |-------------|-----------|-----------|--------|
-| `/pt-br` | `/en` | Home | Na Fila |
-| `/pt-br/servicos` | `/en/services` | Serviços | Na Fila |
-| `/pt-br/sobre` | `/en/about` | Sobre | Na Fila |
-| `/pt-br/blog` | `/en/blog` | Blog | Na Fila |
-| `/pt-br/blog/[slug]` | `/en/blog/[slug]` | Post | Na Fila |
-| `/pt-br/privacidade` | `/en/privacy` | LGPD | Na Fila |
+| `/pt-BR` | `/en` | Home | ✅ Concluído |
+| `/pt-BR/servicos` | `/en/servicos` | Serviços | ✅ Concluído |
+| `/pt-BR/sobre` | `/en/sobre` | Sobre | ✅ Concluído |
+| `/pt-BR/blog` | `/en/blog` | Blog | ✅ Concluído |
+| `/pt-BR/blog/[slug]` | `/en/blog/[slug]` | Post | ✅ Concluído |
+| `/pt-BR/privacidade` | `/en/privacidade` | LGPD | ✅ Concluído |
 
 ### Painel Admin
 
 | Rota | Descrição | Proteção | Status |
 |------|-----------|----------|--------|
-| `/pt-br/admin` | Login | Pública | Na Fila |
-| `/pt-br/admin/dashboard` | Dashboard | Middleware Auth | Na Fila |
-| `/pt-br/admin/posts` | Posts | Middleware Auth | Na Fila |
-| `/pt-br/admin/posts/novo` | Criar post | Middleware Auth | Na Fila |
-| `/pt-br/admin/posts/[id]` | Editar post | Middleware Auth | Na Fila |
+| `/pt-BR/admin` | Login | Pública | ✅ Concluído |
+| `/pt-BR/admin/dashboard` | Dashboard + métricas | proxy.ts Auth | ✅ Concluído |
+| `/pt-BR/admin/posts` | Lista de posts | proxy.ts Auth | ✅ Concluído |
+| `/pt-BR/admin/posts/novo` | Criar post | proxy.ts Auth | ✅ Concluído |
+| `/pt-BR/admin/posts/[id]` | Editar post | proxy.ts Auth | ✅ Concluído |
 
 ### API Routes (sem locale)
 
-| Rota | Método | Descrição |
-|------|--------|----------|
-| `/api/contato` | POST | Envio de formulário |
-| `/api/eventos` | POST | Analytics |
+| Rota | Método | Proteção | Descrição |
+|------|--------|----------|-----------|
+| `/api/contato` | POST | Pública | Envio de formulário LGPD |
+| `/api/eventos` | POST | Pública | Analytics sem dados pessoais |
+| `/api/admin/metrics` | GET | Sessão Supabase | Métricas do dashboard admin |
 
 ---
 
