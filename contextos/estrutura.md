@@ -16,7 +16,7 @@ hiago01z/HIVI-Tecnologia/
 │   ├── estrutura.md               # Este documento
 │   └── diario.md                  # Registro de implementações
 │
-├── HIVI-Tecnologia/               # Aplicação Web (Next.js)
+├── hivi-tecnologia/               # Aplicação Web (Next.js)
 │   ├── public/                    # Assets públicos (servidos diretamente)
 │   │   ├── images/                # Imagens estáticas
 │   │   ├── icons/                 # Ícones SVG customizados
@@ -69,12 +69,16 @@ hiago01z/HIVI-Tecnologia/
 │   ├── .env.example               # Template de variáveis (versionar)
 │   ├── .gitignore
 │   ├── next.config.ts
-│   ├── tailwind.config.ts
+│   ├── eslint.config.mjs
+│   ├── postcss.config.mjs
+│   ├── tailwind.config.ts         # Gerado automaticamente pelo preset
 │   ├── tsconfig.json
 │   └── package.json
 │
 └── README.md
 ```
+
+> **Nota de nomenclatura:** A pasta da aplicação é `hivi-tecnologia/` (kebab-case) pois o npm não aceita letras maiúsculas em nomes de projeto.
 
 ---
 
@@ -82,14 +86,16 @@ hiago01z/HIVI-Tecnologia/
 
 | Camada | Tecnologia | Versão | Função |
 |--------|-----------|--------|--------|
-| Framework | Next.js | 14+ | App Router, SSR/SSG/ISR, API Routes |
+| Framework | Next.js | 15+ (App Router) | SSR/SSG/ISR, API Routes |
 | Linguagem | TypeScript | 5+ | Tipagem estática em todo o projeto |
-| Estilização | Tailwind CSS | 3+ | Utility-first, responsividade nativa |
+| Estilização | Tailwind CSS | 4+ | Utility-first, responsividade nativa |
 | Backend/DB | Supabase | latest | PostgreSQL, Auth, Storage |
 | Hospedagem | Vercel | — | CI/CD automático via Git |
 | Ícones | Lucide React | latest | Biblioteca de ícones SVG |
 | Formulários | React Hook Form | latest | Gerenciamento de estado de formulários |
 | Validação | Zod | latest | Schema validation client + server |
+
+**Inicializado com:** `create-next-app@latest` (preset padrão: TypeScript + Tailwind + ESLint + App Router + src/)
 
 ---
 
@@ -148,16 +154,18 @@ hiago01z/HIVI-Tecnologia/
 └────────────────────────────────────────────────────────┘
          │
          ├─── /  (HOME)
-         │    ├── [Hero] — Título + subtítulo + CTA
-         │    ├── [Sobre] — Resumo da empresa
-         │    ├── [Serviços em Destaque] — Cards principais
-         │    ├── [Diferenciais] — Por que nos escolher
-         │    └── [CTA Final] — Entrar em contato
+         │    ├── [Hero] — Título + subtítulo + CTA (layout split)
+         │    ├── [Clientes] — Logos de empresas parceiras
+         │    ├── [Stats] — Números (fundo marinho)
+         │    ├── [Serviços] — Cards (3 colunas)
+         │    ├── [Faixa CTA] — Banner azul com chamada
+         │    ├── [Destaque Produto] — Mockup + features
+         │    └── [Contato] — Formulário
          │
          ├─── /servicos
-         │    ├── [Header da Página] — Título e descrição
-         │    ├── [Grid de Serviços] — Cards com ícone, título e descrição
-         │    └── [CTA] — Link para contato
+         │    ├── [Header da Página]
+         │    ├── [Grid de Serviços] — Cards com ícone e descrição
+         │    └── [CTA]
          │
          ├─── /sobre
          │    ├── [Missão, Visão e Valores]
@@ -165,12 +173,12 @@ hiago01z/HIVI-Tecnologia/
          │    └── [CTA]
          │
          ├─── /blog
-         │    ├── [Grid de Posts] — Cards com capa, título e resumo
+         │    ├── [Grid de Posts]
          │    └── [Paginação]
          │
          ├─── /blog/[slug]
-         │    ├── [Capa e Metadados] — Título, data, categoria
-         │    ├── [Conteúdo do Post] — Markdown renderizado
+         │    ├── [Capa e Metadados]
+         │    ├── [Conteúdo do Post]
          │    └── [Posts Relacionados]
          │
          └─── /privacidade
@@ -179,7 +187,7 @@ hiago01z/HIVI-Tecnologia/
 ┌────────────────────────────────────────────────────────┐
 │                        FOOTER                          │
 │  [Logo]  Links do Site  Redes Sociais  [Privacidade]   │
-│               © 2024 HIVI Tecnologia                   │
+│               © HIVI Tecnologia                        │
 └────────────────────────────────────────────────────────┘
 ```
 
@@ -190,7 +198,7 @@ hiago01z/HIVI-Tecnologia/
 Todas as informações de contato e redes sociais são configuradas via variáveis de ambiente — **nenhum dado de contato ou link de rede social deve ser escrito diretamente no código.**
 
 ```env
-# /.env.example
+# hivi-tecnologia/.env.example
 
 # -------------------------------------------------------------------
 # Supabase — obtidos no dashboard do projeto Supabase
@@ -221,8 +229,6 @@ NEXT_PUBLIC_YOUTUBE=https://youtube.com/@hivi
 ```
 
 > **Segurança:** O arquivo `.env.local` nunca deve ser versionado. Apenas `.env.example` (sem valores reais) vai para o repositório.
->
-> **Contato e redes sociais:** Os valores de `NEXT_PUBLIC_TELEFONE`, `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_EMAIL_CONTATO` e de todas as redes sociais devem ser definidos no painel da Vercel (Environment Variables) e no `.env.local` em ambiente local.
 
 ---
 
@@ -246,5 +252,4 @@ NEXT_PUBLIC_YOUTUBE=https://youtube.com/@hivi
 - `SUPABASE_SERVICE_ROLE_KEY` apenas em Server Components ou API Routes
 - Row Level Security (RLS) habilitado em todas as tabelas do Supabase
 - Inputs de formulários validados com Zod no client e no server
-- Proteção CSRF nas API Routes
 - Headers de segurança configurados no `next.config.ts`

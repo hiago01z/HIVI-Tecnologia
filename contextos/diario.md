@@ -26,21 +26,41 @@
 #### ✅ Criação da pasta `contextos/` e documentação base
 
 - Criação da estrutura de documentação do projeto em `/contextos/`
-- **`projeto.md`** — Escopo completo, descrição de todos os 11 serviços, planejamento em 4 fases e stack tecnológica definida
-- **`regras.md`** — 7 regras formais de desenvolvimento, incluindo conformidade LGPD, padrões de qualidade e instruções para agentes de IA
-- **`designe.md`** — Design system provisório com paleta de cores, tipografia (Inter), escala de espaçamento, especificações de componentes (botões, cards, header, footer) e diretrizes de acessibilidade WCAG AA
-- **`estrutura.md`** — Arquitetura completa do projeto (Next.js App Router), stack tecnológica, diagrama visual das páginas, esquema do banco de dados Supabase e convenções de nomenclatura
+- **`projeto.md`** — Escopo completo, descrição de todos os serviços, planejamento em 4 fases e stack tecnológica definida
+- **`regras.md`** — 7 regras formais incluindo conformidade LGPD, padrões de qualidade e instruções para agentes de IA
+- **`designe.md`** — Design system com paleta de cores extraída das imagens de referência, tipografia, layouts de seções e componentes
+- **`estrutura.md`** — Arquitetura completa, stack, diagrama visual e esquema de banco de dados
 - **`diario.md`** — Este documento
 
 **Commit:** `docs(contextos): configuração inicial dos documentos do projeto HIVI Tecnologia`
 
-#### ✅ Decisão de arquitetura: contato e redes sociais via variáveis de ambiente
+#### ✅ Decisão: contato e redes sociais via variáveis de ambiente
 
-- Definido que número de telefone, WhatsApp, e-mail de contato e links de redes sociais **não serão hardcoded no código**
-- Todos esses dados serão configurados via variáveis de ambiente (`NEXT_PUBLIC_*`) na Vercel e no `.env.local`
-- `estrutura.md` atualizado com o template completo do `.env.example` incluindo as novas variáveis
+- Número de telefone, WhatsApp, e-mail e links de redes sociais configurados via `NEXT_PUBLIC_*`
+- Nenhum dado de contato será escrito diretamente no código
+- `estrutura.md` atualizado com template completo do `.env.example`
 
 **Commit:** `docs(contextos): adiciona variáveis de ambiente para telefone e redes sociais`
+
+#### ✅ Design system definido com base nas imagens de referência
+
+- Paleta de cores definitiva: Azul Marinho `#162268`, Azul Primário `#1565C0`, Degrâdê Hero `#F0F7FF → #C8DFFF`
+- Layout hero: split 50/50 (texto esquerda + mockup direita)
+- Seções alternadas definidas: branco → marinho → branco → azul suave
+- Barra de stats, cards de serviços (padrão + destaque) e footer documentados
+
+**Commit:** `docs(designe): atualiza design system com estilo extraído das imagens de referência`
+
+#### ✅ Inicialização do projeto Next.js
+
+- Projeto criado com `create-next-app@latest` (preset padrão)
+- Configurações: TypeScript + Tailwind CSS 4 + ESLint + App Router + `src/` directory
+- Estrutura de pastas criada: `components/{ui,layout,sections,blog}`, `lib/supabase`, `types`, `constants`
+- `.env.example` configurado com todas as variáveis do projeto
+- `.gitignore` atualizado para versionar `.env.example` mas ignorar `.env*.local`
+- Pasta da aplicação: `hivi-tecnologia/` (npm exige kebab-case; sem maiúsculas)
+
+**Commit:** `feat(hivi-tecnologia): inicializa projeto Next.js com preset padrão`
 
 ---
 
@@ -50,39 +70,36 @@
 
 | # | Tarefa | Dependência | Status |
 |---|--------|------------|--------|
-| 1 | Receber imagens de referência do cliente e atualizar `designe.md` | Cliente | 📋 Na Fila |
-| 2 | Inicializar projeto Next.js na pasta `HIVI-Tecnologia/` | — | 📋 Na Fila |
-| 3 | Configurar Tailwind CSS + TypeScript + ESLint + Prettier | Tarefa 2 | 📋 Na Fila |
-| 4 | Configurar Supabase (cliente server e client-side) | Tarefa 2 | 📋 Na Fila |
-| 5 | Configurar `.env.example` no projeto com todas as variáveis definidas | Tarefa 2 | 📋 Na Fila |
-| 6 | Implementar Header e Footer globais | Tarefa 3 + Design | 📋 Na Fila |
-| 7 | Implementar página Home com todas as seções | Tarefa 6 | 📋 Na Fila |
+| 1 | Instalar dependências adicionais: Lucide React, React Hook Form, Zod, Supabase JS | — | 📋 Na Fila |
+| 2 | Configurar clientes Supabase (`lib/supabase/client.ts` e `server.ts`) | Tarefa 1 | 📋 Na Fila |
+| 3 | Configurar `.env.local` com credenciais reais do Supabase | Credenciais | 📋 Na Fila |
+| 4 | Implementar Header e Footer globais | Design system | 📋 Na Fila |
+| 5 | Implementar página Home completa (hero, clientes, stats, serviços, CTA, contato) | Tarefa 4 | 📋 Na Fila |
 
 ### Média Prioridade
 
 | # | Tarefa | Dependência | Status |
 |---|--------|------------|--------|
-| 8 | Implementar página Serviços | Tarefa 6 | 📋 Na Fila |
-| 9 | Implementar página Sobre Nós | Tarefa 6 | 📋 Na Fila |
-| 10 | Implementar Política de Privacidade (LGPD) | Tarefa 6 | 📋 Na Fila |
-| 11 | Estruturar Blog com Supabase (tabela + listagem + post individual) | Tarefa 4 | 📋 Na Fila |
-| 12 | Implementar formulário de contato com validação LGPD | Tarefa 4 | 📋 Na Fila |
+| 6 | Implementar página Serviços | Tarefa 4 | 📋 Na Fila |
+| 7 | Implementar página Sobre Nós | Tarefa 4 | 📋 Na Fila |
+| 8 | Implementar Política de Privacidade (LGPD) | Tarefa 4 | 📋 Na Fila |
+| 9 | Estruturar Blog com Supabase | Tarefa 2 | 📋 Na Fila |
+| 10 | Implementar formulário de contato com validação LGPD | Tarefa 2 | 📋 Na Fila |
 
 ### Baixa Prioridade
 
 | # | Tarefa | Dependência | Status |
 |---|--------|------------|--------|
-| 13 | SEO completo: meta tags, Open Graph, sitemap, robots.txt | Fases anteriores | 📋 Na Fila |
-| 14 | Otimização de performance (Core Web Vitals) | Fases anteriores | 📋 Na Fila |
-| 15 | Testes de responsividade em todos os breakpoints | Fases anteriores | 📋 Na Fila |
-| 16 | Auditoria final de conformidade LGPD | Fases anteriores | 📋 Na Fila |
-| 17 | Configuração de domínio personalizado na Vercel | Deploy | 📋 Na Fila |
+| 11 | SEO: meta tags, Open Graph, sitemap, robots.txt | Fases anteriores | 📋 Na Fila |
+| 12 | Otimização de performance (Core Web Vitals) | Fases anteriores | 📋 Na Fila |
+| 13 | Testes de responsividade (mobile, tablet, desktop) | Fases anteriores | 📋 Na Fila |
+| 14 | Auditoria final de conformidade LGPD | Fases anteriores | 📋 Na Fila |
+| 15 | Configuração de domínio na Vercel | Deploy | 📋 Na Fila |
 
 ---
 
 ## Observações e Pendências Abertas
 
-- ⚠️ **Design:** Aguardando imagens de referência do cliente para definir paleta de cores, tipografia e estilo visual definitivos. Atualizar `designe.md` antes de implementar qualquer componente visual.
-- ⚠️ **Variáveis de ambiente:** Telefone, WhatsApp, e-mail e redes sociais a serem preenchidos na Vercel (produção) e no `.env.local` (desenvolvimento local) antes do início do desenvolvimento dos componentes de contato e footer.
-- ⚠️ **Credenciais Supabase:** URLs e chaves a serem configuradas no momento do setup. Não versionar.
-- ⚠️ **Domínio:** Verificar disponibilidade e adquirir domínio para a Vercel antes do deploy final.
+- ⚠️ **Credenciais Supabase:** Preencher `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` e `SUPABASE_SERVICE_ROLE_KEY` no `.env.local` e no painel da Vercel antes de implementar qualquer funcionalidade que use o banco.
+- ⚠️ **Variáveis de contato e redes sociais:** Preencher `NEXT_PUBLIC_TELEFONE`, `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_EMAIL_CONTATO` e links de redes sociais no `.env.local` e na Vercel antes de implementar Header, Footer e página de contato.
+- ⚠️ **Domínio:** Verificar disponibilidade e adquirir domínio antes do deploy final.
