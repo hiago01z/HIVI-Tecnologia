@@ -34,6 +34,14 @@
 
 **Commit:** `docs(contextos): configuração inicial dos documentos do projeto HIVI Tecnologia`
 
+#### ✅ Decisão de arquitetura: contato e redes sociais via variáveis de ambiente
+
+- Definido que número de telefone, WhatsApp, e-mail de contato e links de redes sociais **não serão hardcoded no código**
+- Todos esses dados serão configurados via variáveis de ambiente (`NEXT_PUBLIC_*`) na Vercel e no `.env.local`
+- `estrutura.md` atualizado com o template completo do `.env.example` incluindo as novas variáveis
+
+**Commit:** `docs(contextos): adiciona variáveis de ambiente para telefone e redes sociais`
+
 ---
 
 ## Próximas Implementações
@@ -46,33 +54,35 @@
 | 2 | Inicializar projeto Next.js na pasta `HIVI-Tecnologia/` | — | 📋 Na Fila |
 | 3 | Configurar Tailwind CSS + TypeScript + ESLint + Prettier | Tarefa 2 | 📋 Na Fila |
 | 4 | Configurar Supabase (cliente server e client-side) | Tarefa 2 | 📋 Na Fila |
-| 5 | Implementar Header e Footer globais | Tarefa 3 + Design | 📋 Na Fila |
-| 6 | Implementar página Home com todas as seções | Tarefa 5 | 📋 Na Fila |
+| 5 | Configurar `.env.example` no projeto com todas as variáveis definidas | Tarefa 2 | 📋 Na Fila |
+| 6 | Implementar Header e Footer globais | Tarefa 3 + Design | 📋 Na Fila |
+| 7 | Implementar página Home com todas as seções | Tarefa 6 | 📋 Na Fila |
 
 ### Média Prioridade
 
 | # | Tarefa | Dependência | Status |
 |---|--------|------------|--------|
-| 7 | Implementar página Serviços | Tarefa 5 | 📋 Na Fila |
-| 8 | Implementar página Sobre Nós | Tarefa 5 | 📋 Na Fila |
-| 9 | Implementar Política de Privacidade (LGPD) | Tarefa 5 | 📋 Na Fila |
-| 10 | Estruturar Blog com Supabase (tabela + listagem + post individual) | Tarefa 4 | 📋 Na Fila |
-| 11 | Implementar formulário de contato com validação LGPD | Tarefa 4 | 📋 Na Fila |
+| 8 | Implementar página Serviços | Tarefa 6 | 📋 Na Fila |
+| 9 | Implementar página Sobre Nós | Tarefa 6 | 📋 Na Fila |
+| 10 | Implementar Política de Privacidade (LGPD) | Tarefa 6 | 📋 Na Fila |
+| 11 | Estruturar Blog com Supabase (tabela + listagem + post individual) | Tarefa 4 | 📋 Na Fila |
+| 12 | Implementar formulário de contato com validação LGPD | Tarefa 4 | 📋 Na Fila |
 
 ### Baixa Prioridade
 
 | # | Tarefa | Dependência | Status |
 |---|--------|------------|--------|
-| 12 | SEO completo: meta tags, Open Graph, sitemap, robots.txt | Fases anteriores | 📋 Na Fila |
-| 13 | Otimização de performance (Core Web Vitals) | Fases anteriores | 📋 Na Fila |
-| 14 | Testes de responsividade em todos os breakpoints | Fases anteriores | 📋 Na Fila |
-| 15 | Auditoria final de conformidade LGPD | Fases anteriores | 📋 Na Fila |
-| 16 | Configuração de domínio personalizado na Vercel | Deploy | 📋 Na Fila |
+| 13 | SEO completo: meta tags, Open Graph, sitemap, robots.txt | Fases anteriores | 📋 Na Fila |
+| 14 | Otimização de performance (Core Web Vitals) | Fases anteriores | 📋 Na Fila |
+| 15 | Testes de responsividade em todos os breakpoints | Fases anteriores | 📋 Na Fila |
+| 16 | Auditoria final de conformidade LGPD | Fases anteriores | 📋 Na Fila |
+| 17 | Configuração de domínio personalizado na Vercel | Deploy | 📋 Na Fila |
 
 ---
 
 ## Observações e Pendências Abertas
 
 - ⚠️ **Design:** Aguardando imagens de referência do cliente para definir paleta de cores, tipografia e estilo visual definitivos. Atualizar `designe.md` antes de implementar qualquer componente visual.
-- ⚠️ **Credenciais:** URLs e chaves do Supabase serão configuradas no momento do setup. Não versionar.
+- ⚠️ **Variáveis de ambiente:** Telefone, WhatsApp, e-mail e redes sociais a serem preenchidos na Vercel (produção) e no `.env.local` (desenvolvimento local) antes do início do desenvolvimento dos componentes de contato e footer.
+- ⚠️ **Credenciais Supabase:** URLs e chaves a serem configuradas no momento do setup. Não versionar.
 - ⚠️ **Domínio:** Verificar disponibilidade e adquirir domínio para a Vercel antes do deploy final.

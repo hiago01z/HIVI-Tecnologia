@@ -187,19 +187,42 @@ hiago01z/HIVI-Tecnologia/
 
 ## 6. Variáveis de Ambiente
 
+Todas as informações de contato e redes sociais são configuradas via variáveis de ambiente — **nenhum dado de contato ou link de rede social deve ser escrito diretamente no código.**
+
 ```env
 # /.env.example
 
+# -------------------------------------------------------------------
 # Supabase — obtidos no dashboard do projeto Supabase
+# -------------------------------------------------------------------
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=xxxx
-SUPABASE_SERVICE_ROLE_KEY=xxxx   # Nunca expor no frontend
+SUPABASE_SERVICE_ROLE_KEY=xxxx        # Nunca expor no frontend
 
+# -------------------------------------------------------------------
 # Site
+# -------------------------------------------------------------------
 NEXT_PUBLIC_SITE_URL=https://hivi.com.br
+
+# -------------------------------------------------------------------
+# Contato
+# -------------------------------------------------------------------
+NEXT_PUBLIC_TELEFONE=+55 (XX) XXXX-XXXX
+NEXT_PUBLIC_WHATSAPP=5500000000000    # Somente números, com DDI
+NEXT_PUBLIC_EMAIL_CONTATO=contato@hivi.com.br
+
+# -------------------------------------------------------------------
+# Redes Sociais
+# -------------------------------------------------------------------
+NEXT_PUBLIC_INSTAGRAM=https://instagram.com/hivi
+NEXT_PUBLIC_LINKEDIN=https://linkedin.com/company/hivi
+NEXT_PUBLIC_FACEBOOK=https://facebook.com/hivi
+NEXT_PUBLIC_YOUTUBE=https://youtube.com/@hivi
 ```
 
 > **Segurança:** O arquivo `.env.local` nunca deve ser versionado. Apenas `.env.example` (sem valores reais) vai para o repositório.
+>
+> **Contato e redes sociais:** Os valores de `NEXT_PUBLIC_TELEFONE`, `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_EMAIL_CONTATO` e de todas as redes sociais devem ser definidos no painel da Vercel (Environment Variables) e no `.env.local` em ambiente local.
 
 ---
 
