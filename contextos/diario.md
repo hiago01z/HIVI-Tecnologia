@@ -210,6 +210,30 @@
 
 ---
 
+### 2026-07-24 — Fase 8: Infraestrutura Supabase + Ajustes de Produção
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Schema SQL Supabase
+- `hivi-tecnologia/supabase/schema.sql` — script completo para executar no SQL Editor do Supabase
+- Tabela `blog_posts` — `jsonb` multilíngue (titulo, slug, resumo, conteudo), trigger `atualizado_em`
+- Tabela `contatos` — LGPD: nome, email, telefone, mensagem, locale, consentimento_lgpd
+- Tabela `eventos` — analytics sem PII: tipo, pagina, locale, metadados
+- Trigger `set_updated_at()` — atualiza `atualizado_em` automaticamente no update
+- Indexes: `idx_blog_posts_publicado_em`, `idx_blog_posts_slug` (GIN), `idx_eventos_tipo`, `idx_eventos_criado_em`, `idx_contatos_criado_em`
+- RLS habilitado em todas as tabelas (Regra 8)
+- Policy `blog_posts_leitura_publica` — anon/authenticated lê apenas posts publicados
+- Policy `eventos_insercao_anon` — anon pode inserir eventos com tipo válido
+- Constraint `eventos_tipo_check` — garante apenas tipos permitidos
+- Bloco `DO $$ assert $$` — verifica criação das 3 tabelas após execução
+- Credenciais Supabase (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SITE_URL`) configuradas na Vercel pelo usuário
+
+#### ✅ Fix — Footer oculta ícones sociais sem URL configurada
+- `Footer.tsx` — `ALL_SOCIAL_LINKS` com `.filter(Boolean)` substitui o `?? '#'` anterior
+- Ícones sociais só aparecem se a variável de ambiente estiver definida e não vazia
+
+---
+
 ### 2026-07-24 — Fase 7: SEO e Qualidade
 
 **Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
@@ -246,17 +270,20 @@
 | 17 | Admin — editor multilingual de posts | ✅ Concluído |
 | 18 | robots.txt + sitemap.xml | ✅ Concluído |
 | 19 | Auditoria LGPD (consentimento, privacidade) | ✅ Concluído |
-| 20 | Deploy na Vercel | 📋 Pendente (credenciais + domínio) |
-| 21 | Configuração de domínio | 📋 Pendente |
+| 20 | Deploy na Vercel | 🔄 Em progresso (keys Supabase configuradas) |
+| 21 | Schema Supabase (tabelas + RLS) | 📋 Pendente (executar `supabase/schema.sql`) |
+| 22 | Usuário admin no Supabase Auth | 📋 Pendente (criar no painel) |
+| 23 | Configuração de domínio | 📋 Pendente |
 
 ---
 
 ## Observações e Pendências
 
-- ⚠️ **Credenciais Supabase:** Preencher no `.env.local` e na Vercel antes do deploy.
-- ⚠️ **Schema Supabase:** Criar tabelas `blog_posts`, `contatos`, `eventos` com RLS antes de testar.
-- ⚠️ **Usuário admin:** Criar diretamente no painel Supabase Auth (nunca via código).
-- ⚠️ **Domínio:** Adquirir antes do deploy final.
+- ✅ **Credenciais Supabase:** Configuradas na Vercel pelo usuário (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SITE_URL`).
+- ⚠️ **Schema Supabase:** Executar `hivi-tecnologia/supabase/schema.sql` no SQL Editor do Supabase antes de testar qualquer funcionalidade.
+- ⚠️ **Usuário admin:** Criar diretamente no painel Supabase Auth > Authentication > Users (nunca via código).
+- ⚠️ **Env vars opcionais:** `NEXT_PUBLIC_TELEFONE`, `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_EMAIL_CONTATO`, `NEXT_PUBLIC_INSTAGRAM`, `NEXT_PUBLIC_LINKEDIN`, `NEXT_PUBLIC_FACEBOOK`, `NEXT_PUBLIC_YOUTUBE` — configurar na Vercel para exibir dados de contato e ícones sociais.
+- ⚠️ **Domínio:** Adquirir e configurar no painel Vercel antes do deploy final.
 - ℹ️ **Next.js 16:** Usa `proxy.ts` em vez de `middleware.ts`. A função se chama `proxy`.
 - ℹ️ **Rate limiting:** Implementado in-memory. Para múltiplas instâncias em produção, migrar para Upstash Redis ou tabela Supabase.
 - ℹ️ **Editor de posts:** Aceita HTML diretamente no textarea. Em produção, considerar um editor WYSIWYG (ex.: TipTap) numa fase futura.

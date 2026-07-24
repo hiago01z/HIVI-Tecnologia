@@ -36,32 +36,16 @@ function IconYoutube() {
   );
 }
 
-const SOCIAL_LINKS = [
-  {
-    key: 'instagram',
-    href: process.env.NEXT_PUBLIC_INSTAGRAM ?? '#',
-    Icon: IconInstagram,
-    label: 'Instagram',
-  },
-  {
-    key: 'linkedin',
-    href: process.env.NEXT_PUBLIC_LINKEDIN ?? '#',
-    Icon: IconLinkedin,
-    label: 'LinkedIn',
-  },
-  {
-    key: 'facebook',
-    href: process.env.NEXT_PUBLIC_FACEBOOK ?? '#',
-    Icon: IconFacebook,
-    label: 'Facebook',
-  },
-  {
-    key: 'youtube',
-    href: process.env.NEXT_PUBLIC_YOUTUBE ?? '#',
-    Icon: IconYoutube,
-    label: 'YouTube',
-  },
+const ALL_SOCIAL_LINKS = [
+  { key: 'instagram', href: process.env.NEXT_PUBLIC_INSTAGRAM, Icon: IconInstagram, label: 'Instagram' },
+  { key: 'linkedin',  href: process.env.NEXT_PUBLIC_LINKEDIN,  Icon: IconLinkedin,  label: 'LinkedIn'  },
+  { key: 'facebook',  href: process.env.NEXT_PUBLIC_FACEBOOK,  Icon: IconFacebook,  label: 'Facebook'  },
+  { key: 'youtube',   href: process.env.NEXT_PUBLIC_YOUTUBE,   Icon: IconYoutube,   label: 'YouTube'   },
 ];
+
+const SOCIAL_LINKS = ALL_SOCIAL_LINKS.filter(
+  (link): link is typeof link & { href: string } => Boolean(link.href),
+);
 
 const VISIBLE_SERVICES = SERVICE_KEYS.slice(0, 6);
 

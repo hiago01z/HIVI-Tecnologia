@@ -152,5 +152,13 @@ Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
 - [x] `sitemap.xml` com todas as rotas públicas e hreflang
 - [x] `generateMetadata` com `metadataBase`, title template e OpenGraph
 - [x] 404 locale-aware com link traduzido
-- [ ] Deploy na Vercel (pendente credenciais Supabase + domínio)
+
+### Fase 8 — Infraestrutura Supabase e Produção 🔄
+- [x] Credenciais Supabase configuradas na Vercel
+- [x] Schema SQL criado (`hivi-tecnologia/supabase/schema.sql`)
+- [x] Tabelas com RLS, triggers, indexes e constraints
+- [x] Footer oculta ícones sociais sem env var configurada
+- [ ] Executar `supabase/schema.sql` no SQL Editor do Supabase
+- [ ] Criar usuário admin no Supabase Auth (painel)
+- [ ] Configurar env vars opcionais na Vercel (telefone, redes sociais)
 - [ ] Configuração de domínio
