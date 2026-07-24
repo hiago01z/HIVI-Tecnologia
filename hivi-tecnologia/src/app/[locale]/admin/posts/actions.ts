@@ -1,0 +1,95 @@
+'use server';
+
+import { createAdminClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/server';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+
+async function requireAuth() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error('Unauthorized');
+}
+
+export async function deletePostAction(formData: FormData) {
+  await requireAuth();
+  const id = formData.get('id') as string;
+  const locale = (formData.get('locale') as string) || 'pt-BR';
+
+  const admin = await createAdminClient();
+  await admin.from('blog_posts').delete().eq('id', id);
+
+  revalidatePath(`/${locale}/admin/posts`);
+  revalidatePath(`/${locale}/blog`);
+}
+
+export async function togglePublishAction(formData: FormData) {
+  await requireAuth();
+  const id = formData.get('id') as string;
+  const published = formData.get('published') === 'true';
+  const locale = (formData.get('locale') as string) || 'pt-BR';
+
+  const admin = await createAdminClient();
+  await admin
+    .from('blog_posts')
+    .update({ publicado: !published, atualizado_em: new Date().toISOString() })
+    .eq('id', id);
+
+  revalidatePath(`/${locale}/admin/posts`);
+  revalidatePath(`/${locale}/blog`);
+}
+
+export async function savePostAction(
+  _prevState: { error: string } | null,
+  formData: FormData,
+): Promise<{ error: string } | null> {
+  await requireAuth();
+
+  const id = formData.get('id') as string | null;
+  const locale = (formData.get('locale') as string) || 'pt-BR';
+  const publish = formData.get('publish') === 'true';
+
+  const locales = ['pt-BR', 'en', 'es'] as const;
+  const titulo: Record<string, string> = {};
+  const slug: Record<string, string> = {};
+  const resumo: Record<string, string> = {};
+  const conteudo: Record<string, string> = {};
+
+  for (const l of locales) {
+    titulo[l] = (formData.get(`titulo_${l}`) as string) || '';
+    slug[l] = (formData.get(`slug_${l}`) as string) || '';
+    resumo[l] = (formData.get(`resumo_${l}`) as string) || '';
+    conteudo[l] = (formData.get(`conteudo_${l}`) as string) || '';
+  }
+
+  const imagem_url = (formData.get('imagem_url') as string) || null;
+
+  const payload = {
+    titulo,
+    slug,
+    resumo,
+    conteudo,
+    imagem_url: imagem_url || null,
+    publicado: publish,
+    atualizado_em: new Date().toISOString(),
+  };
+
+  const admin = await createAdminClient();
+
+  if (id) {
+    const { error } = await admin.from('blog_posts').update(payload).eq('id', id);
+    if (error) return { error: error.message };
+    revalidatePath(`/${locale}/admin/posts`);
+    revalidatePath(`/${locale}/blog`);
+    redirect(`/${locale}/admin/posts`);
+  } else {
+    const { error } = await admin
+      .from('blog_posts')
+      .insert({ ...payload, criado_em: new Date().toISOString() });
+    if (error) return { error: error.message };
+    revalidatePath(`/${locale}/admin/posts`);
+    revalidatePath(`/${locale}/blog`);
+    redirect(`/${locale}/admin/posts`);
+  }
+  return null;
+}

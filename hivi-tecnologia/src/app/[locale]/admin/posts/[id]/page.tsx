@@ -1,21 +1,28 @@
-import { setRequestLocale } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { createAdminClient } from '@/lib/supabase/server';
+import { PostEditor } from '@/components/admin/PostEditor';
+import type { BlogPost } from '@/types/blog';
 
 export default async function EditPostPage({
   params,
 }: {
   params: Promise<{ locale: string; id: string }>;
 }) {
-  const { locale } = await params;
+  const { locale, id } = await params;
   setRequestLocale(locale);
-  return <EditPostContent />;
-}
 
-function EditPostContent() {
-  const t = useTranslations('admin.postEditor');
+  const admin = await createAdminClient();
+  const { data } = await admin.from('blog_posts').select('*').eq('id', id).single();
+
+  if (!data) notFound();
+
+  const t = await getTranslations({ locale, namespace: 'admin.postEditor' });
+
   return (
-    <main className="min-h-screen bg-[#F0F7FF] p-8">
-      <h1 className="text-3xl font-bold text-[#162268]">{t('titleLabel')}</h1>
-    </main>
+    <>
+      <h1 className="mb-8 text-2xl font-bold text-[#162268]">{t('titleLabel')}</h1>
+      <PostEditor post={data as BlogPost} />
+    </>
   );
 }

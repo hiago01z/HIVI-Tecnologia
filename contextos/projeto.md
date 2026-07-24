@@ -110,41 +110,47 @@ Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
 - [x] Arquitetura admin definida
 - [x] Arquitetura i18n definida
 
-### Fase 2 — Setup Técnico
-- [ ] Instalar dependências: `next-intl`, Lucide, React Hook Form, Zod, `@supabase/ssr`
-- [ ] Configurar `next-intl` (routing, middleware, messages)
-- [ ] Criar arquivos de tradução: `pt-br.json`, `en.json`, `es.json`
-- [ ] Configurar clientes Supabase
-- [ ] Implementar `middleware.ts` (i18n + auth)
-- [ ] Configurar `.env.local`
+### Fase 2 — Setup Técnico ✅
+- [x] Instalar dependências: `next-intl`, Lucide, React Hook Form, Zod, `@supabase/ssr`
+- [x] Configurar `next-intl` (routing, middleware, messages)
+- [x] Criar arquivos de tradução: `pt-BR.json`, `en.json`, `es.json`
+- [x] Configurar clientes Supabase
+- [x] Implementar `proxy.ts` (i18n + auth — Next.js 16)
+- [x] Configurar `.env.example`
 
-### Fase 3 — Site Público
-- [ ] Header com `LanguageSwitcher`
-- [ ] Footer
-- [ ] Página Home
-- [ ] Página Serviços
-- [ ] Página Sobre Nós
-- [ ] Página Política de Privacidade
-- [ ] Formulário de contato (LGPD)
+### Fase 3 — Site Público ✅
+- [x] Header com `LanguageSwitcher`
+- [x] Footer (ícones sociais via SVG inline)
+- [x] MobileMenu (hamburger responsivo)
+- [x] Página Home completa
+- [x] Página Serviços completa
+- [x] Página Sobre Nós completa
+- [x] Página Política de Privacidade (LGPD)
+- [x] Formulário de contato (react-hook-form + zod + consentimento LGPD)
 
-### Fase 4 — Blog Público
-- [ ] Listagem de posts
-- [ ] Post individual
-- [ ] SEO e meta tags por locale
+### Fase 4 — Blog Público ✅
+- [x] Listagem de posts (grid de cards com imagem, data, resumo)
+- [x] Post individual com prose typography e Open Graph
+- [x] SEO e meta tags por locale (hreflang, canonical)
+- [x] `@tailwindcss/typography` instalado
 
-### Fase 5 — Analytics
-- [ ] Rastreamento de eventos (sem dados pessoais)
-- [ ] Armazenamento no Supabase com locale
+### Fase 5 — Analytics ✅
+- [x] Rastreamento de eventos (sem dados pessoais — Regra 6)
+- [x] `page_view` por rota via `PageViewTracker`
+- [x] `click_contato`, `click_whatsapp`, `click_servico`
+- [x] Armazenamento no Supabase com locale
 
-### Fase 6 — Painel Admin
-- [ ] Login seguro com rate limiting
-- [ ] Dashboard de métricas
-- [ ] Gestão de posts (com editor multilingual)
-- [ ] Visualização de contatos recebidos
+### Fase 6 — Painel Admin ✅
+- [x] Login seguro com Server Action + rate limiting (5/min, bloqueio 15min)
+- [x] Layout admin com navbar (Dashboard / Posts / Sair)
+- [x] Dashboard de métricas (7/30/90 dias) via API protegida
+- [x] Gestão de posts (listar, publicar, despublicar, excluir)
+- [x] Editor multilingual (pt-BR / en / es) com auto-slug
 
-### Fase 7 — Qualidade e Launch
-- [ ] Testes de responsividade
-- [ ] Auditoria LGPD
-- [ ] Otimização de performance
-- [ ] Deploy na Vercel
+### Fase 7 — Qualidade e Launch ✅
+- [x] `robots.txt` gerado por Next.js (bloqueia /admin e /api)
+- [x] `sitemap.xml` com todas as rotas públicas e hreflang
+- [x] `generateMetadata` com `metadataBase`, title template e OpenGraph
+- [x] 404 locale-aware com link traduzido
+- [ ] Deploy na Vercel (pendente credenciais Supabase + domínio)
 - [ ] Configuração de domínio

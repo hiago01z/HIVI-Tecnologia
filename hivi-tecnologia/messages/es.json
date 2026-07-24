@@ -13,7 +13,11 @@
     "description": "Transformamos su empresa con tecnología de vanguardia, consultoría especializada y soporte continuo. Resultados reales, crecimiento sostenible.",
     "ctaPrimary": "Contactar",
     "ctaSecondary": "Ver Servicios",
-    "imageAlt": "Profesionales de tecnología trabajando en soluciones innovadoras"
+    "imageAlt": "Profesionales de tecnología trabajando en soluciones innovadoras",
+    "check1": "Consultoría tecnológica especializada y estratégica",
+    "check2": "Infraestructura y cloud a medida para su negocio",
+    "check3": "Soporte técnico 24/7 para su operación",
+    "check4": "Entrega a tiempo y dentro del presupuesto"
   },
   "stats": {
     "clients": "Clientes Atendidos",
