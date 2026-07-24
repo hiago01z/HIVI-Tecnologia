@@ -12,6 +12,8 @@
 
 Site empresarial da HIVI Tecnologia, desenvolvido para apresentar a empresa, seus serviços, portfólio e formas de contato. O site deve transmitir profissionalismo, credibilidade e inovação, conectando a empresa com potenciais clientes de forma clara e objetiva.
 
+Além do site público, o projeto conta com um **painel administrativo privado** (`/admin`) para gestão de conteúdo do blog e monitoramento de métricas do site.
+
 ---
 
 ## Público-Alvo
@@ -22,7 +24,7 @@ Site empresarial da HIVI Tecnologia, desenvolvido para apresentar a empresa, seu
 
 ---
 
-## Páginas do Site
+## Páginas do Site Público
 
 | Página | Rota | Descrição |
 |--------|------|-----------|
@@ -32,13 +34,21 @@ Site empresarial da HIVI Tecnologia, desenvolvido para apresentar a empresa, seu
 | Blog | `/blog` | Posts sobre trabalhos, novidades e curiosidades tecnológicas |
 | Política de Privacidade | `/privacidade` | Termos e políticas conforme a LGPD |
 
+## Painel Administrativo (Privado)
+
+| Página | Rota | Descrição |
+|--------|------|-----------|
+| Login | `/admin` | Tela de autenticação (e-mail + senha via Supabase Auth) |
+| Dashboard | `/admin/dashboard` | Métricas: cliques, visitas, contatos recebidos |
+| Posts | `/admin/posts` | Listagem e gestão dos posts do blog |
+| Novo Post | `/admin/posts/novo` | Editor de novo post |
+| Editar Post | `/admin/posts/[id]` | Edição de post existente |
+
+> **Segurança:** A rota `/admin` **não possui link visível em nenhuma parte do site público**. O acesso é feito apenas digitando a URL manualmente. A autenticação é gerenciada pelo Supabase Auth com sessão server-side.
+
 ---
 
 ## Serviços Oferecidos
-
-### Consultoria em Tecnologia da Informação
-
-Orientação estratégica para empresas e empreendedores que buscam maturidade tecnológica.
 
 | Serviço | Descrição |
 |---------|----------|
@@ -66,11 +76,12 @@ Orientação estratégica para empresas e empreendedores que buscam maturidade t
 
 | Camada | Tecnologia | Descrição |
 |--------|-----------|----------|
-| Framework | Next.js 14+ (App Router) | SSR, SSG, ISR e API Routes |
+| Framework | Next.js 15+ (App Router) | SSR, SSG, ISR e API Routes |
 | Linguagem | TypeScript | Tipagem estática em todo o projeto |
-| Estilização | Tailwind CSS | Utility-first, responsivo por padrão |
+| Estilização | Tailwind CSS 4+ | Utility-first, responsivo por padrão |
 | Backend/DB | Supabase (PostgreSQL) | Banco de dados, autenticação e storage |
 | Hospedagem | Vercel | Deploy contínuo via Git |
+| Autenticação Admin | Supabase Auth | E-mail + senha, sessão server-side |
 
 ---
 
@@ -79,27 +90,40 @@ Orientação estratégica para empresas e empreendedores que buscam maturidade t
 ### Fase 1 — Fundação
 - [x] Definição da estrutura do projeto
 - [x] Criação dos documentos base (`contextos/`)
-- [ ] Recebimento das imagens de referência do design
-- [ ] Configuração do ambiente (Next.js + Supabase + Vercel)
-- [ ] Implementação do layout base e design system
+- [x] Design system definido com base nas imagens de referência
+- [x] Inicialização do projeto Next.js (preset padrão)
+- [x] Definição da arquitetura do painel admin
 
-### Fase 2 — Desenvolvimento Core
-- [ ] Componentes globais (Header, Footer, Navigation)
+### Fase 2 — Desenvolvimento Core do Site Público
+- [ ] Instalar dependências adicionais (Lucide, React Hook Form, Zod, Supabase JS)
+- [ ] Configurar clientes Supabase
+- [ ] Componentes globais (Header, Footer)
 - [ ] Página Home
 - [ ] Página Serviços
 - [ ] Página Sobre Nós
 - [ ] Página Política de Privacidade
-- [ ] Formulário de contato com integração LGPD
+- [ ] Formulário de contato com LGPD
 
-### Fase 3 — Blog e Conteúdo
-- [ ] Estrutura do Blog com Supabase
-- [ ] Listagem e paginação de posts
+### Fase 3 — Blog Público
+- [ ] Página de listagem de posts
 - [ ] Página individual de post (`/blog/[slug]`)
-- [ ] SEO e meta tags em todas as páginas
+- [ ] SEO e meta tags
 
-### Fase 4 — Qualidade e Launch
-- [ ] Testes de responsividade (mobile, tablet, desktop)
+### Fase 4 — Analytics
+- [ ] Rastreamento de cliques no botão de contato
+- [ ] Rastreamento de visitas por página
+- [ ] Armazenamento de eventos no Supabase
+
+### Fase 5 — Painel Admin
+- [ ] Middleware de autenticação (proteção de rotas `/admin/*`)
+- [ ] Tela de login (`/admin`)
+- [ ] Dashboard de métricas
+- [ ] Listagem e gestão de posts
+- [ ] Editor de posts (novo e edição)
+
+### Fase 6 — Qualidade e Launch
+- [ ] Testes de responsividade
 - [ ] Auditoria de conformidade LGPD
-- [ ] Otimização de performance (Core Web Vitals)
+- [ ] Otimização de performance
 - [ ] Deploy na Vercel
-- [ ] Configuração de domínio personalizado
+- [ ] Configuração de domínio

@@ -1,6 +1,6 @@
 # Diário de Implementação — HIVI Tecnologia
 
-> Registro cronológico de todas as implementações realizadas no projeto. Manter este documento sempre atualizado é obrigatório conforme as Regras do Projeto.
+> Registro cronológico de todas as implementações. Manter atualizado é obrigatório conforme as Regras do Projeto.
 
 ---
 
@@ -8,11 +8,11 @@
 
 | Ícone | Status | Descrição |
 |-------|--------|-----------|
-| ✅ | **Concluído** | Implementação finalizada, revisada e documentada |
-| 🔄 | **Em Progresso** | Atualmente sendo desenvolvido |
+| ✅ | **Concluído** | Finalizado, revisado e documentado |
+| 🔄 | **Em Progresso** | Sendo desenvolvido |
 | 📋 | **Na Fila** | Planejado, aguardando início |
-| ❌ | **Bloqueado** | Impedido por dependência externa ou problema identificado |
-| 🔁 | **Em Revisão** | Aguardando revisão, teste ou aprovação |
+| ❌ | **Bloqueado** | Impedido por dependência ou problema |
+| 🔁 | **Em Revisão** | Aguardando revisão ou aprovação |
 
 ---
 
@@ -20,86 +20,84 @@
 
 ### 2026-07-24 — Configuração Inicial do Projeto
 
-**Responsável:** Claude Code (Agente IA)  
-**Branch:** `main`
+**Responsável:** Claude Code (Agente IA) | **Branch:** `main`
 
-#### ✅ Criação da pasta `contextos/` e documentação base
+#### ✅ Documentação base (`contextos/`)
+- `projeto.md`, `regras.md`, `designe.md`, `estrutura.md`, `diario.md` criados
+- 7 regras formais incluindo LGPD e instruções para agentes de IA
 
-- Criação da estrutura de documentação do projeto em `/contextos/`
-- **`projeto.md`** — Escopo completo, descrição de todos os serviços, planejamento em 4 fases e stack tecnológica definida
-- **`regras.md`** — 7 regras formais incluindo conformidade LGPD, padrões de qualidade e instruções para agentes de IA
-- **`designe.md`** — Design system com paleta de cores extraída das imagens de referência, tipografia, layouts de seções e componentes
-- **`estrutura.md`** — Arquitetura completa, stack, diagrama visual e esquema de banco de dados
-- **`diario.md`** — Este documento
+#### ✅ Contato e redes sociais via variáveis de ambiente
+- `NEXT_PUBLIC_TELEFONE`, `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_EMAIL_CONTATO` e redes sociais
+- Nenhum dado de contato hardcoded no código
 
-**Commit:** `docs(contextos): configuração inicial dos documentos do projeto HIVI Tecnologia`
+#### ✅ Design system com imagens de referência
+- Paleta: Azul Marinho `#162268`, Azul Primário `#1565C0`, Degrâdê Hero `#F0F7FF → #C8DFFF`
+- Layout hero split, seções alternadas, barra de stats, cards, footer documentados
 
-#### ✅ Decisão: contato e redes sociais via variáveis de ambiente
+#### ✅ Projeto Next.js inicializado
+- `create-next-app@latest` com TypeScript + Tailwind CSS 4 + ESLint + App Router + `src/`
+- Estrutura de pastas: `components/{ui,layout,sections,blog,admin}`, `lib/supabase`, `types`, `constants`
+- `.env.example` configurado, `.gitignore` atualizado
+- Pasta: `hivi-tecnologia/` (npm exige kebab-case)
 
-- Número de telefone, WhatsApp, e-mail e links de redes sociais configurados via `NEXT_PUBLIC_*`
-- Nenhum dado de contato será escrito diretamente no código
-- `estrutura.md` atualizado com template completo do `.env.example`
-
-**Commit:** `docs(contextos): adiciona variáveis de ambiente para telefone e redes sociais`
-
-#### ✅ Design system definido com base nas imagens de referência
-
-- Paleta de cores definitiva: Azul Marinho `#162268`, Azul Primário `#1565C0`, Degrâdê Hero `#F0F7FF → #C8DFFF`
-- Layout hero: split 50/50 (texto esquerda + mockup direita)
-- Seções alternadas definidas: branco → marinho → branco → azul suave
-- Barra de stats, cards de serviços (padrão + destaque) e footer documentados
-
-**Commit:** `docs(designe): atualiza design system com estilo extraído das imagens de referência`
-
-#### ✅ Inicialização do projeto Next.js
-
-- Projeto criado com `create-next-app@latest` (preset padrão)
-- Configurações: TypeScript + Tailwind CSS 4 + ESLint + App Router + `src/` directory
-- Estrutura de pastas criada: `components/{ui,layout,sections,blog}`, `lib/supabase`, `types`, `constants`
-- `.env.example` configurado com todas as variáveis do projeto
-- `.gitignore` atualizado para versionar `.env.example` mas ignorar `.env*.local`
-- Pasta da aplicação: `hivi-tecnologia/` (npm exige kebab-case; sem maiúsculas)
-
-**Commit:** `feat(hivi-tecnologia): inicializa projeto Next.js com preset padrão`
+#### ✅ Arquitetura do painel admin definida
+- Rotas: `/admin` (login), `/admin/dashboard`, `/admin/posts`, `/admin/posts/novo`, `/admin/posts/[id]`
+- Autenticação: Supabase Auth, cookie `HttpOnly; Secure; SameSite=Strict`, validação via `middleware.ts`
+- Analytics: tabela `eventos` sem dados pessoais (conformidade LGPD)
+- **A rota `/admin` não é linkada ou mencionada em nenhuma parte do site público**
+- Regra 8 criada em `regras.md` com todas as medidas de segurança do admin
 
 ---
 
 ## Próximas Implementações
 
-### Alta Prioridade
+### Alta Prioridade — Fase 2 (Site Público Core)
 
 | # | Tarefa | Dependência | Status |
 |---|--------|------------|--------|
-| 1 | Instalar dependências adicionais: Lucide React, React Hook Form, Zod, Supabase JS | — | 📋 Na Fila |
-| 2 | Configurar clientes Supabase (`lib/supabase/client.ts` e `server.ts`) | Tarefa 1 | 📋 Na Fila |
-| 3 | Configurar `.env.local` com credenciais reais do Supabase | Credenciais | 📋 Na Fila |
-| 4 | Implementar Header e Footer globais | Design system | 📋 Na Fila |
-| 5 | Implementar página Home completa (hero, clientes, stats, serviços, CTA, contato) | Tarefa 4 | 📋 Na Fila |
+| 1 | Instalar dependências: Lucide, React Hook Form, Zod, `@supabase/ssr` | — | 📋 Na Fila |
+| 2 | Configurar `lib/supabase/client.ts` e `server.ts` | Tarefa 1 | 📋 Na Fila |
+| 3 | Preencher `.env.local` com credenciais Supabase e de contato | Credenciais | 📋 Na Fila |
+| 4 | Implementar `middleware.ts` (proteção de `/admin/*`) | Tarefa 2 | 📋 Na Fila |
+| 5 | Implementar Header e Footer globais | Design system | 📋 Na Fila |
+| 6 | Implementar página Home completa | Tarefa 5 | 📋 Na Fila |
 
-### Média Prioridade
+### Média Prioridade — Fases 2/3/4
 
-| # | Tarefa | Dependência | Status |
-|---|--------|------------|--------|
-| 6 | Implementar página Serviços | Tarefa 4 | 📋 Na Fila |
-| 7 | Implementar página Sobre Nós | Tarefa 4 | 📋 Na Fila |
-| 8 | Implementar Política de Privacidade (LGPD) | Tarefa 4 | 📋 Na Fila |
-| 9 | Estruturar Blog com Supabase | Tarefa 2 | 📋 Na Fila |
-| 10 | Implementar formulário de contato com validação LGPD | Tarefa 2 | 📋 Na Fila |
+| # | Tarefa | Status |
+|---|--------|--------|
+| 7 | Página Serviços | 📋 Na Fila |
+| 8 | Página Sobre Nós | 📋 Na Fila |
+| 9 | Política de Privacidade (LGPD) | 📋 Na Fila |
+| 10 | Blog público (listagem + post individual) | 📋 Na Fila |
+| 11 | Formulário de contato com LGPD | 📋 Na Fila |
+| 12 | Analytics: rastreamento de eventos (cliques, visitas) | 📋 Na Fila |
 
-### Baixa Prioridade
+### Fase 5 — Painel Admin
 
-| # | Tarefa | Dependência | Status |
-|---|--------|------------|--------|
-| 11 | SEO: meta tags, Open Graph, sitemap, robots.txt | Fases anteriores | 📋 Na Fila |
-| 12 | Otimização de performance (Core Web Vitals) | Fases anteriores | 📋 Na Fila |
-| 13 | Testes de responsividade (mobile, tablet, desktop) | Fases anteriores | 📋 Na Fila |
-| 14 | Auditoria final de conformidade LGPD | Fases anteriores | 📋 Na Fila |
-| 15 | Configuração de domínio na Vercel | Deploy | 📋 Na Fila |
+| # | Tarefa | Status |
+|---|--------|--------|
+| 13 | Tela de login `/admin` com rate limiting | 📋 Na Fila |
+| 14 | Dashboard com cards de métricas | 📋 Na Fila |
+| 15 | Listagem e exclusão de posts | 📋 Na Fila |
+| 16 | Editor de posts (criar e editar) | 📋 Na Fila |
+| 17 | Visualização de contatos recebidos | 📋 Na Fila |
+
+### Fase 6 — Qualidade e Launch
+
+| # | Tarefa | Status |
+|---|--------|--------|
+| 18 | SEO: meta tags, Open Graph, sitemap, robots.txt | 📋 Na Fila |
+| 19 | Otimização de performance | 📋 Na Fila |
+| 20 | Testes de responsividade | 📋 Na Fila |
+| 21 | Auditoria LGPD | 📋 Na Fila |
+| 22 | Deploy + configuração de domínio na Vercel | 📋 Na Fila |
 
 ---
 
 ## Observações e Pendências Abertas
 
-- ⚠️ **Credenciais Supabase:** Preencher `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` e `SUPABASE_SERVICE_ROLE_KEY` no `.env.local` e no painel da Vercel antes de implementar qualquer funcionalidade que use o banco.
-- ⚠️ **Variáveis de contato e redes sociais:** Preencher `NEXT_PUBLIC_TELEFONE`, `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_EMAIL_CONTATO` e links de redes sociais no `.env.local` e na Vercel antes de implementar Header, Footer e página de contato.
-- ⚠️ **Domínio:** Verificar disponibilidade e adquirir domínio antes do deploy final.
+- ⚠️ **Credenciais Supabase:** Preencher no `.env.local` e na Vercel antes de qualquer implementação que use banco.
+- ⚠️ **Usuário admin:** Criar o usuário administrador diretamente no painel do Supabase Auth (nunca via código). Configurar `role = 'admin'` nos metadados do usuário.
+- ⚠️ **RLS:** Configurar as políticas de Row Level Security no Supabase antes de qualquer implementação do admin.
+- ⚠️ **Domínio:** Adquirir e configurar domínio antes do deploy final.

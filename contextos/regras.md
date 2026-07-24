@@ -1,6 +1,6 @@
 # Regras do Projeto — HIVI Tecnologia
 
-> Este documento define as diretrizes obrigatórias de desenvolvimento, controle de versão, documentação e conformidade legal. O cumprimento destas regras é mandatório para todos os colaboradores e agentes envolvidos no projeto.
+> Este documento define as diretrizes obrigatórias de desenvolvimento, controle de versão, documentação e conformidade legal. O cumprimento é mandatório para todos os colaboradores e agentes envolvidos no projeto.
 
 ---
 
@@ -20,29 +20,21 @@ Antes de iniciar qualquer desenvolvimento, modificação ou refatoração, **tod
 
 ## Regra 2 — Controle de Versão: Commit e Push Obrigatórios
 
-Ao finalizar qualquer implementação, as seguintes ações são **mandatórias e devem ser executadas nessa ordem**:
+Ao finalizar qualquer implementação, as seguintes ações são **mandatórias**:
 
-1. Revisar todas as alterações realizadas
-2. Atualizar os documentos relevantes em `/contextos/` (conforme a Regra 3)
-3. Realizar o `git commit` com mensagem clara, descritiva e no seguinte formato:
+1. Revisar todas as alterações
+2. Atualizar os documentos relevantes em `/contextos/`
+3. Commit com mensagem descritiva no formato:
 
 ```
-tipo(escopo): descrição breve no imperativo
+tipo(escopo): descrição breve
 
-Detalhamento opcional das mudanças realizadas.
+Detalhamento opcional.
 ```
 
-**Tipos aceitos:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+**Tipos:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
-**Exemplos:**
-```
-feat(home): adiciona seção de serviços em destaque
-fix(blog): corrige paginação de posts
-docs(contextos): atualiza diario.md com implementações recentes
-chore(deps): atualiza dependências do projeto
-```
-
-4. Realizar o `git push` imediatamente após o commit
+4. Push imediatamente após o commit
 
 > **Nunca deixe alterações sem commit. Nunca deixe commits sem push.**
 
@@ -50,89 +42,120 @@ chore(deps): atualiza dependências do projeto
 
 ## Regra 3 — Atualização Obrigatória da Documentação
 
-Após concluir qualquer implementação, **todos os arquivos `.md` do projeto e o `README.md` devem ser atualizados** para refletir o estado real e atual do projeto:
+Após concluir qualquer implementação, **todos os arquivos `.md` e o `README.md` devem ser atualizados**:
 
 | Documento | O que atualizar |
 |-----------|----------------|
-| `diario.md` | Registrar o que foi implementado com o status correto |
-| `estrutura.md` | Atualizar caso haja mudança na arquitetura ou rotas |
-| `designe.md` | Atualizar se houver novos componentes ou padrões visuais |
-| `projeto.md` | Atualizar o planejamento (checkboxes e fases) |
-| `README.md` | Manter sincronizado com o estado real do projeto |
+| `diario.md` | Status das tarefas realizadas |
+| `estrutura.md` | Mudanças na arquitetura ou rotas |
+| `designe.md` | Novos componentes ou padrões visuais |
+| `projeto.md` | Fases e planejamento (checkboxes) |
+| `README.md` | Estado atual do projeto |
 
-> **Documentação desatualizada é considerada um erro de projeto tão grave quanto um bug em produção.**
+> **Documentação desatualizada é considerada um erro de projeto.**
 
 ---
 
 ## Regra 4 — Respeito à Estrutura e Integridade do Sistema
 
-Antes de criar novos arquivos, rotas, componentes ou serviços:
+- Consultar `estrutura.md` antes de criar arquivos, rotas ou componentes
+- Seguir as convenções de nomenclatura estabelecidas
+- **Nunca modificar arquivos críticos** sem revisão documentada:
+  - `middleware.ts`, `next.config.ts`, `.env.local`, configurações Supabase, `vercel.json`
 
-- Consultar `estrutura.md` para compreender a organização estabelecida
-- Verificar se já existe um padrão para o que se deseja implementar
-- Seguir rigorosamente as convenções de nomenclatura e organização de pastas
-- **Nunca modificar arquivos de configuração críticos** sem revisão cuidadosa:
-  - `next.config.js` / `next.config.ts`
-  - `.env.local` e arquivos de variáveis de ambiente
-  - `tailwind.config.js`
-  - Configurações do Supabase
-  - Configurações da Vercel (`vercel.json`)
-
-> **Quebrar a estrutura do projeto causa impacto direto em produção. Leia, analise e só então implemente.**
+> **Quebrar a estrutura impacta produção. Leia antes de agir.**
 
 ---
 
 ## Regra 5 — Instrução para Agentes de Inteligência Artificial
 
-Se você é um agente de IA e está lendo este documento, as seguintes diretrizes se aplicam ao seu trabalho neste projeto:
+Se você é um agente de IA lendo este documento:
 
-### Ao Iniciar uma Implementação:
-1. Leia **todos** os documentos em `/contextos/` antes de qualquer ação
-2. Identifique no `diario.md` quais tarefas estão com status "Na Fila" ou "Em Progresso"
-3. Compreenda o contexto completo antes de propor ou executar qualquer alteração
-4. Não assuma nada — verifique na documentação. Em caso de dúvida, solicite esclarecimento
+### Ao Iniciar:
+1. Leia **todos** os documentos em `/contextos/`
+2. Verifique `diario.md` para identificar tarefas "Na Fila" ou "Em Progresso"
+3. Não assuma nada — verifique na documentação
 
-### Ao Finalizar uma Implementação:
-1. Atualize o `diario.md` com o status correto das tarefas realizadas
-2. Atualize todos os documentos afetados pela implementação
-3. Realize o commit seguindo o padrão da Regra 2
-4. Realize o push ao finalizar
-5. Reporte o que foi feito de forma clara, objetiva e estruturada
+### Ao Finalizar:
+1. Atualize `diario.md` com status correto
+2. Atualize todos os documentos afetados
+3. Realize commit e push seguindo a Regra 2
+4. Reporte o que foi feito de forma clara
 
-### Restrições para Agentes:
-- Nunca modifique variáveis de ambiente sem autorização explícita do responsável
-- Nunca exclua arquivos, pastas ou registros do banco sem confirmação
-- Nunca faça push para `main` com alterações não revisadas em ambiente de produção
-- Sempre priorize a estabilidade e integridade do sistema em produção
-- Sempre documente o que foi feito antes de encerrar a sessão
+### Restrições:
+- Nunca modifique variáveis de ambiente sem autorização explícita
+- Nunca exclua arquivos ou registros sem confirmação
+- Nunca faça push para `main` com alterações não revisadas
+- Sempre priorize estabilidade do sistema em produção
 
 ---
 
 ## Regra 6 — Conformidade com a LGPD
 
-Todas as funcionalidades que envolvam coleta, armazenamento ou processamento de dados pessoais **devem seguir rigorosamente a Lei Geral de Proteção de Dados (Lei nº 13.709/2018)**:
+Todas as funcionalidades que envolvam dados pessoais devem seguir **rigorosamente a Lei nº 13.709/2018**:
 
-- Todo formulário de contato deve ter consentimento explícito, claro e destacado do usuário
-- A Política de Privacidade deve estar acessível em todas as páginas (obrigatoriamente no footer)
-- Os dados coletados devem ser mínimos e justificados (princípio da necessidade e finalidade)
-- O usuário deve ter mecanismo acessível para solicitar a exclusão de seus dados
-- Nenhum dado pessoal deve ser compartilhado com terceiros sem base legal adequada
-- Logs de acesso, armazenamento e uso de dados devem ser documentados e auditáveis
-- A política de retenção de dados deve ser definida e respeitada
+- Todo formulário de contato exige consentimento explícito e destacado
+- Política de Privacidade acessível em todas as páginas (footer obrigatório)
+- Dados mínimos e justificados (princípio da necessidade)
+- Mecanismo de solicitação de exclusão de dados acessível ao usuário
+- A tabela `eventos` (analytics) **não deve armazenar IP, cookies ou qualquer dado pessoal**
+- Política de retenção de dados definida e respeitada
 
-> **O descumprimento da LGPD pode resultar em sanções legais. A conformidade não é opcional.**
+> **O descumprimento da LGPD pode resultar em sanções legais.**
 
 ---
 
 ## Regra 7 — Padrões de Qualidade de Código
 
-| Critério | Padrão Obrigatório |
-|----------|-------------------|
-| Tipagem | TypeScript obrigatório. Tipos bem definidos, sem uso de `any` |
-| Responsividade | Todos os componentes devem funcionar em mobile, tablet e desktop |
-| Acessibilidade | Tags semânticas HTML corretas e atributos ARIA onde necessário |
-| Performance | Imagens otimizadas (WebP), lazy loading, Core Web Vitals monitorados |
-| SEO | Meta tags, Open Graph e estrutura semântica em todas as páginas |
-| Segurança | Validação de inputs em client e server, sanitização de dados, HTTPS |
-| Código limpo | Sem variáveis não utilizadas, sem console.log em produção |
-| Comentários | Apenas onde o "porquê" não é óbvio pelo código |
+| Critério | Padrão |
+|----------|--------|
+| Tipagem | TypeScript obrigatório. Sem `any` |
+| Responsividade | Mobile, tablet e desktop |
+| Acessibilidade | Tags semânticas + ARIA |
+| Performance | WebP, lazy loading, Core Web Vitals |
+| SEO | Meta tags e Open Graph em todas as páginas |
+| Segurança | Validação Zod no client e server, HTTPS, sem secrets no frontend |
+| Código limpo | Sem variáveis não usadas, sem `console.log` em produção |
+
+---
+
+## Regra 8 — Segurança do Painel Administrativo
+
+O painel `/admin` lida com acesso privilegiado ao sistema. As seguintes medidas são **obrigatórias e não negociáveis**:
+
+### Acesso e Visibilidade
+- A rota `/admin` **não deve ser linkada, referenciada ou mencionada** em nenhuma parte do site público
+- Nenhum botão, link, sitemap, `robots.txt` ou meta tag deve revelar a existência do painel
+- Acesso exclusivamente por URL digitada manualmente pelo administrador
+
+### Autenticação
+- Autenticação via **Supabase Auth** com e-mail e senha
+- Sessão gerenciada **server-side** via cookie `HttpOnly; Secure; SameSite=Strict`
+- O token JWT **nunca deve ser exposto ao JavaScript do cliente**
+- Validação da sessão feita no `middleware.ts` do Next.js em **toda requisição** a `/admin/*`
+- Se a sessão for inválida ou expirada: redirect imediato para `/admin` (tela de login)
+
+### Proteção Contra Ataques
+- **Rate limiting** na rota de login: máximo de 5 tentativas por minuto por IP
+- Após exceder o limite: bloquear por 15 minutos com resposta genérica (sem indicar o motivo)
+- **Mensagens de erro genéricas** no login: nunca informar se o e-mail existe ou não
+- Validação com Zod em todos os inputs do admin (server-side obrigatório)
+- **Proteção contra CSRF** em todas as Server Actions
+- Headers de segurança configurados no `next.config.ts`:
+  ```
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: (restritivo)
+  Permissions-Policy: (restritivo)
+  ```
+
+### Banco de Dados
+- **Row Level Security (RLS)** habilitado em todas as tabelas
+- Escrita em `posts` e leitura de `contatos` e `eventos` restritas a usuários com `role = 'admin'` no Supabase
+- O `SUPABASE_SERVICE_ROLE_KEY` **nunca é exposto ao cliente** — apenas em Server Components e API Routes
+
+### Regras Gerais
+- Nunca armazenar senha em texto puro (Supabase Auth faz o hash automaticamente)
+- Logout deve invalidar a sessão no servidor, não apenas no cliente
+- Qualquer modificação no `middleware.ts` deve ser revisada cuidadosamente antes do push
