@@ -1,5 +1,5 @@
-import { setRequestLocale } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { PostEditor } from '@/components/admin/PostEditor';
 
 export default async function NovoPostPage({
   params,
@@ -8,14 +8,13 @@ export default async function NovoPostPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <NovoPostContent />;
-}
 
-function NovoPostContent() {
-  const t = useTranslations('admin.postEditor');
+  const t = await getTranslations({ locale, namespace: 'admin.postEditor' });
+
   return (
-    <main className="min-h-screen bg-[#F0F7FF] p-8">
-      <h1 className="text-3xl font-bold text-[#162268]">{t('titleLabel')}</h1>
-    </main>
+    <>
+      <h1 className="mb-8 text-2xl font-bold text-[#162268]">{t('titleLabel')}</h1>
+      <PostEditor />
+    </>
   );
 }
