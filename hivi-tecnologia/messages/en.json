@@ -13,7 +13,11 @@
     "description": "We transform your company with cutting-edge technology, specialized consulting and continuous support. Real results, sustainable growth.",
     "ctaPrimary": "Contact Us",
     "ctaSecondary": "View Services",
-    "imageAlt": "Technology professionals working on innovative solutions"
+    "imageAlt": "Technology professionals working on innovative solutions",
+    "check1": "Specialized and strategic technology consulting",
+    "check2": "Tailored infrastructure and cloud solutions for your business",
+    "check3": "24/7 technical support for your operations",
+    "check4": "On-time and on-budget delivery"
   },
   "stats": {
     "clients": "Clients Served",

@@ -1,5 +1,10 @@
-import { useTranslations } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { StatsSection } from '@/components/sections/StatsSection';
+import { ServicesSection } from '@/components/sections/ServicesSection';
+import { AboutSection } from '@/components/sections/AboutSection';
+import { CtaBanner } from '@/components/sections/CtaBanner';
+import { ContactSection } from '@/components/sections/ContactSection';
 
 export default async function HomePage({
   params,
@@ -9,16 +14,14 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <HomeContent />;
-}
-
-function HomeContent() {
-  const t = useTranslations('hero');
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-bold text-[#162268]">{t('title')}</h1>
-      <p className="mt-4 text-lg text-[#4B5563]">{t('description')}</p>
-    </main>
+    <>
+      <HeroSection />
+      <StatsSection />
+      <ServicesSection />
+      <AboutSection />
+      <CtaBanner />
+      <ContactSection />
+    </>
   );
 }
