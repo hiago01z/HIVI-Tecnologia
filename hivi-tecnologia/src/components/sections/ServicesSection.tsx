@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { SERVICE_KEYS, FEATURED_SERVICES, type ServiceKey } from '@/constants/services';
 import { ServiceCardLink } from './ServiceCardLink';
+import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
 const SERVICE_ICONS: Record<ServiceKey, React.ElementType> = {
   consultoriaTI: Brain,
@@ -27,15 +28,17 @@ export function ServicesSection() {
     <section className="bg-white py-24" aria-label={t('services.sectionTitle')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-[#0D1117] lg:text-4xl">
-            {t('services.sectionTitle')}
-          </h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1565C0]" aria-hidden="true" />
-          <p className="mx-auto mt-5 max-w-2xl text-[#4B5563]">
-            {t('services.sectionSubtitle')}
-          </p>
-        </div>
+        <AnimateOnScroll>
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-[#0D1117] lg:text-4xl">
+              {t('services.sectionTitle')}
+            </h2>
+            <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1565C0]" aria-hidden="true" />
+            <p className="mx-auto mt-5 max-w-2xl text-[#4B5563]">
+              {t('services.sectionSubtitle')}
+            </p>
+          </div>
+        </AnimateOnScroll>
 
         {/* Grid */}
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -153,6 +153,12 @@ Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
 - [x] `generateMetadata` com `metadataBase`, title template e OpenGraph
 - [x] 404 locale-aware com link traduzido
 
+### Fase 9 — Qualidade de Produto ✅
+- [x] Admin — página Contatos (`/admin/contatos`)
+- [x] Botão WhatsApp flutuante (condicional por env var)
+- [x] Animações de scroll — IntersectionObserver, respeita `prefers-reduced-motion`
+- [x] Traduções `admin.contatos` e `admin.nav.contatos` nos 3 locales
+
 ### Fase 8 — Infraestrutura Supabase e Produção 🔄
 - [x] Credenciais Supabase configuradas na Vercel
 - [x] Schema SQL criado (`hivi-tecnologia/supabase/schema.sql`)

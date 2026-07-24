@@ -44,6 +44,12 @@ export default async function AdminLayout({
             >
               {t('posts')}
             </Link>
+            <Link
+              href="/admin/contatos"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              {t('contatos')}
+            </Link>
 
             <form action={logoutAction} className="ml-2">
               <input type="hidden" name="locale" value={locale} />

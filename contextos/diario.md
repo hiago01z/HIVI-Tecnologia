@@ -210,6 +210,37 @@
 
 ---
 
+### 2026-07-24 — Fase 9: Qualidade de Produto — Contatos Admin, WhatsApp e Animações
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `main`
+
+#### ✅ Admin — Página de Contatos (`/admin/contatos`)
+- `src/app/[locale]/admin/contatos/page.tsx` — lista todos os formulários recebidos
+- Exibe: nome, e-mail (linkado), telefone, mensagem, locale, data, badge LGPD
+- Protegida por autenticação (redirect para login se não autenticado)
+- Navbar admin atualizada com link "Contatos" (traduzido nos 3 locales)
+- Chaves `admin.contatos.*` adicionadas em `pt-BR.json`, `en.json`, `es.json`
+- Chave `admin.nav.contatos` adicionada nos 3 arquivos de mensagem
+
+#### ✅ Botão WhatsApp flutuante (`WhatsAppButton`)
+- `src/components/ui/WhatsAppButton.tsx` — componente client fixo bottom-right
+- Só renderiza se `NEXT_PUBLIC_WHATSAPP` estiver configurado
+- Ícone SVG do WhatsApp (inline), cor `#25D366`
+- Aciona analytics `click_whatsapp` ao clicar
+- Adicionado ao `(site)/layout.tsx` — presente em todas as páginas públicas
+- Acessível: `aria-label`, `focus-visible` ring verde
+
+#### ✅ Animações de scroll (Intersection Observer)
+- `src/components/ui/AnimateOnScroll.tsx` — wrapper client com IntersectionObserver
+- Efeito fade-up (400ms ease-out) ou fade simples; prop `delay` para stagger
+- Respeita `prefers-reduced-motion: reduce` (mostra conteúdo imediatamente)
+- Aplicado em:
+  - `StatsSection` — cada card com delay escalonado (0/100/200/300ms)
+  - `ServicesSection` — heading da seção
+  - `AboutSection` — heading + colunas de texto e cards (delay 100ms/200ms)
+
+---
+
 ### 2026-07-24 — Fase 8: Infraestrutura Supabase + Ajustes de Produção
 
 **Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
@@ -274,6 +305,9 @@
 | 21 | Schema Supabase (tabelas + RLS) | 📋 Pendente (executar `supabase/schema.sql`) |
 | 22 | Usuário admin no Supabase Auth | 📋 Pendente (criar no painel) |
 | 23 | Configuração de domínio | 📋 Pendente |
+| 24 | Admin — página Contatos | ✅ Concluído |
+| 25 | Botão WhatsApp flutuante | ✅ Concluído |
+| 26 | Animações de scroll (IntersectionObserver) | ✅ Concluído |
 
 ---
 

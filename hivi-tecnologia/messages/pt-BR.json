@@ -233,9 +233,16 @@
       "saveAndPublish": "Salvar e Publicar",
       "saving": "Salvando..."
     },
+    "contatos": {
+      "title": "Contatos Recebidos",
+      "totalContacts": "contatos no total",
+      "noContacts": "Nenhum contato recebido ainda.",
+      "lgpdConsent": "LGPD ✓"
+    },
     "nav": {
       "dashboard": "Dashboard",
       "posts": "Posts",
+      "contatos": "Contatos",
       "logout": "Sair"
     }
   },

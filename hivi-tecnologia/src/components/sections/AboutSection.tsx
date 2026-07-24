@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { Target, Eye, Heart, CheckCircle } from 'lucide-react';
+import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
 export function AboutSection() {
   const t = useTranslations('about');
@@ -9,19 +10,21 @@ export function AboutSection() {
     <section className="bg-[#EBF3FF] py-24" aria-label={t('sectionTitle')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-[#0D1117] lg:text-4xl">
-            {t('sectionTitle')}
-          </h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1565C0]" aria-hidden="true" />
-          <p className="mx-auto mt-5 max-w-xl text-[#4B5563]">
-            {t('sectionSubtitle')}
-          </p>
-        </div>
+        <AnimateOnScroll>
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-[#0D1117] lg:text-4xl">
+              {t('sectionTitle')}
+            </h2>
+            <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1565C0]" aria-hidden="true" />
+            <p className="mx-auto mt-5 max-w-xl text-[#4B5563]">
+              {t('sectionSubtitle')}
+            </p>
+          </div>
+        </AnimateOnScroll>
 
         <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
           {/* Left — description */}
-          <div>
+          <AnimateOnScroll delay={100}>
             <p className="text-[#4B5563] leading-relaxed">{t('description1')}</p>
             <p className="mt-4 text-[#4B5563] leading-relaxed">{t('description2')}</p>
 
@@ -42,9 +45,10 @@ export function AboutSection() {
                   ))}
               </ul>
             </div>
-          </div>
+          </AnimateOnScroll>
 
           {/* Right — mission / vision cards */}
+          <AnimateOnScroll delay={200}>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
             <div className="rounded-xl bg-white p-6 shadow-sm border border-[#E2E8F0]">
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#1565C0]/10">
@@ -84,6 +88,7 @@ export function AboutSection() {
               </div>
             </div>
           </div>
+          </AnimateOnScroll>
         </div>
       </div>
     </section>
