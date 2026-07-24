@@ -1,5 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 
 export default function SiteLayout({
   children,
@@ -8,6 +9,7 @@ export default function SiteLayout({
 }) {
   return (
     <>
+      <PageViewTracker />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />

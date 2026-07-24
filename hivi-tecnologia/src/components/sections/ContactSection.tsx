@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
 import type { ContatoPayload } from '@/types/contato';
+import { fireEvent } from '@/lib/analytics';
 
 function useContatoSchema() {
   const t = useTranslations('contact.form.errors');
@@ -55,6 +56,7 @@ function ContactForm() {
       if (!res.ok) throw new Error();
       setStatus('success');
       reset();
+      fireEvent({ tipo: 'click_contato', pagina: window.location.pathname, locale });
     } catch {
       setStatus('error');
     }
@@ -209,6 +211,7 @@ function ContactForm() {
 
 export function ContactSection() {
   const t = useTranslations('contact');
+  const locale = useLocale();
 
   const phone = process.env.NEXT_PUBLIC_TELEFONE;
   const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP;
@@ -256,6 +259,9 @@ export function ContactSection() {
                   href={`https://wa.me/${whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    fireEvent({ tipo: 'click_whatsapp', pagina: window.location.pathname, locale })
+                  }
                   className="flex items-center gap-4 rounded-xl bg-[#1565C0] p-4 shadow-sm transition-shadow hover:shadow-md hover:bg-[#1976D2]"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15">

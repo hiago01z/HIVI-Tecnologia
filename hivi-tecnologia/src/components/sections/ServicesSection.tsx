@@ -1,10 +1,10 @@
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
 import {
   Brain, ClipboardList, Server, Shield, Headphones,
-  Code2, Zap, BarChart3, Cloud, Database, Monitor, ArrowRight,
+  Code2, Zap, BarChart3, Cloud, Database, Monitor,
 } from 'lucide-react';
 import { SERVICE_KEYS, FEATURED_SERVICES, type ServiceKey } from '@/constants/services';
+import { ServiceCardLink } from './ServiceCardLink';
 
 const SERVICE_ICONS: Record<ServiceKey, React.ElementType> = {
   consultoriaTI: Brain,
@@ -81,17 +81,11 @@ export function ServicesSection() {
                   {t(`services.items.${key}.description`)}
                 </p>
 
-                <Link
-                  href="/sobre#contato"
-                  className={`mt-6 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 ${
-                    isFeatured
-                      ? 'bg-white text-[#1565C0] hover:bg-[#EBF3FF] focus-visible:outline-white'
-                      : 'bg-[#1565C0] text-white hover:bg-[#1976D2] focus-visible:outline-[#1565C0]'
-                  }`}
-                >
-                  {t('services.contactUs')}
-                  <ArrowRight size={14} aria-hidden="true" />
-                </Link>
+                <ServiceCardLink
+                  serviceKey={key}
+                  label={t('services.contactUs')}
+                  isFeatured={isFeatured}
+                />
               </div>
             );
           })}
