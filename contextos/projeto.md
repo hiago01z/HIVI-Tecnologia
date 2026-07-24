@@ -10,9 +10,11 @@
 
 ## Ideia Central
 
-Site empresarial da HIVI Tecnologia, desenvolvido para apresentar a empresa, seus serviços, portfólio e formas de contato. O site deve transmitir profissionalismo, credibilidade e inovação, conectando a empresa com potenciais clientes de forma clara e objetiva.
+Site empresarial da HIVI Tecnologia para apresentar a empresa, seus serviços, portfólio e contato. O site deve transmitir profissionalismo, credibilidade e inovação.
 
-Além do site público, o projeto conta com um **painel administrativo privado** (`/admin`) para gestão de conteúdo do blog e monitoramento de métricas do site.
+**Recursos principais:**
+- Site público multilíngue (pt-BR, en, es) com detecção automática por geolocalização
+- Painel administrativo privado (`/admin`) para gestão de conteúdo e métricas
 
 ---
 
@@ -26,25 +28,39 @@ Além do site público, o projeto conta com um **painel administrativo privado**
 
 ## Páginas do Site Público
 
-| Página | Rota | Descrição |
-|--------|------|-----------|
-| Home | `/` | Apresentação institucional, proposta de valor e CTA principal |
-| Serviços | `/servicos` | Listagem detalhada de todos os serviços oferecidos |
-| Sobre Nós | `/sobre` | História, missão, visão e equipe da HIVI |
-| Blog | `/blog` | Posts sobre trabalhos, novidades e curiosidades tecnológicas |
-| Política de Privacidade | `/privacidade` | Termos e políticas conforme a LGPD |
+Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
+
+| Página | Rota (pt-BR) | Descrição |
+|--------|-------------|----------|
+| Home | `/pt-br` | Apresentação institucional, proposta de valor e CTA |
+| Serviços | `/pt-br/servicos` | Listagem de todos os serviços |
+| Sobre Nós | `/pt-br/sobre` | História, missão, visão e equipe |
+| Blog | `/pt-br/blog` | Posts sobre trabalhos e novidades |
+| Política de Privacidade | `/pt-br/privacidade` | Termos LGPD |
 
 ## Painel Administrativo (Privado)
 
 | Página | Rota | Descrição |
 |--------|------|-----------|
-| Login | `/admin` | Tela de autenticação (e-mail + senha via Supabase Auth) |
-| Dashboard | `/admin/dashboard` | Métricas: cliques, visitas, contatos recebidos |
-| Posts | `/admin/posts` | Listagem e gestão dos posts do blog |
-| Novo Post | `/admin/posts/novo` | Editor de novo post |
-| Editar Post | `/admin/posts/[id]` | Edição de post existente |
+| Login | `/pt-br/admin` | Autenticação via Supabase Auth |
+| Dashboard | `/pt-br/admin/dashboard` | Métricas: cliques, visitas, contatos |
+| Posts | `/pt-br/admin/posts` | Listagem e gestão dos posts |
+| Novo Post | `/pt-br/admin/posts/novo` | Editor com suporte a todos os locales |
+| Editar Post | `/pt-br/admin/posts/[id]` | Edição com suporte a todos os locales |
 
-> **Segurança:** A rota `/admin` **não possui link visível em nenhuma parte do site público**. O acesso é feito apenas digitando a URL manualmente. A autenticação é gerenciada pelo Supabase Auth com sessão server-side.
+> **Segurança:** Sem links no site público. Acesso apenas por URL digitada.
+
+---
+
+## Internacionalização (i18n)
+
+| Locale | Idioma | Padrão | Detecção automática |
+|--------|--------|--------|--------------------|
+| `pt-BR` | Português (Brasil) | ✅ | Brasil e fallback |
+| `en` | Inglês | — | Países de língua inglesa |
+| `es` | Espanhol | — | Países hispano-falantes |
+
+**Nenhuma string de texto deve ser hardcoded no código.** Tudo via arquivos `messages/*.json`.
 
 ---
 
@@ -52,17 +68,17 @@ Além do site público, o projeto conta com um **painel administrativo privado**
 
 | Serviço | Descrição |
 |---------|----------|
-| Diagnóstico de Infraestrutura de TI | Análise da estrutura tecnológica atual e identificação de melhorias |
-| Planejamento Estratégico de TI | Planejamento da evolução tecnológica alinhado aos objetivos da empresa |
-| Projetos de Infraestrutura Tecnológica | Planejamento de redes, equipamentos, servidores, Wi-Fi e organização da TI |
-| Consultoria para Novas Empresas | Apoio na escolha de equipamentos, sistemas, serviços em nuvem e estrutura tecnológica |
-| Implantação e Gestão de Sistemas | Auxílio na implantação de ERPs, CRMs, sistemas financeiros, de estoque e produtividade |
-| Consultoria em Segurança da Informação | Políticas de segurança, backup, controle de acesso e boas práticas |
-| Transformação Digital | Modernização de processos e digitalização de operações |
-| Automação de Processos | Implementação de automações para reduzir tarefas manuais e aumentar a produtividade |
-| Treinamentos Corporativos | Capacitação em tecnologia, segurança digital e uso de ferramentas empresariais |
-| Desenvolvimento de Sites | Criação de sites institucionais, landing pages, portfólios, blogs e sites para pequenas empresas |
-| Relatórios e Auditorias de TI | Relatórios técnicos, inventário de ativos, avaliação de riscos e recomendações de melhorias |
+| Diagnóstico de Infraestrutura de TI | Análise da estrutura atual e identificação de melhorias |
+| Planejamento Estratégico de TI | Evolução tecnológica alinhada aos objetivos da empresa |
+| Projetos de Infraestrutura Tecnológica | Redes, equipamentos, servidores, Wi-Fi |
+| Consultoria para Novas Empresas | Apoio na escolha de tecnologias e estrutura inicial |
+| Implantação e Gestão de Sistemas | ERPs, CRMs, sistemas financeiros e de produtividade |
+| Consultoria em Segurança da Informação | Políticas de segurança, backup e controle de acesso |
+| Transformação Digital | Modernização e digitalização de operações |
+| Automação de Processos | Redução de tarefas manuais e aumento de produtividade |
+| Treinamentos Corporativos | Capacitação em tecnologia e ferramentas empresariais |
+| Desenvolvimento de Sites | Sites institucionais, landing pages, portfólios e blogs |
+| Relatórios e Auditorias de TI | Inventário, avaliação de riscos e recomendações |
 
 ---
 
@@ -76,54 +92,59 @@ Além do site público, o projeto conta com um **painel administrativo privado**
 
 | Camada | Tecnologia | Descrição |
 |--------|-----------|----------|
-| Framework | Next.js 15+ (App Router) | SSR, SSG, ISR e API Routes |
-| Linguagem | TypeScript | Tipagem estática em todo o projeto |
-| Estilização | Tailwind CSS 4+ | Utility-first, responsivo por padrão |
-| Backend/DB | Supabase (PostgreSQL) | Banco de dados, autenticação e storage |
-| Hospedagem | Vercel | Deploy contínuo via Git |
-| Autenticação Admin | Supabase Auth | E-mail + senha, sessão server-side |
+| Framework | Next.js 15+ (App Router) | SSR, SSG, Middleware |
+| Linguagem | TypeScript | Tipagem estática |
+| Estilização | Tailwind CSS 4+ | Utility-first |
+| i18n | next-intl | Multilíngue (pt-BR, en, es) |
+| Backend/DB | Supabase | PostgreSQL, Auth, Storage |
+| Hospedagem | Vercel | CI/CD + geolocalização |
 
 ---
 
 ## Planejamento por Fases
 
-### Fase 1 — Fundação
-- [x] Definição da estrutura do projeto
-- [x] Criação dos documentos base (`contextos/`)
-- [x] Design system definido com base nas imagens de referência
-- [x] Inicialização do projeto Next.js (preset padrão)
-- [x] Definição da arquitetura do painel admin
+### Fase 1 — Fundação ✅
+- [x] Documentação base (`contextos/`)
+- [x] Design system (imagens de referência)
+- [x] Projeto Next.js inicializado
+- [x] Arquitetura admin definida
+- [x] Arquitetura i18n definida
 
-### Fase 2 — Desenvolvimento Core do Site Público
-- [ ] Instalar dependências adicionais (Lucide, React Hook Form, Zod, Supabase JS)
+### Fase 2 — Setup Técnico
+- [ ] Instalar dependências: `next-intl`, Lucide, React Hook Form, Zod, `@supabase/ssr`
+- [ ] Configurar `next-intl` (routing, middleware, messages)
+- [ ] Criar arquivos de tradução: `pt-br.json`, `en.json`, `es.json`
 - [ ] Configurar clientes Supabase
-- [ ] Componentes globais (Header, Footer)
+- [ ] Implementar `middleware.ts` (i18n + auth)
+- [ ] Configurar `.env.local`
+
+### Fase 3 — Site Público
+- [ ] Header com `LanguageSwitcher`
+- [ ] Footer
 - [ ] Página Home
 - [ ] Página Serviços
 - [ ] Página Sobre Nós
 - [ ] Página Política de Privacidade
-- [ ] Formulário de contato com LGPD
+- [ ] Formulário de contato (LGPD)
 
-### Fase 3 — Blog Público
-- [ ] Página de listagem de posts
-- [ ] Página individual de post (`/blog/[slug]`)
-- [ ] SEO e meta tags
+### Fase 4 — Blog Público
+- [ ] Listagem de posts
+- [ ] Post individual
+- [ ] SEO e meta tags por locale
 
-### Fase 4 — Analytics
-- [ ] Rastreamento de cliques no botão de contato
-- [ ] Rastreamento de visitas por página
-- [ ] Armazenamento de eventos no Supabase
+### Fase 5 — Analytics
+- [ ] Rastreamento de eventos (sem dados pessoais)
+- [ ] Armazenamento no Supabase com locale
 
-### Fase 5 — Painel Admin
-- [ ] Middleware de autenticação (proteção de rotas `/admin/*`)
-- [ ] Tela de login (`/admin`)
+### Fase 6 — Painel Admin
+- [ ] Login seguro com rate limiting
 - [ ] Dashboard de métricas
-- [ ] Listagem e gestão de posts
-- [ ] Editor de posts (novo e edição)
+- [ ] Gestão de posts (com editor multilingual)
+- [ ] Visualização de contatos recebidos
 
-### Fase 6 — Qualidade e Launch
+### Fase 7 — Qualidade e Launch
 - [ ] Testes de responsividade
-- [ ] Auditoria de conformidade LGPD
+- [ ] Auditoria LGPD
 - [ ] Otimização de performance
 - [ ] Deploy na Vercel
 - [ ] Configuração de domínio

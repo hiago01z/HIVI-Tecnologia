@@ -8,33 +8,31 @@
 
 Antes de iniciar qualquer desenvolvimento, modificação ou refatoração, **todos os documentos da pasta `/contextos` devem ser lidos integralmente**, na seguinte ordem:
 
-1. `projeto.md` — compreender escopo, serviços e objetivos
-2. `estrutura.md` — entender a arquitetura e tecnologias adotadas
-3. `designe.md` — respeitar o padrão visual estabelecido
+1. `projeto.md` — escopo, serviços e objetivos
+2. `estrutura.md` — arquitetura e tecnologias
+3. `designe.md` — padrão visual
 4. `regras.md` — este documento
-5. `diario.md` — verificar o estado atual das implementações
+5. `diario.md` — estado atual das implementações
 
-> **Nenhuma linha de código deve ser escrita sem que todos os documentos tenham sido consultados e compreendidos.**
+> **Nenhuma linha de código deve ser escrita sem que todos os documentos tenham sido consultados.**
 
 ---
 
 ## Regra 2 — Controle de Versão: Commit e Push Obrigatórios
 
-Ao finalizar qualquer implementação, as seguintes ações são **mandatórias**:
+Ao finalizar qualquer implementação:
 
-1. Revisar todas as alterações
-2. Atualizar os documentos relevantes em `/contextos/`
-3. Commit com mensagem descritiva no formato:
+1. Revisar alterações
+2. Atualizar documentação em `/contextos/`
+3. Commit no formato:
 
 ```
 tipo(escopo): descrição breve
-
-Detalhamento opcional.
 ```
 
 **Tipos:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
-4. Push imediatamente após o commit
+4. Push imediatamente
 
 > **Nunca deixe alterações sem commit. Nunca deixe commits sem push.**
 
@@ -42,66 +40,53 @@ Detalhamento opcional.
 
 ## Regra 3 — Atualização Obrigatória da Documentação
 
-Após concluir qualquer implementação, **todos os arquivos `.md` e o `README.md` devem ser atualizados**:
+Após cada implementação, atualizar:
 
 | Documento | O que atualizar |
 |-----------|----------------|
-| `diario.md` | Status das tarefas realizadas |
-| `estrutura.md` | Mudanças na arquitetura ou rotas |
-| `designe.md` | Novos componentes ou padrões visuais |
-| `projeto.md` | Fases e planejamento (checkboxes) |
+| `diario.md` | Status das tarefas |
+| `estrutura.md` | Mudanças na arquitetura |
+| `designe.md` | Novos componentes visuais |
+| `projeto.md` | Fases e checkboxes |
 | `README.md` | Estado atual do projeto |
-
-> **Documentação desatualizada é considerada um erro de projeto.**
 
 ---
 
 ## Regra 4 — Respeito à Estrutura e Integridade do Sistema
 
-- Consultar `estrutura.md` antes de criar arquivos, rotas ou componentes
-- Seguir as convenções de nomenclatura estabelecidas
-- **Nunca modificar arquivos críticos** sem revisão documentada:
-  - `middleware.ts`, `next.config.ts`, `.env.local`, configurações Supabase, `vercel.json`
-
-> **Quebrar a estrutura impacta produção. Leia antes de agir.**
+- Consultar `estrutura.md` antes de criar arquivos ou rotas
+- Seguir as convenções de nomenclatura
+- Nunca modificar sem revisão: `middleware.ts`, `next.config.ts`, `.env.local`, configurações Supabase
 
 ---
 
 ## Regra 5 — Instrução para Agentes de Inteligência Artificial
 
-Se você é um agente de IA lendo este documento:
-
 ### Ao Iniciar:
 1. Leia **todos** os documentos em `/contextos/`
-2. Verifique `diario.md` para identificar tarefas "Na Fila" ou "Em Progresso"
+2. Verifique `diario.md` (tarefas "Na Fila" ou "Em Progresso")
 3. Não assuma nada — verifique na documentação
 
 ### Ao Finalizar:
-1. Atualize `diario.md` com status correto
+1. Atualize `diario.md`
 2. Atualize todos os documentos afetados
-3. Realize commit e push seguindo a Regra 2
-4. Reporte o que foi feito de forma clara
+3. Commit + push (Regra 2)
+4. Reporte o que foi feito
 
 ### Restrições:
-- Nunca modifique variáveis de ambiente sem autorização explícita
-- Nunca exclua arquivos ou registros sem confirmação
+- Nunca modifique variáveis de ambiente sem autorização
+- Nunca exclua arquivos sem confirmação
 - Nunca faça push para `main` com alterações não revisadas
-- Sempre priorize estabilidade do sistema em produção
 
 ---
 
 ## Regra 6 — Conformidade com a LGPD
 
-Todas as funcionalidades que envolvam dados pessoais devem seguir **rigorosamente a Lei nº 13.709/2018**:
-
-- Todo formulário de contato exige consentimento explícito e destacado
-- Política de Privacidade acessível em todas as páginas (footer obrigatório)
-- Dados mínimos e justificados (princípio da necessidade)
-- Mecanismo de solicitação de exclusão de dados acessível ao usuário
-- A tabela `eventos` (analytics) **não deve armazenar IP, cookies ou qualquer dado pessoal**
-- Política de retenção de dados definida e respeitada
-
-> **O descumprimento da LGPD pode resultar em sanções legais.**
+- Consentimento explícito em formulários de contato
+- Política de Privacidade sempre acessível (footer)
+- Dados mínimos e justificados
+- Tabela `eventos` sem IP, cookies ou dados pessoais
+- Política de retenção de dados definida
 
 ---
 
@@ -111,51 +96,78 @@ Todas as funcionalidades que envolvam dados pessoais devem seguir **rigorosament
 |----------|--------|
 | Tipagem | TypeScript obrigatório. Sem `any` |
 | Responsividade | Mobile, tablet e desktop |
-| Acessibilidade | Tags semânticas + ARIA |
+| Acessibilidade | HTML semântico + ARIA |
 | Performance | WebP, lazy loading, Core Web Vitals |
-| SEO | Meta tags e Open Graph em todas as páginas |
-| Segurança | Validação Zod no client e server, HTTPS, sem secrets no frontend |
-| Código limpo | Sem variáveis não usadas, sem `console.log` em produção |
+| SEO | Meta tags e Open Graph por locale |
+| Código limpo | Sem `console.log` em produção |
 
 ---
 
 ## Regra 8 — Segurança do Painel Administrativo
 
-O painel `/admin` lida com acesso privilegiado ao sistema. As seguintes medidas são **obrigatórias e não negociáveis**:
-
 ### Acesso e Visibilidade
-- A rota `/admin` **não deve ser linkada, referenciada ou mencionada** em nenhuma parte do site público
-- Nenhum botão, link, sitemap, `robots.txt` ou meta tag deve revelar a existência do painel
-- Acesso exclusivamente por URL digitada manualmente pelo administrador
+- A rota `/admin` **não deve ser linkada ou referenciada** em nenhuma parte do site público
+- Sem botões, links, sitemap ou meta tags revelando o painel
+- Acesso exclusivo por URL digitada manualmente
 
 ### Autenticação
-- Autenticação via **Supabase Auth** com e-mail e senha
-- Sessão gerenciada **server-side** via cookie `HttpOnly; Secure; SameSite=Strict`
-- O token JWT **nunca deve ser exposto ao JavaScript do cliente**
-- Validação da sessão feita no `middleware.ts` do Next.js em **toda requisição** a `/admin/*`
-- Se a sessão for inválida ou expirada: redirect imediato para `/admin` (tela de login)
+- Supabase Auth com e-mail e senha
+- Sessão server-side: cookie `HttpOnly; Secure; SameSite=Strict`
+- JWT nunca exposto ao JavaScript cliente
+- `middleware.ts` valida sessão em toda requisição a `/[locale]/admin/*`
+- Sessão inválida: redirect imediato para login
 
 ### Proteção Contra Ataques
-- **Rate limiting** na rota de login: máximo de 5 tentativas por minuto por IP
-- Após exceder o limite: bloquear por 15 minutos com resposta genérica (sem indicar o motivo)
-- **Mensagens de erro genéricas** no login: nunca informar se o e-mail existe ou não
-- Validação com Zod em todos os inputs do admin (server-side obrigatório)
-- **Proteção contra CSRF** em todas as Server Actions
-- Headers de segurança configurados no `next.config.ts`:
-  ```
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Content-Security-Policy: (restritivo)
-  Permissions-Policy: (restritivo)
-  ```
+- **Rate limiting** no login: máximo 5 tentativas/min por IP; bloquear 15 min após exceder
+- Mensagens de erro genéricas (nunca revelar se e-mail existe)
+- Validação Zod em todos os inputs do admin (server-side obrigatório)
+- Proteção CSRF em todas as Server Actions
+- Headers no `next.config.ts`: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
+  `Referrer-Policy`, `CSP`, `Permissions-Policy`
 
 ### Banco de Dados
-- **Row Level Security (RLS)** habilitado em todas as tabelas
-- Escrita em `posts` e leitura de `contatos` e `eventos` restritas a usuários com `role = 'admin'` no Supabase
-- O `SUPABASE_SERVICE_ROLE_KEY` **nunca é exposto ao cliente** — apenas em Server Components e API Routes
+- RLS habilitado em todas as tabelas
+- Escrita em `posts`, leitura de `contatos` e `eventos`: restrito a `role = 'admin'`
+- `SUPABASE_SERVICE_ROLE_KEY` nunca exposto ao cliente
+- Logout invalida a sessão no servidor
 
-### Regras Gerais
-- Nunca armazenar senha em texto puro (Supabase Auth faz o hash automaticamente)
-- Logout deve invalidar a sessão no servidor, não apenas no cliente
-- Qualquer modificação no `middleware.ts` deve ser revisada cuidadosamente antes do push
+---
+
+## Regra 9 — Internacionalização: Zero Strings Hardcoded
+
+**Nenhum texto visível ao usuário deve ser escrito diretamente no código.**
+
+Toda string de interface — títulos, descrições, rótulos, mensagens de erro, placeholders, textos de botões, alt de imagens, textos do footer, textos do admin — deve obrigatoriamente estar nos arquivos de tradução:
+
+```
+hivi-tecnologia/messages/
+  pt-br.json   ← português (PADRÃO)
+  en.json      ← inglês
+  es.json      ← espanhol
+```
+
+### Regras de Uso
+
+| Proibido | Correto |
+|----------|---------|
+| `<h1>Consultoria em TI</h1>` | `<h1>{t('hero.title')}</h1>` |
+| `placeholder="Seu nome"` | `placeholder={t('form.name_placeholder')}` |
+| `alt="Logo da HIVI"` | `alt={t('common.logo_alt')}` |
+| `toast('Enviado com sucesso')` | `toast(t('form.success_message'))` |
+
+### Estrutura Obrigatória
+
+- Toda chave adicionada em `pt-br.json` deve ser adicionada também em `en.json` e `es.json`
+- Chaves ausentes em algum locale devem cair no locale padrão (`pt-BR`), nunca ficar vazia
+- Nomes de chave: camelCase aninhado (`hero.title`, `nav.contact`, `footer.privacy_policy`)
+- Nunca usar índices numéricos como chave (`item_0`, `service_1`) — use nomes descritivos
+
+### Detecção Automática de Locale
+
+O locale do usuário é detectado automaticamente pelo `middleware.ts` na seguinte ordem:
+1. Cookie `NEXT_LOCALE` (preferência salva manualmente)
+2. Header `x-vercel-ip-country` (geolocalização Vercel)
+3. Header `Accept-Language` do browser
+4. Fallback: `pt-BR`
+
+O usuário pode alterar o idioma a qualquer momento pelo componente `LanguageSwitcher` no Header.
