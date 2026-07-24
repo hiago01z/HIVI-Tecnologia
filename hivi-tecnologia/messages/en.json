@@ -1,0 +1,244 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About Us",
+    "blog": "Blog",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy"
+  },
+  "hero": {
+    "eyebrow": "Consulting • IT Management • Infrastructure • Web Development",
+    "title": "Strategic Technology Solutions for Businesses",
+    "description": "We transform your company with cutting-edge technology, specialized consulting and continuous support. Real results, sustainable growth.",
+    "ctaPrimary": "Contact Us",
+    "ctaSecondary": "View Services",
+    "imageAlt": "Technology professionals working on innovative solutions"
+  },
+  "stats": {
+    "clients": "Clients Served",
+    "projects": "Projects Delivered",
+    "uptime": "Availability",
+    "support": "Technical Support",
+    "clientsValue": "150+",
+    "projectsValue": "300+",
+    "uptimeValue": "99.9%",
+    "supportValue": "24/7"
+  },
+  "services": {
+    "sectionTitle": "Our Services",
+    "sectionSubtitle": "Complete solutions for all your company's technology needs",
+    "learnMore": "Learn more",
+    "contactUs": "Talk to a specialist",
+    "items": {
+      "consultoriaTI": {
+        "title": "IT Consulting",
+        "description": "Strategic analysis and technology planning to drive your business growth."
+      },
+      "gestaoProjetos": {
+        "title": "IT Project Management",
+        "description": "Agile methodologies and efficient management to ensure on-time and on-budget delivery."
+      },
+      "infraestrutura": {
+        "title": "Infrastructure & Cloud",
+        "description": "Robust, scalable and secure infrastructure architecture with leading cloud platforms."
+      },
+      "segurancaInfo": {
+        "title": "Information Security",
+        "description": "Advanced data and system protection with diagnostics, policies and continuous monitoring."
+      },
+      "suporteTI": {
+        "title": "IT Support",
+        "description": "Specialized technical support with fast response times and efficient incident resolution."
+      },
+      "desenvolvimentoWeb": {
+        "title": "Web & App Development",
+        "description": "Creation of modern, responsive and high-performance websites, systems and applications."
+      },
+      "automacaoProcessos": {
+        "title": "Process Automation",
+        "description": "Workflow automation to reduce operational costs and eliminate repetitive tasks."
+      },
+      "businessIntelligence": {
+        "title": "Business Intelligence",
+        "description": "Transform data into strategic insights with dashboards, reports and predictive analytics."
+      },
+      "migracaoCloud": {
+        "title": "Cloud Migration",
+        "description": "Safe planning and execution of legacy system migration to cloud environments."
+      },
+      "erp": {
+        "title": "ERP Implementation",
+        "description": "Configuration, customization and support of ERP systems to optimize business management."
+      },
+      "ti360": {
+        "title": "IT 360°",
+        "description": "Complete IT infrastructure management with proactive monitoring and integrated support."
+      }
+    }
+  },
+  "about": {
+    "sectionTitle": "About HIVI Tecnologia",
+    "sectionSubtitle": "A company that believes in the power of technology to transform businesses",
+    "description1": "HIVI Tecnologia is a consulting company specialized in technology solutions for companies of all sizes. Founded with the goal of democratizing access to quality technology, we combine technical expertise with strategic business vision.",
+    "description2": "Our team of specialists works side by side with clients to understand their challenges and deliver solutions that generate real, measurable results.",
+    "mission": "Mission",
+    "missionText": "Transform companies through strategic technology solutions, creating sustainable value and driving the growth of our clients.",
+    "vision": "Vision",
+    "visionText": "To be the reference technology partner for companies seeking innovation, efficiency and digital security in Brazil.",
+    "values": "Values",
+    "valuesItems": ["Technical excellence", "Ethics and transparency", "Continuous innovation", "Customer focus", "Responsibility"]
+  },
+  "contact": {
+    "sectionTitle": "Contact Us",
+    "sectionSubtitle": "We're ready to help your company grow with technology",
+    "ctaText": "Schedule a no-obligation conversation with our specialists and discover how we can transform your company.",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "callToAction": "Start WhatsApp conversation",
+    "form": {
+      "title": "Send a message",
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone (optional)",
+      "phonePlaceholder": "+1 (555) 999-9999",
+      "message": "Message",
+      "messagePlaceholder": "Describe how we can help your company...",
+      "lgpdConsent": "I agree to the ",
+      "lgpdLink": "Privacy Policy",
+      "lgpdConsentSuffix": " and authorize contact from HIVI Tecnologia.",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "successTitle": "Message sent!",
+      "successMessage": "We will contact you shortly.",
+      "errorMessage": "Error sending. Please try again.",
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email",
+        "messageRequired": "Message is required",
+        "consentRequired": "You must accept the privacy policy"
+      }
+    }
+  },
+  "blog": {
+    "sectionTitle": "Blog",
+    "sectionSubtitle": "Articles, success stories and news from the technology world",
+    "readMore": "Read full article",
+    "backToBlog": "Back to Blog",
+    "publishedOn": "Published on",
+    "noPostsFound": "No posts found.",
+    "loadMore": "Load more"
+  },
+  "footer": {
+    "description": "Strategic technology solutions for companies seeking growth and innovation.",
+    "company": "Company",
+    "services": "Services",
+    "connect": "Connect",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "rights": "All rights reserved.",
+    "tagline": "Consulting • IT Management • Infrastructure • Web Development"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "intro": "HIVI Tecnologia is committed to protecting your personal data, in compliance with the General Data Protection Law (LGPD — Law 13.709/2018).",
+    "sections": {
+      "dataController": {
+        "title": "1. Data Controller",
+        "content": "HIVI Tecnologia — responsible for the processing of personal data collected on this website."
+      },
+      "dataCollected": {
+        "title": "2. Data Collected",
+        "content": "We collect the following data when you use our contact form: full name, email address, phone (optional) and message. We also collect anonymized browsing data for website usage analysis."
+      },
+      "purpose": {
+        "title": "3. Processing Purpose",
+        "content": "Your data is used exclusively to: respond to your contact, send information about our services (with consent) and improve our platform."
+      },
+      "retention": {
+        "title": "4. Data Retention",
+        "content": "We keep your data for the period necessary to fulfill the purpose of contact, or for the applicable legal period, after which it is securely deleted."
+      },
+      "rights": {
+        "title": "5. Your Rights (LGPD)",
+        "content": "You have the right to: confirm the existence of processing, access your data, correct incomplete data, request anonymization or deletion, revoke consent at any time."
+      },
+      "security": {
+        "title": "6. Security",
+        "content": "We adopt technical and administrative measures to protect your data against unauthorized access, destruction or improper disclosure."
+      },
+      "contact": {
+        "title": "7. Data Protection Officer Contact",
+        "content": "To exercise your rights or clarify doubts, contact us by email:"
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "backHome": "Back to home"
+  },
+  "admin": {
+    "login": {
+      "title": "Restricted Access",
+      "subtitle": "Admin Panel — HIVI Tecnologia",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "submitting": "Signing in...",
+      "error": "Invalid email or password.",
+      "rateLimited": "Too many attempts. Please try again in 15 minutes."
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "totalPageViews": "Page Views",
+      "contactClicks": "Contact Clicks",
+      "whatsappClicks": "WhatsApp Clicks",
+      "serviceClicks": "Service Clicks",
+      "period": "Period",
+      "last7days": "Last 7 days",
+      "last30days": "Last 30 days",
+      "last90days": "Last 90 days"
+    },
+    "posts": {
+      "title": "Blog Posts",
+      "newPost": "New Post",
+      "edit": "Edit",
+      "delete": "Delete",
+      "publish": "Publish",
+      "unpublish": "Unpublish",
+      "published": "Published",
+      "draft": "Draft",
+      "confirmDelete": "Are you sure you want to delete this post?",
+      "deleteSuccess": "Post deleted successfully.",
+      "noPosts": "No posts created yet."
+    },
+    "postEditor": {
+      "titleLabel": "Title",
+      "slugLabel": "Slug (URL)",
+      "summaryLabel": "Summary",
+      "contentLabel": "Content",
+      "imageLabel": "Image URL",
+      "localeTab": "Language",
+      "save": "Save",
+      "saveAndPublish": "Save & Publish",
+      "saving": "Saving..."
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "posts": "Posts",
+      "logout": "Sign Out"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "pt-BR": "Português",
+    "en": "English",
+    "es": "Español"
+  }
+}

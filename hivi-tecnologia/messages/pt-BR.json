@@ -1,0 +1,244 @@
+{
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "about": "Sobre Nós",
+    "blog": "Blog",
+    "contact": "Entrar em Contato",
+    "privacy": "Política de Privacidade"
+  },
+  "hero": {
+    "eyebrow": "Consultoria • Gestão de TI • Infraestrutura • Desenvolvimento Web",
+    "title": "Soluções Tecnológicas Estratégicas para Empresas",
+    "description": "Transformamos sua empresa com tecnologia de ponta, consultoria especializada e suporte contínuo. Resultados reais, crescimento sustentável.",
+    "ctaPrimary": "Entrar em Contato",
+    "ctaSecondary": "Conhecer Serviços",
+    "imageAlt": "Profissionais de tecnologia trabalhando em soluções inovadoras"
+  },
+  "stats": {
+    "clients": "Clientes Atendidos",
+    "projects": "Projetos Entregues",
+    "uptime": "Disponibilidade",
+    "support": "Suporte Técnico",
+    "clientsValue": "150+",
+    "projectsValue": "300+",
+    "uptimeValue": "99.9%",
+    "supportValue": "24/7"
+  },
+  "services": {
+    "sectionTitle": "Nossos Serviços",
+    "sectionSubtitle": "Soluções completas para todas as necessidades de tecnologia da sua empresa",
+    "learnMore": "Saiba mais",
+    "contactUs": "Falar com especialista",
+    "items": {
+      "consultoriaTI": {
+        "title": "Consultoria de TI",
+        "description": "Análise estratégica e planejamento tecnológico para impulsionar o crescimento do seu negócio."
+      },
+      "gestaoProjetos": {
+        "title": "Gestão de Projetos de TI",
+        "description": "Metodologias ágeis e gestão eficiente para garantir a entrega no prazo e dentro do orçamento."
+      },
+      "infraestrutura": {
+        "title": "Infraestrutura e Cloud",
+        "description": "Arquitetura de infraestrutura robusta, escalável e segura com as principais plataformas cloud."
+      },
+      "segurancaInfo": {
+        "title": "Segurança da Informação",
+        "description": "Proteção avançada de dados e sistemas com diagnósticos, políticas e monitoramento contínuo."
+      },
+      "suporteTI": {
+        "title": "Suporte de TI",
+        "description": "Atendimento técnico especializado com tempos de resposta ágeis e resolução eficiente de incidentes."
+      },
+      "desenvolvimentoWeb": {
+        "title": "Desenvolvimento Web e Apps",
+        "description": "Criação de sites, sistemas e aplicativos modernos, responsivos e de alta performance."
+      },
+      "automacaoProcessos": {
+        "title": "Automação de Processos",
+        "description": "Automatização de fluxos de trabalho para reduzir custos operacionais e eliminar tarefas repetitivas."
+      },
+      "businessIntelligence": {
+        "title": "Business Intelligence",
+        "description": "Transformação de dados em insights estratégicos com dashboards, relatórios e análises preditivas."
+      },
+      "migracaoCloud": {
+        "title": "Migração para Cloud",
+        "description": "Planejamento e execução segura da migração de sistemas legados para ambientes em nuvem."
+      },
+      "erp": {
+        "title": "Implementação de ERP",
+        "description": "Configuração, customização e suporte de sistemas ERP para otimizar a gestão empresarial."
+      },
+      "ti360": {
+        "title": "TI 360°",
+        "description": "Gestão completa da infraestrutura de TI com monitoramento proativo e suporte integrado."
+      }
+    }
+  },
+  "about": {
+    "sectionTitle": "Sobre a HIVI Tecnologia",
+    "sectionSubtitle": "Uma empresa que acredita no poder da tecnologia para transformar negócios",
+    "description1": "A HIVI Tecnologia é uma empresa de consultoria especializada em soluções tecnológicas para empresas de todos os portes. Fundada com o objetivo de democratizar o acesso a tecnologia de qualidade, unimos expertise técnica com visão estratégica de negócios.",
+    "description2": "Nossa equipe de especialistas trabalha lado a lado com os clientes para entender seus desafios e entregar soluções que geram resultados reais e mensuráveis.",
+    "mission": "Missão",
+    "missionText": "Transformar empresas por meio de soluções tecnológicas estratégicas, criando valor sustentável e impulsionando o crescimento dos nossos clientes.",
+    "vision": "Visão",
+    "visionText": "Ser a parceira de tecnologia de referência para empresas que buscam inovação, eficiência e segurança digital no Brasil.",
+    "values": "Valores",
+    "valuesItems": ["Excelência técnica", "Ética e transparência", "Inovação contínua", "Foco no cliente", "Responsabilidade"]
+  },
+  "contact": {
+    "sectionTitle": "Entre em Contato",
+    "sectionSubtitle": "Estamos prontos para ajudar sua empresa a crescer com tecnologia",
+    "ctaText": "Agende uma conversa sem compromisso com nossos especialistas e descubra como podemos transformar sua empresa.",
+    "phone": "Telefone",
+    "whatsapp": "WhatsApp",
+    "email": "E-mail",
+    "callToAction": "Iniciar conversa no WhatsApp",
+    "form": {
+      "title": "Envie uma mensagem",
+      "name": "Nome completo",
+      "namePlaceholder": "Seu nome",
+      "email": "E-mail",
+      "emailPlaceholder": "seu@email.com",
+      "phone": "Telefone (opcional)",
+      "phonePlaceholder": "+55 (11) 99999-9999",
+      "message": "Mensagem",
+      "messagePlaceholder": "Descreva como podemos ajudar sua empresa...",
+      "lgpdConsent": "Concordo com a ",
+      "lgpdLink": "Política de Privacidade",
+      "lgpdConsentSuffix": " e autorizo o contato da HIVI Tecnologia.",
+      "submit": "Enviar Mensagem",
+      "submitting": "Enviando...",
+      "successTitle": "Mensagem enviada!",
+      "successMessage": "Entraremos em contato em breve.",
+      "errorMessage": "Erro ao enviar. Tente novamente.",
+      "errors": {
+        "nameRequired": "Nome é obrigatório",
+        "emailRequired": "E-mail é obrigatório",
+        "emailInvalid": "E-mail inválido",
+        "messageRequired": "Mensagem é obrigatória",
+        "consentRequired": "É necessário aceitar a política de privacidade"
+      }
+    }
+  },
+  "blog": {
+    "sectionTitle": "Blog",
+    "sectionSubtitle": "Artigos, casos de sucesso e novidades do mundo da tecnologia",
+    "readMore": "Ler artigo completo",
+    "backToBlog": "Voltar ao Blog",
+    "publishedOn": "Publicado em",
+    "noPostsFound": "Nenhum post encontrado.",
+    "loadMore": "Carregar mais"
+  },
+  "footer": {
+    "description": "Soluções tecnológicas estratégicas para empresas que buscam crescimento e inovação.",
+    "company": "Empresa",
+    "services": "Serviços",
+    "connect": "Conecte-se",
+    "legal": "Legal",
+    "privacy": "Política de Privacidade",
+    "rights": "Todos os direitos reservados.",
+    "tagline": "Consultoria • Gestão de TI • Infraestrutura • Desenvolvimento Web"
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "lastUpdated": "Última atualização",
+    "intro": "A HIVI Tecnologia está comprometida com a proteção dos seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei 13.709/2018).",
+    "sections": {
+      "dataController": {
+        "title": "1. Controlador dos Dados",
+        "content": "HIVI Tecnologia — responsável pelo tratamento dos dados pessoais coletados neste site."
+      },
+      "dataCollected": {
+        "title": "2. Dados Coletados",
+        "content": "Coletamos os seguintes dados quando você utiliza nosso formulário de contato: nome completo, endereço de e-mail, telefone (opcional) e mensagem. Também coletamos dados de navegação anonimizados para análise de uso do site."
+      },
+      "purpose": {
+        "title": "3. Finalidade do Tratamento",
+        "content": "Seus dados são utilizados exclusivamente para: responder ao seu contato, enviar informações sobre nossos serviços (mediante consentimento) e melhorar nossa plataforma."
+      },
+      "retention": {
+        "title": "4. Retenção dos Dados",
+        "content": "Mantemos seus dados pelo período necessário para atender à finalidade do contato, ou pelo prazo legal aplicável, após o qual são excluídos de forma segura."
+      },
+      "rights": {
+        "title": "5. Seus Direitos (LGPD)",
+        "content": "Você tem direito a: confirmar a existência de tratamento, acessar seus dados, corrigir dados incompletos, solicitar anonimização ou exclusão, revogar o consentimento a qualquer momento."
+      },
+      "security": {
+        "title": "6. Segurança",
+        "content": "Adotamos medidas técnicas e administrativas para proteger seus dados contra acesso não autorizado, destruição ou divulgação indevida."
+      },
+      "contact": {
+        "title": "7. Contato do Encarregado",
+        "content": "Para exercer seus direitos ou esclarecer dúvidas, entre em contato pelo e-mail:"
+      }
+    }
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "A página que você procura não existe ou foi movida.",
+    "backHome": "Voltar ao início"
+  },
+  "admin": {
+    "login": {
+      "title": "Acesso Restrito",
+      "subtitle": "Painel Administrativo — HIVI Tecnologia",
+      "email": "E-mail",
+      "password": "Senha",
+      "submit": "Entrar",
+      "submitting": "Entrando...",
+      "error": "E-mail ou senha inválidos.",
+      "rateLimited": "Muitas tentativas. Tente novamente em 15 minutos."
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "totalPageViews": "Visualizações de Página",
+      "contactClicks": "Cliques em Contato",
+      "whatsappClicks": "Cliques no WhatsApp",
+      "serviceClicks": "Cliques em Serviços",
+      "period": "Período",
+      "last7days": "Últimos 7 dias",
+      "last30days": "Últimos 30 dias",
+      "last90days": "Últimos 90 dias"
+    },
+    "posts": {
+      "title": "Posts do Blog",
+      "newPost": "Novo Post",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "publish": "Publicar",
+      "unpublish": "Despublicar",
+      "published": "Publicado",
+      "draft": "Rascunho",
+      "confirmDelete": "Tem certeza que deseja excluir este post?",
+      "deleteSuccess": "Post excluído com sucesso.",
+      "noPosts": "Nenhum post criado ainda."
+    },
+    "postEditor": {
+      "titleLabel": "Título",
+      "slugLabel": "Slug (URL)",
+      "summaryLabel": "Resumo",
+      "contentLabel": "Conteúdo",
+      "imageLabel": "URL da Imagem",
+      "localeTab": "Idioma",
+      "save": "Salvar",
+      "saveAndPublish": "Salvar e Publicar",
+      "saving": "Salvando..."
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "posts": "Posts",
+      "logout": "Sair"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Idioma",
+    "pt-BR": "Português",
+    "en": "English",
+    "es": "Español"
+  }
+}

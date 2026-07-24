@@ -76,7 +76,7 @@ hiago01z/HIVI-Tecnologia/
 │   │   │   ├── blog/
 │   │   │   └── admin/
 │   │   │
-│   │   ├── middleware.ts              # i18n (locale) + auth (admin)
+│   │   ├── proxy.ts                   # i18n (locale) + auth (admin) — Next.js 16 renomeou middleware → proxy
 │   │   ├── lib/
 │   │   │   ├── supabase/
 │   │   │   │   ├── client.ts
