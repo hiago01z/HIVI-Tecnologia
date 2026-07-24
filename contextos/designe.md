@@ -1,143 +1,236 @@
 # Design System — HIVI Tecnologia
 
-> **Status:** Provisório. As imagens de referência do cliente serão recebidas em breve. Após o recebimento, este documento deve ser revisado e atualizado com a identidade visual oficial da HIVI Tecnologia antes de qualquer implementação visual.
+> **Status:** Definido com base nas imagens de referência fornecidas pelo cliente em 2026-07-24. Este documento é a fonte de verdade visual do projeto. Toda implementação de UI deve seguir estas especificações rigorosamente.
 
 ---
 
 ## 1. Identidade Visual e Posicionamento
 
-A HIVI Tecnologia é uma empresa de soluções tecnológicas com foco em profissionalismo, inovação e confiança. Toda a linguagem visual deve transmitir:
+A HIVI Tecnologia é uma empresa de soluções tecnológicas. O visual deve transmitir:
 
-| Atributo | Como expressar |
-|----------|---------------|
-| **Autoridade técnica** | Design limpo, organizado, preciso |
-| **Modernidade** | Tendências atuais, sem excessos |
-| **Clareza** | Hierarquia visual bem definida |
-| **Confiança** | Consistência, seriedade e estabilidade |
+| Atributo | Como expressar no design |
+|----------|-------------------------|
+| **Autoridade técnica** | Azul profissional, layout limpo e estruturado |
+| **Modernidade** | Degrâdê sutil, cards com sombra, tipografia bold |
+| **Clareza** | Hierarquia visual forte, espaçamento genéroso |
+| **Confiança** | Consistência de cores, sem excessos decorativos |
+
+O estilo geral é **corporativo-tecnológico**: fundo claro com hero em degrâdê azul, seções alternadas entre branco e azul marinho profundo, botões e destaques em azul primário.
 
 ---
 
 ## 2. Paleta de Cores
 
-> ⚠️ **Aguardando imagens de referência.** Paleta abaixo é provisória e deve ser validada com o cliente.
-
 ### Cores Primárias
 
-| Nome | Hex | Token Tailwind | Uso Principal |
-|------|-----|---------------|---------------|
-| Azul Principal | `#1A56DB` | `blue-600` | CTAs, botões primários, links ativos |
-| Azul Escuro | `#1E3A5F` | — | Header, backgrounds de destaque |
-| Azul Claro | `#3B82F6` | `blue-500` | Hover states, acentos, ícones |
+| Nome | Hex | Uso Principal |
+|------|-----|---------------|
+| **Azul Marinho** | `#162268` | Footer, seções escuras, barra de stats, header icon |
+| **Azul Primário** | `#1565C0` | Botões CTA, cards em destaque, ícones de serviços |
+| **Azul Médio** | `#1976D2` | Hover de botões, acentos secundários |
+| **Azul Claro Hero** | `#5BA4E5` | Ponta do degrâdê do hero (canto superior direito) |
 
-### Cores Neutras
-
-| Nome | Hex | Token Tailwind | Uso Principal |
-|------|-----|---------------|---------------|
-| Fundo Principal | `#F9FAFB` | `gray-50` | Background de páginas |
-| Branco | `#FFFFFF` | `white` | Cards, seções alternadas |
-| Cinza Claro | `#E5E7EB` | `gray-200` | Bordas, divisores |
-| Cinza Médio | `#6B7280` | `gray-500` | Textos secundários, placeholders |
-| Cinza Escuro | `#374151` | `gray-700` | Textos de corpo |
-| Preto Suave | `#111827` | `gray-900` | Títulos e textos em destaque |
-
-### Cores de Suporte / Feedback
-
-| Nome | Hex | Token Tailwind | Uso |
-|------|-----|---------------|-----|
-| Verde Sucesso | `#10B981` | `emerald-500` | Confirmações, badges positivos |
-| Vermelho Erro | `#EF4444` | `red-500` | Alertas, erros de formulário |
-| Amarelo Aviso | `#F59E0B` | `amber-500` | Avisos, notificações |
-
-### Modo Escuro (Dark Mode — Opcional Fase 2)
+### Cores de Fundo
 
 | Nome | Hex | Uso |
 |------|-----|-----|
-| Fundo Escuro | `#0F172A` | Background principal |
-| Superfície | `#1E293B` | Cards, containers |
-| Borda Escura | `#334155` | Bordas sutis |
+| **Branco** | `#FFFFFF` | Seções limpas, cards padrão, header |
+| **Azul Suave** | `#EBF3FF` | Fundo de cards não-destacados, seções alternadas leves |
+| **Degrâdê Hero** | `#F0F7FF` → `#C8DFFF` | Background da seção hero (esquerda para direita) |
+
+### Cores de Texto
+
+| Nome | Hex | Uso |
+|------|-----|-----|
+| **Texto Principal** | `#0D1117` | Títulos e corpo em fundo claro |
+| **Texto Secundário** | `#4B5563` | Descrições, legendas em fundo claro |
+| **Texto em Escuro** | `#FFFFFF` | Todo texto em seções de fundo marinho |
+| **Texto Muted** | `#CBD5E1` | Textos secundários em fundo marinho |
+| **Eyebrow/Label** | `#1565C0` | Texto de rótulo acima de títulos principais |
+
+### Cores de Suporte
+
+| Nome | Hex | Uso |
+|------|-----|-----|
+| **Verde Confirmação** | `#22C55E` | Ícones de checklist, badges positivos |
+| **Vermelho** | `#EF4444` | Erros de formulário |
+| **Borda Suave** | `#E2E8F0` | Bordas de cards, divisores |
 
 ---
 
 ## 3. Tipografia
 
-### Fontes Adotadas
+### Fonte Adotada
 
-| Tipo | Fonte | Alternativa | Carregamento |
-|------|-------|------------|-------------|
-| Títulos e Corpo | **Inter** | system-ui, sans-serif | Google Fonts |
-| Código / Técnico | **JetBrains Mono** | monospace | Google Fonts (se necessário) |
+| Tipo | Fonte | Alternativa |
+|------|-------|--------------|
+| Todo o site | **Inter** | system-ui, sans-serif |
 
-**Pesos do Inter a importar:** 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold), 800 (ExtraBold)
+**Pesos do Inter a importar:** 400, 500, 600, 700, 800
 
 ### Escala Tipográfica — Desktop
 
-| Elemento | Tamanho | Peso | Line Height | Uso |
-|----------|---------|------|------------|-----|
-| H1 | 48px / 3rem | 800 | 1.1 | Títulos hero |
-| H2 | 36px / 2.25rem | 700 | 1.2 | Títulos de seção |
-| H3 | 24px / 1.5rem | 600 | 1.3 | Subtítulos de seção |
-| H4 | 20px / 1.25rem | 600 | 1.4 | Títulos de cards |
-| Lead | 18px / 1.125rem | 400 | 1.7 | Parágrafos de destaque |
-| Corpo | 16px / 1rem | 400 | 1.6 | Texto padrão |
-| Pequeno | 14px / 0.875rem | 400 | 1.5 | Labels, notas |
-| Caption | 12px / 0.75rem | 500 | 1.4 | Legendas, metadados |
+| Elemento | Tamanho | Peso | Cor padrão |
+|----------|---------|------|------------|
+| Eyebrow (rótulo acima do H1) | 13px | 600 | `#1565C0`, caixa alta, spacing 2px |
+| H1 (hero) | 48–56px | 800 | `#0D1117` ou branco |
+| H2 (seção) | 36px | 700 | `#0D1117` ou branco |
+| H3 (card/sub) | 20–24px | 600 | herda |
+| Número de stats | 48px | 800 | `#FFFFFF` |
+| Label de stats | 14px | 400 | `#CBD5E1` |
+| Corpo | 16px | 400 | `#4B5563` |
+| Pequeno | 14px | 400 | `#4B5563` |
 
-### Escala Tipográfica — Mobile
+### Escala Mobile
 
 | Elemento | Tamanho Mobile |
-|----------|-----------------|
-| H1 | 32px / 2rem |
-| H2 | 24px / 1.5rem |
-| H3 | 20px / 1.25rem |
-| H4 | 18px / 1.125rem |
+|----------|----------------|
+| H1 | 32px |
+| H2 | 24px |
+| H3 | 18px |
+| Número stats | 36px |
 
 ---
 
 ## 4. Espaçamento
 
-Sistema baseado em múltiplos de 4px, alinhado com os tokens do Tailwind CSS:
+Sistema baseado em múltiplos de 4px (Tailwind):
 
-| Token | Valor | Tailwind | Aplicação típica |
-|-------|-------|---------|------------------|
-| xs | 4px | `p-1` | Espaço mínimo interno |
-| sm | 8px | `p-2` | Padding compacto |
-| md | 16px | `p-4` | Padding padrão de componentes |
-| lg | 24px | `p-6` | Padding interno de cards |
-| xl | 32px | `p-8` | Separação entre blocos |
-| 2xl | 48px | `p-12` | Entre seções de uma página |
-| 3xl | 64px | `p-16` | Seções maiores |
-| 4xl | 96px | `p-24` | Hero sections |
+| Token | Valor | Uso típico |
+|-------|-------|------------|
+| xs | 4px | Gap mínimo |
+| sm | 8px | Padding interno de badges/labels |
+| md | 16px | Padding de componentes |
+| lg | 24px | Padding interno de cards |
+| xl | 32px | Separação entre blocos |
+| 2xl | 64px | Padding vertical de seções |
+| 3xl | 96px | Seções hero e principais |
 
 ---
 
-## 5. Layout e Grid
+## 5. Layout das Seções (Página Home)
 
-### Container Principal
+### 5.1 Header / Navegação
 
+- **Fundo:** `#FFFFFF`, sticky, sombra `0 1px 4px rgba(0,0,0,0.08)` ao rolar
+- **Logo:** à esquerda
+- **Links de navegação:** centro ou à direita — `Inicio | Serviços | Blog | Nosotros`
+- **Botão CTA:** `Contato` — fundo `#1565C0`, texto branco, border-radius `6px`, à direita
+- **Altura:** `64px` (desktop), `56px` (mobile)
+- **Mobile:** menu hamburguer com drawer lateral
+
+---
+
+### 5.2 Seção Hero
+
+**Layout:** Split 50/50 — texto à esquerda, imagem/mockup à direita
+
+**Fundo:**
 ```css
-max-width: 1280px;
-padding-x: 24px;   /* mobile */
-padding-x: 48px;   /* desktop */
-margin: 0 auto;
+background: linear-gradient(135deg, #F0F7FF 0%, #C8DFFF 60%, #9EC8FF 100%);
 ```
 
-### Sistema de Colunas
+**Elementos:**
+- Eyebrow: texto pequeno em maiúsculas, cor `#1565C0`, letter-spacing `2px`
+- Título H1 em negrito, cor `#0D1117`
+- Parágrafo descritivo
+- Lista com ícones de check verde (`#22C55E`) + texto
+- Botão CTA primário
+- Imagem à direita: print de sistema/produto com sombra suave
 
-| Tela | Colunas | Uso típico |
-|------|---------|------------|
-| Mobile (< 768px) | 1 coluna | Empilhamento vertical |
-| Tablet (768px+) | 2 colunas | Cards lado a lado |
-| Desktop (1024px+) | 3–4 colunas | Grid de serviços/posts |
+**Altura mínima:** `100vh` ou `min-h-[600px]`
 
-### Breakpoints Tailwind
+---
 
-| Prefixo | Largura mínima |
-|---------|----------------|
-| `sm:` | 640px |
-| `md:` | 768px |
-| `lg:` | 1024px |
-| `xl:` | 1280px |
-| `2xl:` | 1536px |
+### 5.3 Faixa de Clientes / Logos
+
+**Layout:** 1 linha centralizada com logos de clientes em escala de cinza
+
+**Fundo:** `#FFFFFF`
+
+**Título:** H2 centralizado + linha decorativa azul abaixo (`width: 60px, height: 3px, background: #1565C0`)
+
+**Logos:** Grid horizontal, `grayscale` no CSS, `hover: grayscale(0)` para restaurar cores
+
+---
+
+### 5.4 Seção Escura — Proposta de Valor + Barra de Stats
+
+**Fundo:** `#162268` (azul marinho profundo)
+
+**Padrão de fundo opcional:** pontilhado ou mapa-múndi sutil em azul escuro transparente (SVG ou CSS)
+
+**Conteúdo:**
+- Título H2 e parágrafo centralizados, texto branco
+- Grid 4 colunas com cards de estatísticas:
+
+```
+[  500+       ]  [  100+            ]  [  500+           ]  [  15+        ]
+[  Clientes   ]  [  Trab. Personal. ]  [  Softwares Vend.]  [  Anos neg.  ]
+```
+
+**Card de stat:**
+- Fundo: `rgba(255,255,255,0.08)` ou borda `rgba(255,255,255,0.2)` 1px
+- Border-radius: `12px`
+- Ícone no topo (branco ou azul claro)
+- Número em 48px bold branco
+- Label em 14px cor `#CBD5E1`
+
+---
+
+### 5.5 Seção de Serviços (Cards em 3 colunas)
+
+**Fundo:** `#FFFFFF`
+
+**Título + descrição:** centralizados
+
+**Cards:**
+- **Card padrão:** fundo `#EBF3FF`, borda nenhuma, border-radius `12px`, padding `24px`
+- **Card destaque (central):** fundo `#1565C0`, texto branco — usado para destacar um serviço
+- Ícone no topo do card (SVG)
+- Título em H3
+- Subtexto bold + lista de itens
+- Botão `Iniciar Agora!` em cada card
+  - Card padrão: botão fundo `#1565C0`, texto branco
+  - Card destaque: botão fundo `#FFFFFF`, texto `#1565C0`
+
+---
+
+### 5.6 Faixa CTA Entre Seções
+
+**Fundo:** `#1565C0` (azul primário)
+
+**Conteúdo:** texto centralizado em branco + botão de ação
+
+**Exemplo:** `"¿Quieres saber más? contáctenos ¡Herramientas Inteligentes Negocios Exitosos!"`
+
+**Padding:** `20px 0` (compacto, é uma faixa horizontal, não uma seção)
+
+---
+
+### 5.7 Footer
+
+**Fundo:** `#162268` (azul marinho profundo)
+
+**Layout:** 4–5 colunas
+```
+[Logo + endereço + tel] | [Nosotros] | [Produtos] | [Artigos] | [Software & Desc.]
+```
+
+**Cor do texto:** `#FFFFFF` (títulos de coluna) e `#CBD5E1` (links e textos)
+
+**Links do footer:**
+- Sem underline padrão
+- Hover: underline ou `#FFFFFF`
+
+**Redes sociais:**
+- Ícones de Twitter/X, Facebook, Instagram na base esquerda
+- Estilo: círculos ou inerentes, cor branca
+
+**Barra de copyright:**
+- Fundo ligeiramente mais escuro ou linha separadora `rgba(255,255,255,0.15)`
+- Texto: `© [ano] HIVI Tecnologia — Todos os direitos reservados`
+- Alinhado à direita
 
 ---
 
@@ -145,117 +238,138 @@ margin: 0 auto;
 
 ### Botões
 
-| Variante | Fundo | Texto | Borda | Hover |
-|----------|-------|-------|-------|-------|
-| **Primário** | `#1A56DB` | Branco | — | `#1E3A5F` |
-| **Secundário** | Transparente | `#1A56DB` | `#1A56DB` 1.5px | Fundo `blue-50` |
-| **Ghost** | Transparente | `#374151` | — | Fundo `gray-100` |
-| **Destrutivo** | `#EF4444` | Branco | — | `#DC2626` |
+| Variante | Fundo | Texto | Border | Hover |
+|----------|-------|-------|--------|-------|
+| **Primário** | `#1565C0` | `#FFFFFF` | — | `#1A237E` |
+| **Primário Invertido** | `#FFFFFF` | `#1565C0` | — | `#EBF3FF` |
+| **Secundário** | Transparente | `#1565C0` | `#1565C0` 1.5px | fundo `#EBF3FF` |
+| **Ghost Claro** | Transparente | `#4B5563` | — | fundo `#F1F5F9` |
 
 **Especificações gerais:**
-- Border-radius: `8px`
-- Padding: `12px 24px` (md) / `10px 20px` (sm) / `16px 32px` (lg)
+- Border-radius: `6px`
+- Padding: `12px 28px` (md)
+- Font-weight: 600
 - Transição: `all 200ms ease`
-- Focus: outline azul 2px, offset 2px
-- Tamanho mínimo de área de toque: `44x44px`
+- Área de toque mínima: `44x44px`
 
-### Cards
+### Cards de Serviços
 
-- Background: `#FFFFFF`
-- Borda: `1px solid #E5E7EB`
+| Propriedade | Padrão | Destaque |
+|-------------|---------|----------|
+| Fundo | `#EBF3FF` | `#1565C0` |
+| Texto | `#0D1117` | `#FFFFFF` |
+| Ícone | `#1565C0` | `#FFFFFF` |
+| Border | nenhuma | nenhuma |
+| Border-radius | `12px` | `12px` |
+| Padding | `24px` | `24px` |
+| Sombra | `0 2px 8px rgba(21,101,192,0.08)` | `0 4px 20px rgba(21,101,192,0.35)` |
+
+### Cards de Estatísticas (seção escura)
+
+- Fundo: `rgba(255,255,255,0.07)`
+- Borda: `1px solid rgba(255,255,255,0.15)`
 - Border-radius: `12px`
-- Sombra padrão: `0 1px 3px rgba(0,0,0,0.08)`
-- Sombra no hover: `0 4px 16px rgba(0,0,0,0.12)`
-- Padding interno: `24px`
-- Transição hover: `250ms ease`
+- Padding: `32px 24px`
+- Número: 48px, peso 800, cor `#FFFFFF`
+- Label: 14px, cor `#CBD5E1`
+- Ícone: 40px, cor `rgba(255,255,255,0.7)`, alinhado ao centro
 
 ### Inputs e Formulários
 
-- Borda: `1px solid #D1D5DB`, radius `8px`
-- Focus: `border-color: #1A56DB`, ring `2px rgba(26,86,219,0.2)`
-- Altura padrão: `44px`
-- Label: cinza escuro (`#374151`), peso 500, tamanho 14px
-- Placeholder: `#9CA3AF`
-- Mensagem de erro: vermelho `#EF4444`, tamanho 12px
-
-### Header
-
-- Fundo: `#FFFFFF` com sombra `0 1px 3px rgba(0,0,0,0.08)` ao scroll
-- Posição: sticky, `top: 0`, `z-index: 50`
-- Altura: `64px` (desktop) / `56px` (mobile)
-- Conteúdo: Logo (esquerda) | Navegação (centro/direita) | CTA "Entrar em Contato" (direita)
-- Mobile: menu hamburguer com slide lateral ou dropdown
-
-### Footer
-
-- Fundo: `#1E3A5F`
-- Texto: `#E5E7EB` (principal) e `#9CA3AF` (secundário)
-- Estrutura: Logo + Navegação + Redes Sociais + Copyright
-- Link de **Política de Privacidade** sempre visível no footer
-- Padding: `48px 0` (desktop) / `32px 0` (mobile)
-
-### Seção Hero (Home)
-
-- Altura mínima: `100vh` ou `min-h-screen`
-- Fundo: gradiente de `#1E3A5F` para `#1A56DB` ou imagem com overlay
-- Texto: branco
-- Elementos: Título H1 + subtítulo + dois botões CTA (primário + secundário)
-- Alinhamento: centralizado ou à esquerda (definir após referências visuais)
+- Borda: `1px solid #CBD5E1`, border-radius `6px`
+- Focus: `border-color: #1565C0`, ring `2px rgba(21,101,192,0.2)`
+- Altura: `44px`
+- Label: `#0D1117`, peso 500, 14px
+- Placeholder: `#94A3B8`
+- Erro: `#EF4444`, 12px
 
 ---
 
 ## 7. Iconografia
 
-- **Biblioteca:** Lucide React (preferencial) ou Heroicons
-- **Tamanhos padronizados:**
-  - `16px` — ícones inline em textos
-  - `20px` — ícones em botões e navegação
-  - `24px` — ícones de destaque em listas
-  - `48px` — ícones ilustrativos em cards de serviços
-- **Cor:** herda da cor do texto ou `#1A56DB` para ícones de destaque
-- **Formato alternativo:** SVG otimizado para ícones personalizados da marca
+- **Biblioteca:** Lucide React (preferêncial)
+- **Estilo:** outline (não preenchido), peso de linha consistente
+- **Tamanhos:**
+  - `20px` — navegação e botões
+  - `24px` — listas e destaques inline
+  - `40–48px` — ícones de cards de serviços e stats
+- **Cor em fundo claro:** `#1565C0`
+- **Cor em fundo escuro:** `#FFFFFF` ou `rgba(255,255,255,0.8)`
+- **Ícone de checklist (hero/listas):** círculo azul `#1565C0` com check branco
 
 ---
 
-## 8. Animações e Transições
+## 8. Padrões de Seções — Alternância de Fundo
 
-| Elemento | Duração | Easing | Observação |
-|----------|---------|--------|------------|
-| Hover em botões | 200ms | ease | Cor e sombra |
-| Hover em cards | 250ms | ease | Sombra e leve elevação |
-| Menu mobile | 300ms | ease-in-out | Slide ou fade |
-| Fade de páginas | 200ms | ease | Entrada suave |
-| Scroll animations | 400ms | ease-out | Entrada de seções |
-| Tooltips | 150ms | ease | Aparecer/desaparecer |
+A home segue um padrão de alternância de fundos:
 
-**Princípio:** Animações devem ser sutis e funcionais. Nunca comprometer a usabilidade ou acessibilidade.
+```
+[HEADER]          → Branco
+[HERO]            → Degrâdê azul claro (#F0F7FF → #C8DFFF)
+[CLIENTES/LOGOS]  → Branco
+[STATS + CTA]     → Azul Marinho (#162268)
+[SERVIÇOS]       → Branco
+[DESTAQUE PROD.]  → Azul Claro suave (#EBF3FF) ou Branco com imagem
+[FAIXA CTA]       → Azul Primário (#1565C0)
+[DEPOIMENTOS]     → Branco
+[CONTATO/FORM]    → Azul Claro (#EBF3FF)
+[FOOTER]          → Azul Marinho (#162268)
+```
 
----
-
-## 9. Imagens e Mídia
-
-- **Formato preferido:** WebP (com fallback JPG/PNG para compatibilidade)
-- **Ícones:** SVG sempre que possível
-- **Hero:** proporção 16:9 ou 21:9
-- **Miniaturas de blog:** proporção 16:9
-- **Avatares:** proporção 1:1, border-radius `50%` ou `12px`
-- **Todas as imagens** devem ter atributo `alt` descritivo e significativo
-- **Otimização:** Next.js `<Image>` component obrigatório para imagens locais
+> Esta alternância cria ritmo visual sem uso de imagens complexas. Respeitar esta sequência em todas as páginas.
 
 ---
 
-## 10. Acessibilidade (A11y)
+## 9. Animações e Transições
+
+| Elemento | Duração | Easing |
+|----------|---------|--------|
+| Hover em botões | 200ms | ease |
+| Hover em cards | 250ms | ease |
+| Menu mobile (drawer) | 300ms | ease-in-out |
+| Fade de entrada de seções (scroll) | 400ms | ease-out |
+| Hover em logos de clientes | 300ms | ease |
+
+**Princípio:** Animações sutis. Nada que desvie a atenção do conteúdo.
+
+---
+
+## 10. Imagens e Mídia
+
+- **Formato:** WebP (fallback JPG/PNG)
+- **Mockups de produto:** imagem de tela de sistema/software com sombra e leve inclinação perspectiva (como nas referências)
+- **Logos de clientes:** PNG com fundo transparente, exibidos em `grayscale`, hover restaura cor
+- **Hero image:** sempre à direita no layout split
+- **Todas as imagens:** atributo `alt` descritivo obrigatório
+- **Componente Next.js `<Image>`:** obrigatório para todas as imagens estáticas
+
+---
+
+## 11. Acessibilidade (A11y)
 
 | Critério | Requisito |
-|----------|----------|
-| Contraste de texto | Mínimo WCAG AA: 4.5:1 (texto normal), 3:1 (texto grande) |
-| Foco visível | Todos os elementos interativos com outline visível |
-| Semântica HTML | `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`, `<article>` |
-| Atributos ARIA | Usar onde o HTML semântico não é suficiente |
-| Área de toque | Mínimo `44x44px` para elementos clicáveis em mobile |
-| Texto alternativo | Toda imagem com conteúdo tem `alt` descritivo |
-| Navegação por teclado | Tab, Enter e Esc funcionando em todos os componentes interativos |
+|----------|-----------|
+| Contraste texto/fundo | WCAG AA mínimo: 4.5:1 para texto normal |
+| Foco visível | Outline azul `#1565C0` em todos os elementos interativos |
+| HTML semântico | `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`, `<article>` |
+| ARIA | Usar onde o HTML semântico não é suficiente |
+| Área de toque | Mínimo `44x44px` em mobile |
+| Alt em imagens | Obrigatório e descritivo |
+| Tab/Enter/Esc | Navegação por teclado funcional |
 
 ---
 
-> **Próximo passo obrigatório:** Receber as imagens de referência do cliente, extrair paleta de cores definitiva, tipografia e estilo visual oficial, e atualizar este documento antes de implementar qualquer componente visual.
+## 12. Resumo Visual Rápido (Cheat Sheet)
+
+```
+AZUL MARINHO PROFUNDO  #162268  → footer, seções escuras, stats
+AZUL PRIMÁRIO         #1565C0  → botões, cards destaque, ícones, faixa CTA
+AZUL HOVER             #1976D2  → hover de botões
+AZUL SUAVE             #EBF3FF  → cards padrão, fundos de seção alternada
+DEGRÂDÊ HERO          #F0F7FF → #C8DFFF  → hero background
+TEXTO ESCURO           #0D1117  → títulos em fundo claro
+TEXTO CORPO            #4B5563  → parágrafos em fundo claro
+TEXTO EM ESCURO        #FFFFFF  → todo texto em fundo marinho
+VERDE CHECK            #22C55E  → ícones de checklist
+FONTE                  Inter (400, 500, 600, 700, 800)
+```
