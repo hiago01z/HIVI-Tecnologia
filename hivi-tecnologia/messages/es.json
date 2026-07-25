@@ -17,7 +17,16 @@
     "check1": "Consultoría tecnológica especializada y estratégica",
     "check2": "Infraestructura y cloud a medida para su negocio",
     "check3": "Soporte técnico 24/7 para su operación",
-    "check4": "Entrega a tiempo y dentro del presupuesto"
+    "check4": "Entrega a tiempo y dentro del presupuesto",
+    "mockup": {
+      "statClients": "Clientes",
+      "statUptime": "Uptime",
+      "statProjects": "Proyectos",
+      "statSupport": "Soporte",
+      "chartLabel": "Rendimiento",
+      "badgeDelivered": "✓ Proyecto entregado",
+      "badgeProductivity": "↑ 34% productividad"
+    }
   },
   "stats": {
     "clients": "Clientes Atendidos",

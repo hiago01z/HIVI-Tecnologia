@@ -174,12 +174,20 @@ Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
 - [x] Tradução `clients.*` e `testimonials.*` nos 3 locales (pt-BR, en, es)
 - [x] Home page com ordem de seções alinhada ao designe.md §8
 
-### Fase 8 — Infraestrutura Supabase e Produção 🔄
+### Fase 8 — Infraestrutura Supabase e Produção ✅
 - [x] Credenciais Supabase configuradas na Vercel
 - [x] Schema SQL criado (`hivi-tecnologia/supabase/schema.sql`)
 - [x] Tabelas com RLS, triggers, indexes e constraints
 - [x] Footer oculta ícones sociais sem env var configurada
-- [ ] Executar `supabase/schema.sql` no SQL Editor do Supabase
+- [x] Executar `supabase/schema.sql` no SQL Editor do Supabase
 - [ ] Criar usuário admin no Supabase Auth (painel)
 - [ ] Configurar env vars opcionais na Vercel (telefone, redes sociais)
 - [ ] Configuração de domínio
+
+### Fase 12 — Melhorias Pós-Deploy ✅
+- [x] Auditoria de segurança — crashes e vulnerabilidades corrigidos
+- [x] HeroSection — strings do mockup traduzidas (Regra 9 cumprida)
+- [x] Sitemap dinâmico com posts do blog (hreflang correto)
+- [x] `Content-Security-Policy` adicionado ao `next.config.ts`
+- [x] Rate limiting no formulário de contato (`api/contato`)
+- [x] Prefixo de chave no rate limiter (evita colisão login/contato)

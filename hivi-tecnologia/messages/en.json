@@ -17,7 +17,16 @@
     "check1": "Specialized and strategic technology consulting",
     "check2": "Tailored infrastructure and cloud solutions for your business",
     "check3": "24/7 technical support for your operations",
-    "check4": "On-time and on-budget delivery"
+    "check4": "On-time and on-budget delivery",
+    "mockup": {
+      "statClients": "Clients",
+      "statUptime": "Uptime",
+      "statProjects": "Projects",
+      "statSupport": "Support",
+      "chartLabel": "Performance",
+      "badgeDelivered": "✓ Project delivered",
+      "badgeProductivity": "↑ 34% productivity"
+    }
   },
   "stats": {
     "clients": "Clients Served",

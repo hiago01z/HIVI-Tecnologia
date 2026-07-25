@@ -352,6 +352,26 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 
 ---
 
+### 2026-07-25 — Fase 12: Melhorias Pós-Deploy
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Schema Supabase executado
+- Usuário executou `supabase/schema.sql` no SQL Editor do Supabase
+- Tabelas `blog_posts`, `contatos`, `eventos` criadas com RLS, indexes e triggers
+
+#### ✅ HeroSection — Regra 9 cumprida (strings do mockup)
+- Strings hardcoded em PT-BR no mockup do hero ("Clientes", "Projetos", "Suporte", "Performance", "Projeto entregue", "34% produtividade") extraídas para `messages/*.json`
+- Chaves `hero.mockup.*` adicionadas nos 3 locales (pt-BR, en, es)
+- HeroSection usa `t('hero.mockup.*')` para todas as strings visíveis da ilustração
+
+#### ✅ Sitemap dinâmico com posts do blog
+- `sitemap.ts` tornou-se async e consulta `blog_posts` publicados no Supabase
+- Posts incluídos com URL por locale + `alternates.languages` hreflang correto
+- Fallback seguro: se banco indisponível, retorna apenas rotas estáticas (try-catch)
+
+---
+
 ## Status Final das Implementações
 
 | # | Tarefa | Status |
@@ -389,13 +409,16 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 | 31 | TestimonialsSection — Depoimentos | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
 | 32 | StatsSection — Barra de métricas | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
 | 33 | Auditoria de segurança — crashes e vulnerabilidades | ✅ Concluído |
+| 34 | Schema Supabase executado no banco | ✅ Concluído |
+| 35 | HeroSection — strings do mockup traduzidas (Regra 9) | ✅ Concluído |
+| 36 | Sitemap dinâmico com posts do blog | ✅ Concluído |
 
 ---
 
 ## Observações e Pendências
 
 - ✅ **Credenciais Supabase:** Configuradas na Vercel pelo usuário (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SITE_URL`).
-- ⚠️ **Schema Supabase:** Executar `hivi-tecnologia/supabase/schema.sql` no SQL Editor do Supabase antes de testar qualquer funcionalidade.
+- ✅ **Schema Supabase:** Executado com sucesso no SQL Editor do Supabase em 2026-07-25.
 - ⚠️ **Usuário admin:** Criar diretamente no painel Supabase Auth > Authentication > Users (nunca via código).
 - ⚠️ **Env vars opcionais:** `NEXT_PUBLIC_TELEFONE`, `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_EMAIL_CONTATO`, `NEXT_PUBLIC_INSTAGRAM`, `NEXT_PUBLIC_LINKEDIN`, `NEXT_PUBLIC_FACEBOOK`, `NEXT_PUBLIC_YOUTUBE` — configurar na Vercel para exibir dados de contato e ícones sociais.
 - ⚠️ **Domínio:** Adquirir e configurar no painel Vercel antes do deploy final.

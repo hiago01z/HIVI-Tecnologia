@@ -80,27 +80,27 @@ export function HeroSection() {
               {/* Dashboard content */}
               <div className="p-6 bg-[#F8FAFC]">
                 <div className="grid grid-cols-2 gap-3 mb-4">
-                  {[
-                    { value: '150+', label: 'Clientes', color: '#EBF3FF', accent: '#1565C0' },
-                    { value: '99.9%', label: 'Uptime', color: '#F0FDF4', accent: '#22C55E' },
-                    { value: '300+', label: 'Projetos', color: '#EBF3FF', accent: '#1565C0' },
-                    { value: '24/7', label: 'Suporte', color: '#FFF7ED', accent: '#F59E0B' },
-                  ].map((stat) => (
+                  {([
+                    { value: '150+', labelKey: 'hero.mockup.statClients', color: '#EBF3FF', accent: '#1565C0' },
+                    { value: '99.9%', labelKey: 'hero.mockup.statUptime', color: '#F0FDF4', accent: '#22C55E' },
+                    { value: '300+', labelKey: 'hero.mockup.statProjects', color: '#EBF3FF', accent: '#1565C0' },
+                    { value: '24/7', labelKey: 'hero.mockup.statSupport', color: '#FFF7ED', accent: '#F59E0B' },
+                  ] as const).map((stat) => (
                     <div
-                      key={stat.label}
+                      key={stat.labelKey}
                       className="rounded-xl p-4"
                       style={{ backgroundColor: stat.color }}
                     >
                       <p className="text-xl font-extrabold" style={{ color: stat.accent }}>
                         {stat.value}
                       </p>
-                      <p className="text-xs text-[#4B5563] mt-0.5">{stat.label}</p>
+                      <p className="text-xs text-[#4B5563] mt-0.5">{t(stat.labelKey)}</p>
                     </div>
                   ))}
                 </div>
                 {/* Fake chart bars */}
                 <div className="rounded-xl bg-white p-4 border border-[#E2E8F0]">
-                  <p className="text-xs font-semibold text-[#4B5563] mb-3">Performance</p>
+                  <p className="text-xs font-semibold text-[#4B5563] mb-3">{t('hero.mockup.chartLabel')}</p>
                   <div className="flex items-end gap-2 h-16">
                     {[40, 65, 50, 80, 60, 90, 75].map((h, i) => (
                       <div
@@ -119,10 +119,10 @@ export function HeroSection() {
 
             {/* Floating badges */}
             <div className="absolute -left-6 top-8 rounded-xl bg-[#22C55E] px-3 py-2 shadow-lg hidden lg:block">
-              <p className="text-xs font-bold text-white">✓ Projeto entregue</p>
+              <p className="text-xs font-bold text-white">{t('hero.mockup.badgeDelivered')}</p>
             </div>
             <div className="absolute -right-6 bottom-12 rounded-xl bg-[#1565C0] px-3 py-2 shadow-lg hidden lg:block">
-              <p className="text-xs font-bold text-white">↑ 34% produtividade</p>
+              <p className="text-xs font-bold text-white">{t('hero.mockup.badgeProductivity')}</p>
             </div>
           </div>
         </div>
