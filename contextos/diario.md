@@ -333,6 +333,25 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 
 ---
 
+### 2026-07-25 — Auditoria de Segurança e Correção de Bugs
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Bugs corrigidos (crashes em produção)
+- `admin/layout.tsx` — try-catch em `supabase.auth.getUser()` (causa raiz do "server error")
+- `admin/contatos/page.tsx` — try-catch em `supabase.auth.getUser()`
+- `api/admin/metrics/route.ts` — try-catch em `supabase.auth.getUser()`
+- `admin/posts/actions.ts` — `requireAuth()` com try-catch uniforme
+
+#### ✅ Falhas de segurança corrigidas
+- `proxy.ts` — **cookie names errados** (`sb-access-token`/`sb-auth-token` → padrão `sb-*-auth-token` do `@supabase/ssr`); impedia acesso ao admin após login
+- `proxy.ts` — removido dead code (`isAdminLoginRoute` nunca chamada); função `proxy` tornou-se síncrona
+- `next.config.ts` — adicionado header `Content-Security-Policy` (proteção XSS)
+- `api/contato/route.ts` — rate limiting adicionado (5 req/min por IP, chave `contato:{ip}`)
+- `admin/actions.ts` — chave do rate limiting prefixada `login:{ip}` (evita colisão entre endpoints)
+
+---
+
 ## Status Final das Implementações
 
 | # | Tarefa | Status |
@@ -369,6 +388,7 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 | 30 | ClientsSection — Faixa de Clientes/Logos | ✅ Concluído |
 | 31 | TestimonialsSection — Depoimentos | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
 | 32 | StatsSection — Barra de métricas | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
+| 33 | Auditoria de segurança — crashes e vulnerabilidades | ✅ Concluído |
 
 ---
 
