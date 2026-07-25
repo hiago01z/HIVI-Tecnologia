@@ -230,7 +230,11 @@
       "draft": "Draft",
       "confirmDelete": "Are you sure you want to delete this post?",
       "deleteSuccess": "Post deleted successfully.",
-      "noPosts": "No posts created yet."
+      "noPosts": "No posts created yet.",
+      "colTitle": "Title",
+      "colStatus": "Status",
+      "colDate": "Date",
+      "colActions": "Actions"
     },
     "postEditor": {
       "titleLabel": "Title",

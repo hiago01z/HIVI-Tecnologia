@@ -7,6 +7,7 @@ import { getPostBySlug } from '@/lib/blog';
 import { routing } from '@/i18n/routing';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { CalendarDays, ArrowLeft } from 'lucide-react';
 import type { BlogPost } from '@/types/blog';
 
@@ -79,11 +80,14 @@ function PostContent({ post, locale }: { post: BlogPost; locale: Locale }) {
 
       <header className="mb-10">
         {post.imagem_url && (
-          <div className="mb-8 overflow-hidden rounded-2xl aspect-video">
-            <img
+          <div className="relative mb-8 overflow-hidden rounded-2xl aspect-video">
+            <Image
               src={post.imagem_url}
-              alt=""
-              className="h-full w-full object-cover"
+              alt={titulo}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover"
             />
           </div>
         )}

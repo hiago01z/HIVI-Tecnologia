@@ -230,7 +230,11 @@
       "draft": "Borrador",
       "confirmDelete": "¿Está seguro de que desea eliminar este post?",
       "deleteSuccess": "Post eliminado exitosamente.",
-      "noPosts": "No hay posts creados aún."
+      "noPosts": "No hay posts creados aún.",
+      "colTitle": "Título",
+      "colStatus": "Estado",
+      "colDate": "Fecha",
+      "colActions": "Acciones"
     },
     "postEditor": {
       "titleLabel": "Título",

@@ -230,7 +230,11 @@
       "draft": "Rascunho",
       "confirmDelete": "Tem certeza que deseja excluir este post?",
       "deleteSuccess": "Post excluído com sucesso.",
-      "noPosts": "Nenhum post criado ainda."
+      "noPosts": "Nenhum post criado ainda.",
+      "colTitle": "Título",
+      "colStatus": "Status",
+      "colDate": "Data",
+      "colActions": "Ações"
     },
     "postEditor": {
       "titleLabel": "Título",

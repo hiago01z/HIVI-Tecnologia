@@ -372,6 +372,26 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 
 ---
 
+### 2026-07-25 — Fase 13: Polimento Final
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Regra 9 — cabeçalhos da tabela de posts traduzidos
+- `admin/posts/page.tsx` tinha 4 strings hardcoded: "Título", "Status", "Data", "Ações"
+- Chaves `admin.posts.colTitle`, `colStatus`, `colDate`, `colActions` adicionadas nos 3 locales
+- Componente atualizado para usar `t('colTitle')`, `t('colStatus')`, `t('colDate')`, `t('colActions')`
+
+#### ✅ Blog — `<img>` substituído por `<Image>` do Next.js
+- `blog/page.tsx` — `<img>` → `<Image fill sizes="..." alt={post.titulo}>` com `relative` no container
+- `blog/[slug]/page.tsx` — `<img>` → `<Image fill priority alt={titulo}>` com `relative` no container
+- `alt` agora usa o título do post (antes era `alt=""`)
+
+#### ✅ `next.config.ts` — `remotePatterns` para Supabase Storage
+- Adicionado `images.remotePatterns` com hostname `**.supabase.co` e path `/storage/v1/object/public/**`
+- Permite otimização automática de imagens de posts vindas do Supabase Storage via Next.js Image
+
+---
+
 ## Status Final das Implementações
 
 | # | Tarefa | Status |
@@ -412,6 +432,8 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 | 34 | Schema Supabase executado no banco | ✅ Concluído |
 | 35 | HeroSection — strings do mockup traduzidas (Regra 9) | ✅ Concluído |
 | 36 | Sitemap dinâmico com posts do blog | ✅ Concluído |
+| 37 | Cabeçalhos da tabela de posts traduzidos (Regra 9) | ✅ Concluído |
+| 38 | Blog — `<Image>` Next.js com alt e remotePatterns | ✅ Concluído |
 
 ---
 

@@ -191,3 +191,10 @@ Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
 - [x] `Content-Security-Policy` adicionado ao `next.config.ts`
 - [x] Rate limiting no formulário de contato (`api/contato`)
 - [x] Prefixo de chave no rate limiter (evita colisão login/contato)
+
+### Fase 13 — Polimento Final ✅
+- [x] `admin/posts/page.tsx` — cabeçalhos da tabela traduzidos via `t('colTitle/colStatus/colDate/colActions')`
+- [x] `messages/en.json`, `messages/es.json`, `messages/pt-BR.json` — chaves `admin.posts.col*` adicionadas
+- [x] `blog/page.tsx` — `<img>` → `<Image fill>` com `alt={post.titulo}` e `relative` no container
+- [x] `blog/[slug]/page.tsx` — `<img>` → `<Image fill priority>` com `alt={titulo}` e `relative` no container
+- [x] `next.config.ts` — `images.remotePatterns` para Supabase Storage

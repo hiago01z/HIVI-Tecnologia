@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { getPublishedPosts } from '@/lib/blog';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { CalendarDays, ArrowRight } from 'lucide-react';
 import type { BlogPostPreview } from '@/types/blog';
 
@@ -72,12 +73,13 @@ function BlogCard({ post, locale }: { post: BlogPostPreview; locale: string }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition-shadow hover:shadow-md">
       {post.imagem_url ? (
-        <div className="aspect-video overflow-hidden bg-[#EBF3FF]">
-          <img
+        <div className="relative aspect-video overflow-hidden bg-[#EBF3FF]">
+          <Image
             src={post.imagem_url}
-            alt=""
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
+            alt={post.titulo}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         </div>
       ) : (

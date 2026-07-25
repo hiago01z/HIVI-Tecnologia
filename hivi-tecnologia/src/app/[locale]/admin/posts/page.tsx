@@ -49,16 +49,16 @@ export default async function AdminPostsPage({
             <thead className="bg-[#F8FAFC]">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#4B5563]">
-                  Título
+                  {t('colTitle')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#4B5563]">
-                  Status
+                  {t('colStatus')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#4B5563]">
-                  Data
+                  {t('colDate')}
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-[#4B5563]">
-                  Ações
+                  {t('colActions')}
                 </th>
               </tr>
             </thead>
