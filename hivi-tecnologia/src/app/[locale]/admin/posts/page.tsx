@@ -1,7 +1,8 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { createAdminClient } from '@/lib/supabase/server';
 import { Link } from '@/i18n/navigation';
-import { deletePostAction, togglePublishAction } from './actions';
+import { togglePublishAction } from './actions';
+import { DeletePostButton } from './DeletePostButton';
 import type { Locale } from '@/i18n/routing';
 import { PlusCircle } from 'lucide-react';
 
@@ -107,21 +108,7 @@ export default async function AdminPostsPage({
                           </button>
                         </form>
 
-                        <form
-                          action={deletePostAction}
-                          onSubmit={(e) => {
-                            if (!window.confirm(t('confirmDelete'))) e.preventDefault();
-                          }}
-                        >
-                          <input type="hidden" name="id" value={post.id} />
-                          <input type="hidden" name="locale" value={locale} />
-                          <button
-                            type="submit"
-                            className="rounded-lg px-3 py-1.5 text-xs font-medium text-[#EF4444] hover:bg-red-50"
-                          >
-                            {t('delete')}
-                          </button>
-                        </form>
+                        <DeletePostButton postId={post.id} locale={locale} />
                       </div>
                     </td>
                   </tr>
