@@ -367,7 +367,8 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 | 28 | Error boundaries — site público e admin | ✅ Concluído |
 | 29 | Dashboard — 5º card Total de Contatos | ✅ Concluído |
 | 30 | ClientsSection — Faixa de Clientes/Logos | ✅ Concluído |
-| 31 | TestimonialsSection — Depoimentos | ✅ Concluído |
+| 31 | TestimonialsSection — Depoimentos | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
+| 32 | StatsSection — Barra de métricas | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
 
 ---
 
