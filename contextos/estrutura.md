@@ -84,8 +84,10 @@ hiago01z/HIVI-Tecnologia/
 │   │   │   │   ├── StatsSection.tsx       # Dark navy, 4 métricas
 │   │   │   │   ├── ServicesSection.tsx    # 11 serviços, grid 3 colunas
 │   │   │   │   ├── ServiceCardLink.tsx    # Client wrapper p/ click_servico
+│   │   │   │   ├── ClientsSection.tsx     # Faixa de logos tipográficos (grayscale)
 │   │   │   │   ├── AboutSection.tsx       # Valores, Missão/Visão
 │   │   │   │   ├── CtaBanner.tsx          # Faixa CTA azul
+│   │   │   │   ├── TestimonialsSection.tsx # 3 depoimentos com estrelas e avatar
 │   │   │   │   └── ContactSection.tsx     # Formulário LGPD react-hook-form + zod
 │   │   │   ├── analytics/
 │   │   │   │   └── PageViewTracker.tsx    # Rastreador de page_view por rota
@@ -105,6 +107,7 @@ hiago01z/HIVI-Tecnologia/
 │   │   │   └── contato.ts                 # ContatoPayload, EventoPayload
 │   │   └── constants/
 │   │       ├── services.ts                # SERVICE_KEYS, FEATURED_SERVICES
+│   │       ├── clients.ts                 # CLIENT_LOGOS (6 empresas parceiras)
 │   │       └── navigation.ts              # NAV_LINKS, FOOTER_LEGAL_LINKS
 │   │
 │   ├── .env.local

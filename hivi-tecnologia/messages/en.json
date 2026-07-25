@@ -247,6 +247,35 @@
       "logout": "Sign Out"
     }
   },
+  "clients": {
+    "sectionTitle": "Companies that trust HIVI",
+    "sectionSubtitle": "Strategic IT partners in consulting and infrastructure across Brazil"
+  },
+  "testimonials": {
+    "sectionTitle": "What our clients say",
+    "sectionSubtitle": "Real digital transformation stories with measurable results",
+    "starsAriaLabel": "Rating: 5 out of 5 stars",
+    "items": [
+      {
+        "text": "HIVI completely transformed our IT infrastructure. In just three months, we reduced operational costs by 40% and raised system availability to 99.9%.",
+        "author": "Carlos Mendes",
+        "role": "IT Director",
+        "company": "TechBrasil"
+      },
+      {
+        "text": "We hired HIVI to implement our ERP system and it was one of the best decisions we've made. Professionalism, punctuality and outstanding support from start to finish.",
+        "author": "Ana Lima",
+        "role": "CEO",
+        "company": "Grupo Nexo"
+      },
+      {
+        "text": "The information security consulting helped us identify critical vulnerabilities and implement robust policies. Our environment is significantly better protected now.",
+        "author": "Roberto Santos",
+        "role": "Infrastructure Manager",
+        "company": "DataPro"
+      }
+    ]
+  },
   "error": {
     "title": "Something went wrong",
     "description": "An unexpected error occurred. Please try again.",

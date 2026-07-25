@@ -278,6 +278,61 @@
 
 ---
 
+### 2026-07-25 — Fase 10: Loading States, Error Boundaries e Contatos no Dashboard
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `main`
+
+#### ✅ Loading Skeletons (7 arquivos)
+- `(site)/blog/loading.tsx` — grid de 6 cards skeleton com `animate-pulse`
+- `(site)/blog/[slug]/loading.tsx` — skeleton de artigo (título, imagem, parágrafos)
+- `admin/dashboard/loading.tsx` — 5 cards skeleton + seletor de período
+- `admin/posts/loading.tsx` — tabela skeleton com 5 linhas
+- `admin/contatos/loading.tsx` — 4 cards skeleton de contato
+
+#### ✅ Error Boundaries (2 arquivos)
+- `(site)/error.tsx` — client component com retry + link home (traduções `error.*`)
+- `admin/error.tsx` — client component com retry + link Dashboard (traduções `adminError.*`)
+
+#### ✅ Dashboard — 5º Card (Total de Contatos)
+- `/api/admin/metrics` extendido para retornar `totalContacts` via `count: 'exact'` do Supabase
+- `dashboard/page.tsx` — novo card roxo (`#7C3AED`) com ícone `Users`, sem filtro de período
+- Grid alterado para `lg:grid-cols-5`
+- Chave `admin.dashboard.totalContacts` adicionada nos 3 locales
+
+#### ✅ Traduções novas
+- `error.title`, `error.description`, `error.retry`, `error.backHome` (3 locales)
+- `adminError.title`, `adminError.description`, `adminError.retry`, `adminError.backToDashboard` (3 locales)
+
+---
+
+### 2026-07-25 — Fase 11: Seções Faltantes do Design (Clientes e Depoimentos)
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `main`
+
+#### ✅ ClientsSection — Faixa de Clientes/Logos (designe.md §5.3)
+- `src/components/sections/ClientsSection.tsx` — 6 logos tipográficos com efeito grayscale/opacity
+- `src/constants/clients.ts` — `CLIENT_LOGOS` com 6 empresas parceiras
+- Fundo branco `#FFFFFF`, posicionada entre Hero e Stats (conforme padrão de alternância designe.md §8)
+- Efeito CSS: `opacity-40 grayscale` → `opacity-100 grayscale-0` no hover (300ms ease)
+- Traduções `clients.sectionTitle`, `clients.sectionSubtitle` nos 3 locales
+
+#### ✅ TestimonialsSection — Depoimentos (designe.md §8)
+- `src/components/sections/TestimonialsSection.tsx` — 3 cards com estrelas, citação, avatar com iniciais
+- Fundo branco, grid 1→3 colunas (mobile → desktop)
+- Rating: 5 estrelas com `Star fill="currentColor"` (Lucide), cor `#F59E0B`
+- Avatar: iniciais do nome em círculo `#162268` (sem fotos)
+- Posicionada entre CtaBanner e ContactSection (conforme padrão designe.md §8)
+- Traduções `testimonials.*` com 3 depoimentos nos 3 locales
+- AnimateOnScroll com stagger 0/120/240ms
+
+#### ✅ Home page — ordem de seções atualizada
+```
+Hero → Clients → Stats → Services → About → CtaBanner → Testimonials → Contact
+```
+Alinhada com o padrão de alternância visual do designe.md §8.
+
+---
+
 ## Status Final das Implementações
 
 | # | Tarefa | Status |
@@ -308,6 +363,11 @@
 | 24 | Admin — página Contatos | ✅ Concluído |
 | 25 | Botão WhatsApp flutuante | ✅ Concluído |
 | 26 | Animações de scroll (IntersectionObserver) | ✅ Concluído |
+| 27 | Loading skeletons — blog e admin | ✅ Concluído |
+| 28 | Error boundaries — site público e admin | ✅ Concluído |
+| 29 | Dashboard — 5º card Total de Contatos | ✅ Concluído |
+| 30 | ClientsSection — Faixa de Clientes/Logos | ✅ Concluído |
+| 31 | TestimonialsSection — Depoimentos | ✅ Concluído |
 
 ---
 

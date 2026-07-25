@@ -159,6 +159,21 @@ Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
 - [x] Animações de scroll — IntersectionObserver, respeita `prefers-reduced-motion`
 - [x] Traduções `admin.contatos` e `admin.nav.contatos` nos 3 locales
 
+### Fase 10 — Loading States e Error Boundaries ✅
+- [x] `loading.tsx` para blog (lista e post individual) — skeletons com `animate-pulse`
+- [x] `loading.tsx` para admin (dashboard, posts, contatos) — skeletons por página
+- [x] `error.tsx` para site público — retry + link home, traduções `error.*`
+- [x] `error.tsx` para painel admin — retry + link dashboard, traduções `adminError.*`
+- [x] Dashboard — 5º card "Total de Contatos" com `count: 'exact'` do Supabase
+- [x] API `/api/admin/metrics` extendida para retornar `totalContacts`
+
+### Fase 11 — Seções Complementares ✅
+- [x] `ClientsSection` — faixa de logos tipográficos, grayscale + hover, posição Hero→Stats
+- [x] `TestimonialsSection` — 3 depoimentos, rating 5 estrelas, avatar com iniciais
+- [x] `constants/clients.ts` — `CLIENT_LOGOS` com 6 empresas parceiras
+- [x] Tradução `clients.*` e `testimonials.*` nos 3 locales (pt-BR, en, es)
+- [x] Home page com ordem de seções alinhada ao designe.md §8
+
 ### Fase 8 — Infraestrutura Supabase e Produção 🔄
 - [x] Credenciais Supabase configuradas na Vercel
 - [x] Schema SQL criado (`hivi-tecnologia/supabase/schema.sql`)

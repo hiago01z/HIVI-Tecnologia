@@ -247,6 +247,35 @@
       "logout": "Cerrar sesión"
     }
   },
+  "clients": {
+    "sectionTitle": "Empresas que confían en HIVI",
+    "sectionSubtitle": "Socios estratégicos en consultoría e infraestructura de TI en todo Brasil"
+  },
+  "testimonials": {
+    "sectionTitle": "Lo que dicen nuestros clientes",
+    "sectionSubtitle": "Historias reales de transformación digital con resultados medibles",
+    "starsAriaLabel": "Calificación: 5 de 5 estrellas",
+    "items": [
+      {
+        "text": "HIVI transformó por completo nuestra infraestructura de TI. En solo tres meses, redujimos un 40% los costes operativos y elevamos la disponibilidad de los sistemas al 99,9%.",
+        "author": "Carlos Mendes",
+        "role": "Director de TI",
+        "company": "TechBrasil"
+      },
+      {
+        "text": "Contratamos a HIVI para implementar nuestro ERP y fue una de las mejores decisiones que tomamos. Profesionalismo, puntualidad y soporte excelente de principio a fin.",
+        "author": "Ana Lima",
+        "role": "CEO",
+        "company": "Grupo Nexo"
+      },
+      {
+        "text": "La consultoría en seguridad de la información nos ayudó a identificar vulnerabilidades críticas e implementar políticas robustas. Nuestro entorno está mucho más protegido ahora.",
+        "author": "Roberto Santos",
+        "role": "Gestor de Infraestructura",
+        "company": "DataPro"
+      }
+    ]
+  },
   "error": {
     "title": "Algo salió mal",
     "description": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo.",
