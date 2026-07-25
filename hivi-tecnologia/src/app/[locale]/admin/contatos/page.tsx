@@ -38,9 +38,9 @@ export default async function AdminContatosPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const supabase = await createClient();
   let user = null;
   try {
+    const supabase = await createClient();
     const { data } = await supabase.auth.getUser();
     user = data?.user ?? null;
   } catch {

@@ -39,10 +39,16 @@ export async function loginAction(
     return { error: 'invalid' as const };
   }
 
-  const supabase = await makeClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  let loginOk = false;
+  try {
+    const supabase = await makeClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (!error) loginOk = true;
+  } catch {
+    return { error: 'invalid' as const };
+  }
 
-  if (error) {
+  if (!loginOk) {
     return { error: 'invalid' as const };
   }
 
