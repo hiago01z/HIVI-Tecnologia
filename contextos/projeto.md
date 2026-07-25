@@ -198,3 +198,10 @@ Todas as páginas são traduzidas e acessíveis em pt-BR, en e es.
 - [x] `blog/page.tsx` — `<img>` → `<Image fill>` com `alt={post.titulo}` e `relative` no container
 - [x] `blog/[slug]/page.tsx` — `<img>` → `<Image fill priority>` com `alt={titulo}` e `relative` no container
 - [x] `next.config.ts` — `images.remotePatterns` para Supabase Storage
+
+### Fase 14 — Home Page Completa ✅
+- [x] `admin/layout.tsx` — `createClient()` movido para dentro do try-catch (fix crash produção)
+- [x] `admin/posts/DeletePostButton.tsx` — Client Component para confirmação de delete (fix React 19)
+- [x] Home page — `StatsSection` restaurada (entre Clients e Services)
+- [x] Home page — `TestimonialsSection` restaurada (entre CtaBanner e Contact)
+- [x] Ordem final de seções alinhada ao design §8

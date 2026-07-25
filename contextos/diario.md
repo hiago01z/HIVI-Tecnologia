@@ -372,6 +372,37 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 
 ---
 
+### 2026-07-25 — Fix: Admin Crash e onSubmit em Server Component
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `main` + `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ `admin/layout.tsx` — `createClient()` dentro do try-catch
+- `createClient()` era chamado fora do try-catch; se Supabase inacessível ou env vars ausentes, crashava com `ERROR 1472982161` na página de login
+- Movido para dentro do try-catch: `user = null` silenciosamente em vez de crash
+
+#### ✅ `admin/posts/page.tsx` — onSubmit removido do Server Component
+- `onSubmit={(e) => { window.confirm(...) }}` em Server Component é ilegal no React 19
+- Extraído para `DeletePostButton.tsx` (Client Component com `'use client'`)
+- Comportamento de confirmação antes de deletar mantido
+
+---
+
+### 2026-07-25 — Fase 14: Home Page Completa — Ordem de Seções Correta
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `main` + `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Restauração da ordem de seções da Home (designe.md §8)
+- `StatsSection` restaurada entre `ClientsSection` e `ServicesSection`
+- `TestimonialsSection` restaurada entre `CtaBanner` e `ContactSection`
+- Ordem final alinhada ao padrão de alternância visual do design:
+
+```
+Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#FFF)
+→ About (#EBF3FF) → CtaBanner (#1565C0) → Testimonials (#FFF) → Contact (#EBF3FF)
+```
+
+---
+
 ### 2026-07-25 — Fase 13: Polimento Final
 
 **Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
@@ -426,14 +457,17 @@ Alinhada com o padrão de alternância visual do designe.md §8.
 | 28 | Error boundaries — site público e admin | ✅ Concluído |
 | 29 | Dashboard — 5º card Total de Contatos | ✅ Concluído |
 | 30 | ClientsSection — Faixa de Clientes/Logos | ✅ Concluído |
-| 31 | TestimonialsSection — Depoimentos | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
-| 32 | StatsSection — Barra de métricas | ⏸ Removido da home (dados fictícios — reimplantar com dados reais) |
+| 31 | TestimonialsSection — Depoimentos | ✅ Restaurada na home (Fase 14) |
+| 32 | StatsSection — Barra de métricas | ✅ Restaurada na home (Fase 14) |
 | 33 | Auditoria de segurança — crashes e vulnerabilidades | ✅ Concluído |
 | 34 | Schema Supabase executado no banco | ✅ Concluído |
 | 35 | HeroSection — strings do mockup traduzidas (Regra 9) | ✅ Concluído |
 | 36 | Sitemap dinâmico com posts do blog | ✅ Concluído |
 | 37 | Cabeçalhos da tabela de posts traduzidos (Regra 9) | ✅ Concluído |
 | 38 | Blog — `<Image>` Next.js com alt e remotePatterns | ✅ Concluído |
+| 39 | Admin — crash `createClient()` fora de try-catch | ✅ Concluído |
+| 40 | Admin Posts — `onSubmit` ilegal em Server Component → `DeletePostButton` | ✅ Concluído |
+| 41 | Home — StatsSection e TestimonialsSection restauradas (Fase 14) | ✅ Concluído |
 
 ---
 
