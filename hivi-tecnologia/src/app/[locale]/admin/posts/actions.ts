@@ -6,9 +6,13 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 async function requireAuth() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error('Unauthorized');
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    if (!data?.user) throw new Error('Unauthorized');
+  } catch {
+    throw new Error('Unauthorized');
+  }
 }
 
 export async function deletePostAction(formData: FormData) {

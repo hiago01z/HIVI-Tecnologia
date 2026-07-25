@@ -39,7 +39,13 @@ export default async function AdminContatosPage({
   setRequestLocale(locale);
 
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data?.user ?? null;
+  } catch {
+    user = null;
+  }
   if (!user) redirect(`/${locale}/admin`);
 
   const t = await getTranslations({ locale, namespace: 'admin.contatos' });

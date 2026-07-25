@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/server';
 import type { ContatoPayload } from '@/types/contato';
+import { checkRateLimit } from '@/lib/rateLimiter';
 import { z } from 'zod';
 
 const contatoSchema = z.object({
@@ -14,6 +15,12 @@ const contatoSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
+    const { allowed } = checkRateLimit(`contato:${ip}`);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Muitas tentativas. Tente mais tarde.' }, { status: 429 });
+    }
+
     const body: ContatoPayload = await request.json();
 
     const parsed = contatoSchema.safeParse(body);

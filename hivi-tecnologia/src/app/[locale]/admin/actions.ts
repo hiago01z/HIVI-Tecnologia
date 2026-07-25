@@ -27,7 +27,7 @@ export async function loginAction(
   const ip = headerStore.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
   const locale = (formData.get('locale') as string) || 'pt-BR';
 
-  const { allowed } = checkRateLimit(ip);
+  const { allowed } = checkRateLimit(`login:${ip}`);
   if (!allowed) {
     return { error: 'rateLimited' as const };
   }

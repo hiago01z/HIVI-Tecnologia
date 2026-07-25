@@ -41,17 +41,14 @@ function isAdminRoute(pathname: string): boolean {
   return /^\/[^/]+\/admin\//.test(pathname);
 }
 
-function isAdminLoginRoute(pathname: string): boolean {
-  return /^\/[^/]+\/admin$/.test(pathname);
+function isAuthenticated(request: NextRequest): boolean {
+  // @supabase/ssr stores session in cookies named sb-{project-ref}-auth-token[.N]
+  return request.cookies.getAll().some(
+    (c) => c.name.startsWith('sb-') && c.name.includes('-auth-token') && Boolean(c.value),
+  );
 }
 
-async function isAuthenticated(request: NextRequest): Promise<boolean> {
-  const sessionCookie = request.cookies.get('sb-access-token')?.value
-    ?? request.cookies.get('sb-auth-token')?.value;
-  return Boolean(sessionCookie);
-}
-
-export async function proxy(request: NextRequest): Promise<NextResponse> {
+export function proxy(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl;
 
   if (pathname === '/' || !routing.locales.some(
@@ -64,7 +61,7 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
   }
 
   if (isAdminRoute(pathname)) {
-    const authenticated = await isAuthenticated(request);
+    const authenticated = isAuthenticated(request);
     if (!authenticated) {
       const locale = pathname.split('/')[1] ?? routing.defaultLocale;
       const loginUrl = new URL(`/${locale}/admin`, request.url);
