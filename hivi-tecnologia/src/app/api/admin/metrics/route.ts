@@ -29,5 +29,9 @@ export async function GET(request: NextRequest) {
     if (tipo in counts) counts[tipo as keyof typeof counts]++;
   });
 
-  return NextResponse.json(counts);
+  const { count: totalContacts } = await admin
+    .from('contatos')
+    .select('*', { count: 'exact', head: true });
+
+  return NextResponse.json({ ...counts, totalContacts: totalContacts ?? 0 });
 }

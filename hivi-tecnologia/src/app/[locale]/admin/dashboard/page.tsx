@@ -1,8 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
-import { Eye, MessageSquare, MessageCircle, Briefcase } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Eye, MessageSquare, MessageCircle, Briefcase, Users } from 'lucide-react';
 
 type Period = '7' | '30' | '90';
 
@@ -11,12 +11,13 @@ interface Metrics {
   click_contato: number;
   click_whatsapp: number;
   click_servico: number;
+  totalContacts: number;
 }
 
 async function fetchMetrics(days: number): Promise<Metrics> {
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
   const res = await fetch(`/api/admin/metrics?since=${encodeURIComponent(since)}`);
-  if (!res.ok) return { page_view: 0, click_contato: 0, click_whatsapp: 0, click_servico: 0 };
+  if (!res.ok) return { page_view: 0, click_contato: 0, click_whatsapp: 0, click_servico: 0, totalContacts: 0 };
   return res.json();
 }
 
@@ -34,11 +35,12 @@ export default function DashboardPage() {
     });
   }, [period]);
 
-  const cards = [
-    { key: 'page_view' as const, label: t('totalPageViews'), Icon: Eye, color: '#1565C0' },
-    { key: 'click_contato' as const, label: t('contactClicks'), Icon: MessageSquare, color: '#162268' },
-    { key: 'click_whatsapp' as const, label: t('whatsappClicks'), Icon: MessageCircle, color: '#22C55E' },
-    { key: 'click_servico' as const, label: t('serviceClicks'), Icon: Briefcase, color: '#F59E0B' },
+  const cards: { key: keyof Metrics; label: string; Icon: React.ElementType; color: string }[] = [
+    { key: 'page_view', label: t('totalPageViews'), Icon: Eye, color: '#1565C0' },
+    { key: 'click_contato', label: t('contactClicks'), Icon: MessageSquare, color: '#162268' },
+    { key: 'click_whatsapp', label: t('whatsappClicks'), Icon: MessageCircle, color: '#22C55E' },
+    { key: 'click_servico', label: t('serviceClicks'), Icon: Briefcase, color: '#F59E0B' },
+    { key: 'totalContacts', label: t('totalContacts'), Icon: Users, color: '#7C3AED' },
   ];
 
   const periods: { value: Period; label: string }[] = [
@@ -69,7 +71,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
         {cards.map(({ key, label, Icon, color }) => (
           <div key={key} className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-black/5">
             <div

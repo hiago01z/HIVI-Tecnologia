@@ -204,6 +204,7 @@
       "contactClicks": "Clics en Contacto",
       "whatsappClicks": "Clics en WhatsApp",
       "serviceClicks": "Clics en Servicios",
+      "totalContacts": "Total de Contactos",
       "period": "Período",
       "last7days": "Últimos 7 días",
       "last30days": "Últimos 30 días",
@@ -245,6 +246,18 @@
       "contatos": "Contactos",
       "logout": "Cerrar sesión"
     }
+  },
+  "error": {
+    "title": "Algo salió mal",
+    "description": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo.",
+    "retry": "Intentar de nuevo",
+    "backHome": "Volver al inicio"
+  },
+  "adminError": {
+    "title": "Error en el panel",
+    "description": "Ocurrió un error inesperado. Inténtelo de nuevo o vuelva al Dashboard.",
+    "retry": "Intentar de nuevo",
+    "backToDashboard": "Volver al Dashboard"
   },
   "languageSwitcher": {
     "label": "Idioma",
