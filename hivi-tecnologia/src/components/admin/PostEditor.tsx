@@ -8,7 +8,6 @@ import type { BlogPost } from '@/types/blog';
 import type { Locale } from '@/i18n/routing';
 
 const LOCALES: Locale[] = ['pt-BR', 'en', 'es'];
-const LOCALE_LABELS: Record<Locale, string> = { 'pt-BR': 'Português', en: 'English', es: 'Español' };
 
 function slugify(text: string): string {
   return text
@@ -54,6 +53,7 @@ interface Props {
 
 export function PostEditor({ post }: Props) {
   const t = useTranslations('admin.postEditor');
+  const tLang = useTranslations('languageSwitcher');
   const locale = useLocale() as Locale;
   const [activeTab, setActiveTab] = useState<Locale>(locale);
   const [titles, setTitles] = useState<Record<Locale, string>>(
@@ -111,7 +111,7 @@ export function PostEditor({ post }: Props) {
                   : 'text-[#4B5563] hover:bg-[#EBF3FF]'
               }`}
             >
-              {LOCALE_LABELS[l]}
+              {tLang(l)}
             </button>
           ))}
         </div>
@@ -126,7 +126,7 @@ export function PostEditor({ post }: Props) {
                   value={titles[l]}
                   onChange={(e) => handleTitleChange(l, e.target.value)}
                   className={inputCls}
-                  placeholder={LOCALE_LABELS[l]}
+                  placeholder={tLang(l)}
                 />
               </div>
               <div>
@@ -154,7 +154,7 @@ export function PostEditor({ post }: Props) {
                   value={contents[l]}
                   onChange={(e) => setContents((prev) => ({ ...prev, [l]: e.target.value }))}
                   className={`${inputCls} font-mono text-xs`}
-                  placeholder="<p>HTML content here...</p>"
+                  placeholder={t('contentPlaceholder')}
                 />
               </div>
             </div>
@@ -171,7 +171,7 @@ export function PostEditor({ post }: Props) {
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
           className={inputCls}
-          placeholder="https://..."
+          placeholder={t('imagePlaceholder')}
         />
         {imageUrl && (
           <img src={imageUrl} alt="" className="mt-3 h-40 w-full rounded-lg object-cover" />
