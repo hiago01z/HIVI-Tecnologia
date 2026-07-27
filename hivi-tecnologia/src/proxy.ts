@@ -51,6 +51,13 @@ function isAuthenticated(request: NextRequest): boolean {
 export function proxy(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl;
 
+  if (pathname.startsWith('/api/')) {
+    const response = NextResponse.next();
+    response.headers.set('X-Frame-Options', 'DENY');
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    return response;
+  }
+
   if (pathname === '/' || !routing.locales.some(
     (l) => pathname.startsWith(`/${l}/`) || pathname === `/${l}`
   )) {
