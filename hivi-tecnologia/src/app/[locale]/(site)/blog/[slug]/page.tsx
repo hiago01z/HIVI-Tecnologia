@@ -52,7 +52,38 @@ export default async function BlogPostPage({
   const post = await getPostBySlug(locale as Locale, slug);
   if (!post) notFound();
 
-  return <PostContent post={post} locale={locale as Locale} />;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivi.com.br';
+  const titulo = post.titulo[locale as Locale] ?? post.titulo['pt-BR'];
+  const resumo = post.resumo[locale as Locale] ?? post.resumo['pt-BR'];
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: titulo,
+    description: resumo,
+    datePublished: post.criado_em,
+    dateModified: post.atualizado_em ?? post.criado_em,
+    author: { '@type': 'Organization', name: 'HIVI Tecnologia', url: siteUrl },
+    publisher: {
+      '@type': 'Organization',
+      name: 'HIVI Tecnologia',
+      url: siteUrl,
+    },
+    url: `${siteUrl}/${locale}/blog/${post.slug[locale as Locale] ?? post.slug['pt-BR']}`,
+    ...(post.imagem_url ? { image: post.imagem_url } : {}),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      <PostContent post={post} locale={locale as Locale} />
+    </>
+  );
 }
 
 function formatDate(iso: string, locale: string) {
