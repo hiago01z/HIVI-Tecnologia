@@ -66,9 +66,42 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  const organizationJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'HIVI Tecnologia',
+    url: siteUrl,
+    description:
+      'Consultoria, gestão de TI, infraestrutura e desenvolvimento web para empresas de todos os portes.',
+    sameAs: [
+      process.env.NEXT_PUBLIC_LINKEDIN,
+      process.env.NEXT_PUBLIC_INSTAGRAM,
+      process.env.NEXT_PUBLIC_FACEBOOK,
+    ].filter(Boolean),
+  };
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'HIVI Tecnologia',
+    url: siteUrl,
+  };
+
   return (
     <html lang={locale} className={inter.variable}>
       <body className="min-h-screen flex flex-col antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, '\\u003c'),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteJsonLd).replace(/</g, '\\u003c'),
+          }}
+        />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
