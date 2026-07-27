@@ -26,7 +26,8 @@ export default async function AdminLayout({
     return <>{children}</>;
   }
 
-  const t = await getTranslations({ locale, namespace: 'admin.nav' });
+  const t = await getTranslations({ locale, namespace: 'admin.nav' }).catch(() => null);
+  if (!t) return <>{children}</>;
 
   return (
     <div className="min-h-screen bg-[#F0F7FF]">

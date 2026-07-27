@@ -29,10 +29,16 @@ export default function DashboardPage() {
 
   useEffect(() => {
     setLoading(true);
-    fetchMetrics(Number(period)).then((data) => {
-      setMetrics(data);
-      setLoading(false);
-    });
+    fetchMetrics(Number(period))
+      .then((data) => {
+        setMetrics(data);
+      })
+      .catch(() => {
+        setMetrics({ page_view: 0, click_contato: 0, click_whatsapp: 0, click_servico: 0, totalContacts: 0 });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [period]);
 
   const cards: { key: keyof Metrics; label: string; Icon: React.ElementType; color: string }[] = [

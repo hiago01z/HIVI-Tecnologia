@@ -7,10 +7,10 @@ import { AlertTriangle } from 'lucide-react';
 
 interface ErrorProps {
   error: Error & { digest?: string };
-  reset: () => void;
+  unstable_retry: () => void;
 }
 
-export default function AdminError({ error, reset }: ErrorProps) {
+export default function AdminError({ error, unstable_retry }: ErrorProps) {
   const t = useTranslations('adminError');
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function AdminError({ error, reset }: ErrorProps) {
       <p className="mt-3 max-w-sm text-[#4B5563]">{t('description')}</p>
       <div className="mt-8 flex flex-wrap justify-center gap-4">
         <button
-          onClick={reset}
+          onClick={unstable_retry}
           className="rounded-lg bg-[#162268] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#111b52]"
         >
           {t('retry')}

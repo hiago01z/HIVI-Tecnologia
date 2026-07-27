@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { createAdminClient } from '@/lib/supabase/server';
+import { createAdminClient, createClient } from '@/lib/supabase/server';
 import { Link } from '@/i18n/navigation';
+import { redirect } from 'next/navigation';
 import { togglePublishAction } from './actions';
 import { DeletePostButton } from './DeletePostButton';
 import type { Locale } from '@/i18n/routing';
@@ -21,13 +22,29 @@ export default async function AdminPostsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  let user = null;
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    user = data?.user ?? null;
+  } catch {
+    user = null;
+  }
+  if (!user) redirect(`/${locale}/admin`);
+
   const t = await getTranslations({ locale, namespace: 'admin.posts' });
 
-  const admin = await createAdminClient();
-  const { data: posts } = await admin
-    .from('blog_posts')
-    .select('id, titulo, publicado, criado_em')
-    .order('criado_em', { ascending: false });
+  let posts: Post[] | null = null;
+  try {
+    const admin = await createAdminClient();
+    const { data } = await admin
+      .from('blog_posts')
+      .select('id, titulo, publicado, criado_em')
+      .order('criado_em', { ascending: false });
+    posts = data as Post[] | null;
+  } catch {
+    posts = null;
+  }
 
   return (
     <>

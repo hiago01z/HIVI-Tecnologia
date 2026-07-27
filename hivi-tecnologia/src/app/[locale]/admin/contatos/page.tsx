@@ -50,11 +50,17 @@ export default async function AdminContatosPage({
 
   const t = await getTranslations({ locale, namespace: 'admin.contatos' });
 
-  const admin = await createAdminClient();
-  const { data: contatos } = await admin
-    .from('contatos')
-    .select('id, nome, email, telefone, mensagem, locale, consentimento_lgpd, criado_em')
-    .order('criado_em', { ascending: false });
+  let contatos: Contato[] | null = null;
+  try {
+    const admin = await createAdminClient();
+    const { data } = await admin
+      .from('contatos')
+      .select('id, nome, email, telefone, mensagem, locale, consentimento_lgpd, criado_em')
+      .order('criado_em', { ascending: false });
+    contatos = data as Contato[] | null;
+  } catch {
+    contatos = null;
+  }
 
   return (
     <div>
