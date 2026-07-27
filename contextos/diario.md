@@ -423,6 +423,39 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 
 ---
 
+### 2026-07-27 — Fase 16: UX — Link Ativo na Navegação e Loading States Completos
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Navegação com link ativo (aria-current)
+
+**`src/components/layout/NavLinks.tsx`** *(novo — Client Component)*
+- `usePathname()` de `@/i18n/navigation` para detectar página atual sem prefixo de locale
+- Lógica `isActive`: `/` → exact match; outros → `startsWith(href + '/')`
+- Active: `bg-[#EBF3FF] text-[#1565C0]` + `aria-current="page"`
+- `Header.tsx` atualizado para usar `<NavLinks />` em vez do loop estático
+
+**`src/components/layout/MobileMenu.tsx`** *(atualizado)*
+- `usePathname()` adicionado — mesmo destaque de link ativo para o menu mobile
+- `aria-current="page"` no link ativo (acessibilidade)
+
+**`src/components/admin/AdminNavLinks.tsx`** *(novo — Client Component)*
+- Mesmo padrão: `usePathname()` + `isActive()` para os links Dashboard / Posts / Contatos
+- Active: `bg-white/20 text-white` (contraste sobre fundo marinho `#162268`)
+- `admin/layout.tsx` atualizado para usar `<AdminNavLinks />`
+
+#### ✅ Loading skeletons completos (todas as páginas)
+
+**Site público:**
+- `(site)/servicos/loading.tsx` — hero + grid 9 cards com `animate-pulse`
+- `(site)/sobre/loading.tsx` — hero + seção about + skeleton do formulário de contato
+
+**Admin:**
+- `admin/posts/novo/loading.tsx` — tabs pt-BR/en/es + campos do editor
+- `admin/posts/[id]/loading.tsx` — mesmo skeleton do novo (edição)
+
+---
+
 ### 2026-07-27 — Fase 15: Correção do Error Boundary no Login Admin e Hardening de Segurança
 
 **Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
@@ -521,6 +554,10 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 | 46 | Admin — `contatos/page.tsx` createAdminClient sem try-catch | ✅ Concluído |
 | 47 | Admin — `posts/[id]/page.tsx` sem auth check nem try-catch | ✅ Concluído |
 | 48 | Admin — `posts/novo/page.tsx` sem auth check | ✅ Concluído |
+| 49 | Header/MobileMenu — link ativo com `usePathname()` (NavLinks client) | ✅ Concluído |
+| 50 | Admin — link ativo na navbar (AdminNavLinks client) | ✅ Concluído |
+| 51 | Loading skeletons — `servicos/loading.tsx` e `sobre/loading.tsx` | ✅ Concluído |
+| 52 | Loading skeletons — `posts/novo/loading.tsx` e `posts/[id]/loading.tsx` | ✅ Concluído |
 
 ---
 
