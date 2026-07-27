@@ -423,6 +423,39 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 
 ---
 
+### 2026-07-27 — Fase 19: Polimento Final — Acessibilidade, UX e Regra 9
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Loading skeletons completos (todas as páginas)
+- `(site)/loading.tsx` — home: hero, clients strip, stats, services grid
+- `(site)/privacidade/loading.tsx` — header, intro box, 7 seções
+
+#### ✅ JSON-LD enriquecido — ProfessionalService
+- `[locale]/layout.tsx` — `@type` expandido para `['Organization', 'ProfessionalService']`
+- Novos campos: `areaServed` (Brazil), `knowsLanguage` (pt-BR/en/es), `serviceType` (6 serviços), `email` e `telephone` via env vars opcionais
+- Melhora rich results e SEO local sem exigir endereço físico
+
+#### ✅ Paginação do blog (URL-based, SEO-friendly)
+- `lib/blog.ts` — `getPublishedPosts` aceita `page` e `perPage`, usa `.range()` e `count: 'exact'` do Supabase
+- `blog/page.tsx` — lê `searchParams.page`, passa `totalPages` para `BlogGrid`
+- `BlogGrid` — nav com prev/next (ChevronLeft/Right) e numeração; links `aria-current` e `aria-disabled`
+- 4 novas chaves traduzidas (`pagination`, `prevPage`, `nextPage`, `goToPage`) nos 3 locales
+
+#### ✅ Página 404 com Header e Footer
+- `not-found.tsx` estava no nível `[locale]` sem acesso ao layout `(site)`
+- Adicionados `<Header />` e `<Footer />` diretamente; número "404" com `aria-hidden`
+
+#### ✅ Regra 9 — PostEditor strings traduzidas
+- `LOCALE_LABELS` removido: abas de idioma usam `t('languageSwitcher.X')`
+- Placeholders de conteúdo e imagem traduzidos nos 3 locales
+
+#### ✅ Regra 9 — aria-labels traduzidos (acessibilidade)
+- 9 novas chaves em `common` (openMenu, closeMenu, homeLink, mainNav, mobileNav, footer, statsSection, whatsappLabel)
+- Header, MobileMenu, Footer, StatsSection, WhatsAppButton atualizados
+
+---
+
 ### 2026-07-27 — Fase 18: SEO — Canonical URLs e x-default hreflang
 
 **Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
@@ -606,6 +639,13 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 | 58 | JSON-LD BlogPosting no `blog/[slug]/page.tsx` | ✅ Concluído |
 | 59 | Admin — exclusão de contatos (LGPD direito ao apagamento) | ✅ Concluído |
 | 60 | SEO — canonical + x-default hreflang na home e blog/[slug] | ✅ Concluído |
+| 61 | Loading skeleton — home (hero, clients, stats, services) | ✅ Concluído |
+| 62 | Loading skeleton — /privacidade (header, intro, seções) | ✅ Concluído |
+| 63 | JSON-LD ProfessionalService — areaServed, knowsLanguage, serviceType | ✅ Concluído |
+| 64 | Blog — paginação URL-based com prev/next e numeração de páginas | ✅ Concluído |
+| 65 | Página 404 — Header e Footer incluídos | ✅ Concluído |
+| 66 | PostEditor — LOCALE_LABELS e placeholders traduzidos (Regra 9) | ✅ Concluído |
+| 67 | aria-labels traduzidos em Header, MobileMenu, Footer, Stats, WhatsApp | ✅ Concluído |
 
 ---
 
