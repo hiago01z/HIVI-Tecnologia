@@ -2,6 +2,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { PageViewTracker } from '@/components/analytics/PageViewTracker';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import { BackToTop } from '@/components/ui/BackToTop';
 
 export default function SiteLayout({
   children,
@@ -15,6 +16,7 @@ export default function SiteLayout({
       <main className="flex-1">{children}</main>
       <Footer />
       <WhatsAppButton />
+      <BackToTop />
     </>
   );
 }

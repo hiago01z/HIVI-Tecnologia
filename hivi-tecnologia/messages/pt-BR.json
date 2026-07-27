@@ -306,5 +306,8 @@
     "pt-BR": "Português",
     "en": "English",
     "es": "Español"
+  },
+  "common": {
+    "backToTop": "Voltar ao topo"
   }
 }
