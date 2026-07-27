@@ -43,12 +43,8 @@ export async function loginAction(
   try {
     const supabase = await makeClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      console.error('[HIVI admin login] auth error:', error.code, error.message);
-    }
     if (!error) loginOk = true;
-  } catch (e) {
-    console.error('[HIVI admin login] exception:', e);
+  } catch {
     return { error: 'invalid' as const };
   }
 
