@@ -423,6 +423,52 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 
 ---
 
+### 2026-07-27 — Fase 15: Correção do Error Boundary no Login Admin e Hardening de Segurança
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### Problema Raiz Identificado — "Erro no painel" após login bem-sucedido
+- Quando `loginAction` chama `redirect()`, o Next.js 16 transmite o RSC payload da rota de destino (`/admin/dashboard`) como parte da mesma resposta da Server Action.
+- Esse streaming ocorre dentro de uma React transition (via `useActionState`). Se qualquer Server Component na rota de destino lança um erro, ele propaga pelo `startTransition` até o Error Boundary mais próximo — que é `admin/error.tsx`, o mesmo que envolve a página de login.
+- Causa raiz: `getTranslations()` em `admin/layout.tsx` era chamada fora de try-catch; se lançava, o Error Boundary exibia "Erro no painel" mesmo o login sendo bem-sucedido.
+
+#### ✅ Correções aplicadas
+
+**`admin/layout.tsx`**
+- `getTranslations()` envolvida em `.catch(() => null)` com guard `if (!t) return <>{children}</>`
+- Garante que falha na tradução nunca propaga como erro não tratado durante o streaming RSC
+
+**`admin/error.tsx`**
+- Prop `reset: () => void` (API Next.js 13 — deprecated) substituída por `unstable_retry: () => void` (Next.js 16.2+)
+- Botão "Tentar novamente" agora dispara re-fetch correto da rota em vez de apenas re-render do cliente
+
+**`admin/dashboard/page.tsx`**
+- `fetchMetrics()` no `useEffect` não tinha `.catch()` — rejeição não tratada podia estourar o Error Boundary
+- Adicionado `.catch()` com fallback `{ page_view: 0, ... }` e `.finally()` para `setLoading(false)`
+
+**`admin/posts/page.tsx`**
+- Faltava verificação de autenticação (sem redirect para login se não autenticado)
+- `createAdminClient()` chamado sem try-catch — crash se env var ausente ou Supabase inacessível
+- Adicionado: auth check com redirect + try-catch completo
+
+**`admin/contatos/page.tsx`**
+- `createAdminClient()` chamado sem try-catch após auth check
+- Adicionado: try-catch com fallback `contatos = null`
+
+**`admin/posts/[id]/page.tsx`** *(vulnerabilidade encontrada na auditoria seguinte)*
+- Sem auth check — qualquer usuário não autenticado podia acessar o editor de post por ID
+- `createAdminClient()` sem try-catch — crash em caso de falha
+- Adicionado: auth check com redirect + try-catch + fallback `notFound()`
+
+**`admin/posts/novo/page.tsx`** *(vulnerabilidade encontrada na auditoria seguinte)*
+- Sem auth check — qualquer usuário não autenticado podia acessar o formulário de criação
+- Adicionado: auth check com redirect
+
+#### ✅ Confirmação do usuário
+- Usuário confirmou: "pronto. consertado" — fix do Error Boundary validado em produção
+
+---
+
 ## Status Final das Implementações
 
 | # | Tarefa | Status |
@@ -468,6 +514,13 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 | 39 | Admin — crash `createClient()` fora de try-catch | ✅ Concluído |
 | 40 | Admin Posts — `onSubmit` ilegal em Server Component → `DeletePostButton` | ✅ Concluído |
 | 41 | Home — StatsSection e TestimonialsSection restauradas (Fase 14) | ✅ Concluído |
+| 42 | Admin — Error Boundary "Erro no painel" após login (Fase 15) | ✅ Concluído |
+| 43 | Admin — `error.tsx` `reset` → `unstable_retry` (Next.js 16.2+) | ✅ Concluído |
+| 44 | Admin — `dashboard/page.tsx` fetchMetrics sem `.catch()` | ✅ Concluído |
+| 45 | Admin — `posts/page.tsx` sem auth check + try-catch | ✅ Concluído |
+| 46 | Admin — `contatos/page.tsx` createAdminClient sem try-catch | ✅ Concluído |
+| 47 | Admin — `posts/[id]/page.tsx` sem auth check nem try-catch | ✅ Concluído |
+| 48 | Admin — `posts/novo/page.tsx` sem auth check | ✅ Concluído |
 
 ---
 
