@@ -251,7 +251,9 @@
       "title": "Contactos Recibidos",
       "totalContacts": "contactos en total",
       "noContacts": "Ningún contacto recibido aún.",
-      "lgpdConsent": "LGPD ✓"
+      "lgpdConsent": "LGPD ✓",
+      "delete": "Eliminar",
+      "confirmDelete": "¿Está seguro de que desea eliminar este contacto? Esta acción no se puede deshacer."
     },
     "nav": {
       "dashboard": "Dashboard",

@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase/server';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { Mail, Phone, MessageSquare } from 'lucide-react';
+import { DeleteContactButton } from './DeleteContactButton';
 import type { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -116,6 +117,7 @@ export default async function AdminContatosPage({
                       {t('lgpdConsent')}
                     </span>
                   )}
+                  <DeleteContactButton contactId={c.id} locale={locale} />
                 </div>
               </div>
 
