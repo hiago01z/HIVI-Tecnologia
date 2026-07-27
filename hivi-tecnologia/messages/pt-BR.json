@@ -144,7 +144,11 @@
     "backToBlog": "Voltar ao Blog",
     "publishedOn": "Publicado em",
     "noPostsFound": "Nenhum post encontrado.",
-    "loadMore": "Carregar mais"
+    "loadMore": "Carregar mais",
+    "pagination": "Paginação",
+    "prevPage": "Página anterior",
+    "nextPage": "Próxima página",
+    "goToPage": "Ir para a página {page}"
   },
   "footer": {
     "description": "Soluções tecnológicas estratégicas para empresas que buscam crescimento e inovação.",

@@ -144,7 +144,11 @@
     "backToBlog": "Back to Blog",
     "publishedOn": "Published on",
     "noPostsFound": "No posts found.",
-    "loadMore": "Load more"
+    "loadMore": "Load more",
+    "pagination": "Pagination",
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "goToPage": "Go to page {page}"
   },
   "footer": {
     "description": "Strategic technology solutions for companies seeking growth and innovation.",

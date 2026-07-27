@@ -2,11 +2,11 @@ import { setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getPublishedPosts } from '@/lib/blog';
+import { getPublishedPosts, POSTS_PER_PAGE } from '@/lib/blog';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { CalendarDays, ArrowRight } from 'lucide-react';
+import { CalendarDays, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { BlogPostPreview } from '@/types/blog';
 
 export async function generateMetadata({
@@ -24,18 +24,23 @@ export async function generateMetadata({
 
 export default async function BlogPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ page?: string }>;
 }) {
   const { locale } = await params;
+  const { page: pageParam } = await searchParams;
   setRequestLocale(locale);
 
-  const posts = await getPublishedPosts(locale as Locale);
+  const page = Math.max(1, parseInt(pageParam ?? '1', 10) || 1);
+  const { posts, total } = await getPublishedPosts(locale as Locale, page);
+  const totalPages = Math.ceil(total / POSTS_PER_PAGE);
 
   return (
     <>
       <BlogHero />
-      <BlogGrid posts={posts} locale={locale} />
+      <BlogGrid posts={posts} locale={locale} page={page} totalPages={totalPages} />
     </>
   );
 }
@@ -113,10 +118,20 @@ function BlogCard({ post, locale }: { post: BlogPostPreview; locale: string }) {
   );
 }
 
-function BlogGrid({ posts, locale }: { posts: BlogPostPreview[]; locale: string }) {
+function BlogGrid({
+  posts,
+  locale,
+  page,
+  totalPages,
+}: {
+  posts: BlogPostPreview[];
+  locale: string;
+  page: number;
+  totalPages: number;
+}) {
   const t = useTranslations('blog');
 
-  if (posts.length === 0) {
+  if (posts.length === 0 && page === 1) {
     return (
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
@@ -134,6 +149,55 @@ function BlogGrid({ posts, locale }: { posts: BlogPostPreview[]; locale: string 
             <BlogCard key={post.id} post={post} locale={locale} />
           ))}
         </div>
+
+        {totalPages > 1 && (
+          <nav
+            className="mt-16 flex items-center justify-center gap-2"
+            aria-label={t('pagination')}
+          >
+            <Link
+              href={page > 2 ? `/blog?page=${page - 1}` : '/blog'}
+              aria-label={t('prevPage')}
+              aria-disabled={page <= 1}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+                page <= 1
+                  ? 'pointer-events-none border-[#E2E8F0] text-[#CBD5E1]'
+                  : 'border-[#E2E8F0] text-[#4B5563] hover:border-[#1565C0] hover:text-[#1565C0]'
+              }`}
+            >
+              <ChevronLeft size={18} aria-hidden="true" />
+            </Link>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+              <Link
+                key={p}
+                href={p === 1 ? '/blog' : `/blog?page=${p}`}
+                aria-label={t('goToPage', { page: p })}
+                aria-current={p === page ? 'page' : undefined}
+                className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium transition-colors ${
+                  p === page
+                    ? 'bg-[#1565C0] text-white'
+                    : 'text-[#4B5563] hover:bg-[#EBF3FF] hover:text-[#1565C0]'
+                }`}
+              >
+                {p}
+              </Link>
+            ))}
+
+            <Link
+              href={`/blog?page=${page + 1}`}
+              aria-label={t('nextPage')}
+              aria-disabled={page >= totalPages}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+                page >= totalPages
+                  ? 'pointer-events-none border-[#E2E8F0] text-[#CBD5E1]'
+                  : 'border-[#E2E8F0] text-[#4B5563] hover:border-[#1565C0] hover:text-[#1565C0]'
+              }`}
+            >
+              <ChevronRight size={18} aria-hidden="true" />
+            </Link>
+          </nav>
+        )}
       </div>
     </section>
   );
