@@ -22,7 +22,7 @@ export async function generateMetadata({
     description: t('description'),
     alternates: {
       canonical: `/${locale}`,
-      languages: { 'pt-BR': '/pt-BR', en: '/en', es: '/es' },
+      languages: { 'x-default': '/pt-BR', 'pt-BR': '/pt-BR', en: '/en', es: '/es' },
     },
   };
 }

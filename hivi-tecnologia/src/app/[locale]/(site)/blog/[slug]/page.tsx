@@ -34,9 +34,13 @@ export async function generateMetadata({
       ...(post.imagem_url ? { images: [{ url: post.imagem_url }] } : {}),
     },
     alternates: {
-      languages: Object.fromEntries(
-        routing.locales.map((l) => [l, `/${l}/blog/${post.slug[l] ?? post.slug['pt-BR']}`]),
-      ),
+      canonical: `/${locale}/blog/${post.slug[locale as Locale] ?? post.slug['pt-BR']}`,
+      languages: {
+        'x-default': `/pt-BR/blog/${post.slug['pt-BR']}`,
+        ...Object.fromEntries(
+          routing.locales.map((l) => [l, `/${l}/blog/${post.slug[l] ?? post.slug['pt-BR']}`]),
+        ),
+      },
     },
   };
 }
