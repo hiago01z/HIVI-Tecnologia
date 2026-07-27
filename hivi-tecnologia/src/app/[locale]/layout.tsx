@@ -68,11 +68,27 @@ export default async function LocaleLayout({
 
   const organizationJsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': ['Organization', 'ProfessionalService'],
     name: 'HIVI Tecnologia',
     url: siteUrl,
     description:
       'Consultoria, gestão de TI, infraestrutura e desenvolvimento web para empresas de todos os portes.',
+    areaServed: { '@type': 'Country', name: 'Brazil' },
+    knowsLanguage: ['pt-BR', 'en', 'es'],
+    serviceType: [
+      'Consultoria de TI',
+      'Gestão de Projetos de TI',
+      'Infraestrutura e Cloud',
+      'Segurança da Informação',
+      'Desenvolvimento Web',
+      'Business Intelligence',
+    ],
+    ...(process.env.NEXT_PUBLIC_EMAIL_CONTATO
+      ? { email: process.env.NEXT_PUBLIC_EMAIL_CONTATO }
+      : {}),
+    ...(process.env.NEXT_PUBLIC_TELEFONE
+      ? { telephone: process.env.NEXT_PUBLIC_TELEFONE }
+      : {}),
     sameAs: [
       process.env.NEXT_PUBLIC_LINKEDIN,
       process.env.NEXT_PUBLIC_INSTAGRAM,

@@ -423,6 +423,17 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 
 ---
 
+### 2026-07-27 — Fase 18: SEO — Canonical URLs e x-default hreflang
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Canonical URL e x-default hreflang
+- `(site)/page.tsx` — `alternates.canonical = /${locale}` + `languages['x-default'] = '/pt-BR'`
+- `blog/[slug]/page.tsx` — `alternates.canonical` aponta para o slug no locale atual; `languages['x-default']` aponta para slug pt-BR; todos os 3 locales mapeados via `routing.locales`
+- Evita conteúdo duplicado no Google quando bots indexam múltiplos locales do mesmo conteúdo
+
+---
+
 ### 2026-07-27 — Fase 17: SEO Avançado, UX Refinado e LGPD (Direito ao Apagamento)
 
 **Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
@@ -594,6 +605,7 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 | 57 | JSON-LD Organization + WebSite no `[locale]/layout.tsx` | ✅ Concluído |
 | 58 | JSON-LD BlogPosting no `blog/[slug]/page.tsx` | ✅ Concluído |
 | 59 | Admin — exclusão de contatos (LGPD direito ao apagamento) | ✅ Concluído |
+| 60 | SEO — canonical + x-default hreflang na home e blog/[slug] | ✅ Concluído |
 
 ---
 
