@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { MobileMenu } from '@/components/layout/MobileMenu';
-import { NAV_LINKS } from '@/constants/navigation';
+import { NavLinks } from '@/components/layout/NavLinks';
 
 function HiviLogo() {
   return (
@@ -25,15 +25,7 @@ export function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex" aria-label="Navegação principal">
-          {NAV_LINKS.map(({ key, href }) => (
-            <Link
-              key={key}
-              href={href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-[#4B5563] transition-colors hover:bg-[#EBF3FF] hover:text-[#1565C0]"
-            >
-              {t(key)}
-            </Link>
-          ))}
+          <NavLinks />
         </nav>
 
         <div className="flex items-center gap-2">

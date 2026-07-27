@@ -3,12 +3,18 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import { NAV_LINKS } from '@/constants/navigation';
+
+function isActive(pathname: string, href: string) {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(href + '/');
+}
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const t = useTranslations();
+  const pathname = usePathname();
 
   return (
     <div className="md:hidden">
@@ -29,16 +35,24 @@ export function MobileMenu() {
           aria-label="Menu de navegação"
         >
           <nav className="flex flex-col p-4 gap-1">
-            {NAV_LINKS.map(({ key, href }) => (
-              <Link
-                key={key}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-4 py-3 text-sm font-medium text-[#0D1117] transition-colors hover:bg-[#EBF3FF] hover:text-[#1565C0]"
-              >
-                {t(key)}
-              </Link>
-            ))}
+            {NAV_LINKS.map(({ key, href }) => {
+              const active = isActive(pathname, href);
+              return (
+                <Link
+                  key={key}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  aria-current={active ? 'page' : undefined}
+                  className={`rounded-md px-4 py-3 text-sm font-medium transition-colors ${
+                    active
+                      ? 'bg-[#EBF3FF] text-[#1565C0]'
+                      : 'text-[#0D1117] hover:bg-[#EBF3FF] hover:text-[#1565C0]'
+                  }`}
+                >
+                  {t(key)}
+                </Link>
+              );
+            })}
             <div className="mt-3 border-t border-[#E2E8F0] pt-3">
               <Link
                 href="/sobre#contato"
