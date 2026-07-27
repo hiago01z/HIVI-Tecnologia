@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
@@ -15,6 +15,10 @@ export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const t = useTranslations();
   const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <div className="md:hidden">

@@ -33,7 +33,7 @@ export default async function AdminLayout({
     <div className="min-h-screen bg-[#F0F7FF]">
       <nav className="sticky top-0 z-40 border-b border-[#162268]/10 bg-[#162268] shadow-sm">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <a href={`/${locale}/admin/dashboard`} className="text-xl font-extrabold tracking-tight text-white">
+          <a href={`/${locale}/admin/dashboard`} aria-label="HIVI Admin — Dashboard" className="text-xl font-extrabold tracking-tight text-white">
             HIVI<span className="text-[#5BA4E5]">.</span>
             <span className="ml-2 text-xs font-normal text-white/60">Admin</span>
           </a>
