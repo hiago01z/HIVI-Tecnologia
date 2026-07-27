@@ -4,9 +4,9 @@ import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { MobileMenu } from '@/components/layout/MobileMenu';
 import { NavLinks } from '@/components/layout/NavLinks';
 
-function HiviLogo() {
+function HiviLogo({ label }: { label: string }) {
   return (
-    <Link href="/" aria-label="HIVI Tecnologia — Página Inicial">
+    <Link href="/" aria-label={label}>
       <span className="text-2xl font-extrabold tracking-tight">
         <span className="text-[#162268]">HIVI</span>
         <span className="text-[#1565C0]">.</span>
@@ -21,10 +21,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 h-16 w-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
-        <HiviLogo />
+        <HiviLogo label={t('common.homeLink')} />
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Navegação principal">
+        <nav className="hidden items-center gap-1 md:flex" aria-label={t('common.mainNav')}>
           <NavLinks />
         </nav>
 

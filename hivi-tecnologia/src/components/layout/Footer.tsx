@@ -54,7 +54,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#162268] text-white" aria-label="Rodapé">
+    <footer className="bg-[#162268] text-white" aria-label={t('common.footer')}>
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Col 1 — Brand */}

@@ -13,7 +13,7 @@ export function StatsSection() {
   const t = useTranslations();
 
   return (
-    <section className="bg-[#162268] py-20" aria-label="Estatísticas">
+    <section className="bg-[#162268] py-20" aria-label={t('common.statsSection')}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
           {STATS.map(({ valueKey, labelKey, Icon }, index) => (

@@ -316,6 +316,14 @@
     "es": "Español"
   },
   "common": {
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "homeLink": "HIVI Tecnologia — Home",
+    "mainNav": "Main navigation",
+    "mobileNav": "Navigation menu",
+    "footer": "Footer",
+    "statsSection": "Statistics",
+    "whatsappLabel": "Chat on WhatsApp",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   }
 }

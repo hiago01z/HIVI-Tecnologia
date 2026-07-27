@@ -316,6 +316,14 @@
     "es": "Español"
   },
   "common": {
-    "backToTop": "Voltar ao topo"
+    "backToTop": "Voltar ao topo",
+    "homeLink": "HIVI Tecnologia — Página Inicial",
+    "mainNav": "Navegação principal",
+    "mobileNav": "Menu de navegação",
+    "footer": "Rodapé",
+    "statsSection": "Estatísticas",
+    "whatsappLabel": "Falar pelo WhatsApp",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu"
   }
 }

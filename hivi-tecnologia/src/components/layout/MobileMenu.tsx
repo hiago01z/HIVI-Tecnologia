@@ -24,7 +24,7 @@ export function MobileMenu() {
     <div className="md:hidden">
       <button
         type="button"
-        aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+        aria-label={open ? t('common.closeMenu') : t('common.openMenu')}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="rounded-md p-2 text-[#4B5563] transition-colors hover:bg-[#EBF3FF] hover:text-[#1565C0] focus-visible:outline-2 focus-visible:outline-[#1565C0]"
@@ -36,7 +36,7 @@ export function MobileMenu() {
         <div
           className="absolute left-0 top-full z-50 w-full border-t border-[#E2E8F0] bg-white shadow-lg"
           role="dialog"
-          aria-label="Menu de navegação"
+          aria-label={t('common.mobileNav')}
         >
           <nav className="flex flex-col p-4 gap-1">
             {NAV_LINKS.map(({ key, href }) => {
