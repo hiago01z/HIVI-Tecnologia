@@ -423,6 +423,35 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 
 ---
 
+### 2026-07-27 — Fase 17: SEO Avançado, UX Refinado e LGPD (Direito ao Apagamento)
+
+**Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
+
+#### ✅ Open Graph Image Dinâmica
+- `src/app/[locale]/opengraph-image.tsx` — gerada via `next/og` ImageResponse (1200×630)
+- Design: gradiente marinho→azul, logo "HIVI.", tagline e subtítulo de serviços
+- Gerada estaticamente no build, herdada por todas as rotas sob `[locale]`
+
+#### ✅ JSON-LD Structured Data (Schema.org)
+- `[locale]/layout.tsx` — `Organization` (name, url, description, sameAs social links filtrados por env var) + `WebSite`
+- `blog/[slug]/page.tsx` — `BlogPosting` (headline, description, datePublished, dateModified, author, publisher, image, url)
+- Sanitização XSS: `.replace(/</g, '\\u003c')` em todos os JSON-LD (conforme docs Next.js 16)
+
+#### ✅ UX — Navegação e Acessibilidade
+- `MobileMenu.tsx` — `useEffect([pathname])` fecha menu automaticamente ao navegar (incluindo botão voltar do browser)
+- `admin/layout.tsx` — logo admin agora tem `aria-label="HIVI Admin — Dashboard"`
+- `globals.css` — `scroll-behavior: smooth` com `@media (prefers-reduced-motion: no-preference)`
+- `BackToTop.tsx` — botão flutuante, aparece após 400px de scroll, `aria-label` via `t('common.backToTop')`
+- `common.backToTop` adicionado em pt-BR, en, es (Regra 9)
+
+#### ✅ LGPD — Direito ao Apagamento
+- `admin/contatos/actions.ts` — `deleteContactAction` server action com auth check
+- `admin/contatos/DeleteContactButton.tsx` — client component com confirmação
+- `admin/contatos/page.tsx` — botão excluir em cada card de contato
+- `admin.contatos.delete` e `confirmDelete` traduzidos nos 3 locales
+
+---
+
 ### 2026-07-27 — Fase 16: UX — Link Ativo na Navegação e Loading States Completos
 
 **Responsável:** Claude Code (Agente IA) | **Branch:** `claude/hivi-projeto-setup-wm45y3`
@@ -558,6 +587,13 @@ Hero (#F0F7FF→#C8DFFF) → Clients (#FFF) → Stats (#162268) → Services (#F
 | 50 | Admin — link ativo na navbar (AdminNavLinks client) | ✅ Concluído |
 | 51 | Loading skeletons — `servicos/loading.tsx` e `sobre/loading.tsx` | ✅ Concluído |
 | 52 | Loading skeletons — `posts/novo/loading.tsx` e `posts/[id]/loading.tsx` | ✅ Concluído |
+| 53 | Open Graph image dinâmica (1200×630, branded, `next/og`) | ✅ Concluído |
+| 54 | MobileMenu — fecha automaticamente ao navegar (`useEffect` + `usePathname`) | ✅ Concluído |
+| 55 | Scroll suave (`scroll-behavior: smooth`) com `prefers-reduced-motion` | ✅ Concluído |
+| 56 | Botão "Voltar ao Topo" flutuante — traduzido nos 3 locales | ✅ Concluído |
+| 57 | JSON-LD Organization + WebSite no `[locale]/layout.tsx` | ✅ Concluído |
+| 58 | JSON-LD BlogPosting no `blog/[slug]/page.tsx` | ✅ Concluído |
+| 59 | Admin — exclusão de contatos (LGPD direito ao apagamento) | ✅ Concluído |
 
 ---
 
