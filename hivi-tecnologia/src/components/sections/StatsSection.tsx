@@ -1,11 +1,10 @@
 import { useTranslations } from 'next-intl';
-import { Users, FolderCheck, Activity, Headphones } from 'lucide-react';
+import { Activity, Headphones, Timer } from 'lucide-react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
 const STATS = [
-  { valueKey: 'stats.clientsValue', labelKey: 'stats.clients', Icon: Users },
-  { valueKey: 'stats.projectsValue', labelKey: 'stats.projects', Icon: FolderCheck },
   { valueKey: 'stats.uptimeValue', labelKey: 'stats.uptime', Icon: Activity },
+  { valueKey: 'stats.responseValue', labelKey: 'stats.response', Icon: Timer },
   { valueKey: 'stats.supportValue', labelKey: 'stats.support', Icon: Headphones },
 ] as const;
 
@@ -14,8 +13,8 @@ export function StatsSection() {
 
   return (
     <section className="bg-[#162268] py-20" aria-label={t('common.statsSection')}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {STATS.map(({ valueKey, labelKey, Icon }, index) => (
             <AnimateOnScroll key={valueKey} delay={index * 100}>
               <div className="flex flex-col items-center rounded-xl border border-white/15 bg-white/7 p-8 text-center">

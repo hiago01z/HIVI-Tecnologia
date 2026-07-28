@@ -29,13 +29,11 @@
     }
   },
   "stats": {
-    "clients": "Clientes Atendidos",
-    "projects": "Projetos Entregues",
     "uptime": "Disponibilidade",
+    "response": "Tempo de Resposta",
     "support": "Suporte Técnico",
-    "clientsValue": "150+",
-    "projectsValue": "300+",
-    "uptimeValue": "99.9%",
+    "uptimeValue": "99,9%",
+    "responseValue": "< 4h",
     "supportValue": "24/7"
   },
   "services": {
@@ -350,6 +348,25 @@
     "pt-BR": "Português",
     "en": "English",
     "es": "Español"
+  },
+  "solutions": {
+    "sectionTitle": "Qual é o desafio da sua empresa?",
+    "sectionSubtitle": "Identifique o problema — a HIVI tem a solução. Cada desafio de TI tem um serviço especializado esperando por você.",
+    "infraChallenge": "Infraestrutura lenta ou instável?",
+    "infraSolution": "Arquitetamos e gerenciamos infraestrutura robusta em cloud ou on-premise, garantindo alta disponibilidade e desempenho.",
+    "securityChallenge": "Dados e sistemas vulneráveis?",
+    "securitySolution": "Identificamos vulnerabilidades, implementamos políticas de segurança e monitoramos continuamente para proteger seu ambiente.",
+    "automationChallenge": "Processos manuais consumindo tempo?",
+    "automationSolution": "Automatizamos fluxos de trabalho repetitivos, liberando sua equipe para focar no que realmente importa para o negócio.",
+    "devChallenge": "Precisa de um site, sistema ou app?",
+    "devSolution": "Desenvolvemos soluções digitais modernas, responsivas e de alto desempenho, do conceito ao deploy em produção.",
+    "consultingChallenge": "TI sem direção estratégica?",
+    "consultingSolution": "Nossa consultoria especializada alinha tecnologia aos objetivos do negócio, com planejamento, diagnóstico e roadmap claro.",
+    "erpChallenge": "Gestão empresarial descentralizada?",
+    "erpSolution": "Implementamos e customizamos sistemas ERP para integrar processos, reduzir retrabalho e melhorar a tomada de decisão.",
+    "ctaHeadline": "A HIVI tem a solução para cada desafio de TI",
+    "ctaSubtext": "Conheça o portfólio completo de serviços e descubra como podemos transformar a tecnologia da sua empresa.",
+    "ctaButton": "Ver todos os serviços"
   },
   "common": {
     "backToTop": "Voltar ao topo",

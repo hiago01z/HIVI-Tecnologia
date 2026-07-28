@@ -29,13 +29,11 @@
     }
   },
   "stats": {
-    "clients": "Clients Served",
-    "projects": "Projects Delivered",
     "uptime": "Availability",
+    "response": "Response Time",
     "support": "Technical Support",
-    "clientsValue": "150+",
-    "projectsValue": "300+",
     "uptimeValue": "99.9%",
+    "responseValue": "< 4h",
     "supportValue": "24/7"
   },
   "services": {
@@ -350,6 +348,25 @@
     "pt-BR": "Português",
     "en": "English",
     "es": "Español"
+  },
+  "solutions": {
+    "sectionTitle": "What's your company's challenge?",
+    "sectionSubtitle": "Identify the problem — HIVI has the solution. Every IT challenge has a specialized service waiting for you.",
+    "infraChallenge": "Slow or unstable infrastructure?",
+    "infraSolution": "We architect and manage robust cloud or on-premise infrastructure, ensuring high availability and performance.",
+    "securityChallenge": "Vulnerable data and systems?",
+    "securitySolution": "We identify vulnerabilities, implement security policies and continuously monitor to protect your environment.",
+    "automationChallenge": "Manual processes wasting time?",
+    "automationSolution": "We automate repetitive workflows, freeing your team to focus on what truly matters for the business.",
+    "devChallenge": "Need a website, system or app?",
+    "devSolution": "We build modern, responsive and high-performance digital solutions, from concept to production deployment.",
+    "consultingChallenge": "IT without strategic direction?",
+    "consultingSolution": "Our specialized consulting aligns technology with business goals, with clear planning, diagnostics and a roadmap.",
+    "erpChallenge": "Decentralized business management?",
+    "erpSolution": "We implement and customize ERP systems to integrate processes, reduce rework and improve decision-making.",
+    "ctaHeadline": "HIVI has the solution for every IT challenge",
+    "ctaSubtext": "Explore our complete service portfolio and discover how we can transform your company's technology.",
+    "ctaButton": "View all services"
   },
   "common": {
     "backToTop": "Back to top",
