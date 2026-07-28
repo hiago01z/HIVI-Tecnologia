@@ -40,7 +40,8 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      return NextResponse.json({ error: 'Erro ao salvar' }, { status: 500 });
+      console.error('[/api/contato] supabase insert error:', error.message, error.code);
+      return NextResponse.json({ error: 'Erro ao salvar', detail: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });
