@@ -33,6 +33,7 @@ function ContactForm() {
   const t = useTranslations('contact.form');
   const locale = useLocale();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorDetail, setErrorDetail] = useState<string | null>(null);
   const schema = useContatoSchema();
 
   const {
@@ -55,13 +56,19 @@ function ContactForm() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        console.error('[contato] API error:', body);
-        throw new Error(body.detail || body.error || 'API error');
+        const msg = body.detail || body.error || `HTTP ${res.status}`;
+        console.error('[contato] API error:', msg, body);
+        setErrorDetail(msg);
+        setStatus('error');
+        return;
       }
       setStatus('success');
+      setErrorDetail(null);
       reset();
       fireEvent({ tipo: 'click_contato', pagina: window.location.pathname, locale });
-    } catch {
+    } catch (err) {
+      console.error('[contato] network error:', err);
+      setErrorDetail(err instanceof Error ? err.message : 'Erro de rede');
       setStatus('error');
     }
   };
@@ -196,9 +203,12 @@ function ContactForm() {
       </div>
 
       {status === 'error' && (
-        <p role="alert" className="mt-4 text-sm text-[#EF4444]">
-          {t('errorMessage')}
-        </p>
+        <div role="alert" className="mt-4 rounded-lg bg-[#FEF2F2] p-3 text-sm text-[#EF4444]">
+          <p>{t('errorMessage')}</p>
+          {errorDetail && (
+            <p className="mt-1 font-mono text-xs opacity-80">{errorDetail}</p>
+          )}
+        </div>
       )}
 
       <button
