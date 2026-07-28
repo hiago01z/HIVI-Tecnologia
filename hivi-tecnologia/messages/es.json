@@ -19,13 +19,14 @@
     "check3": "Soporte técnico 24/7 para su operación",
     "check4": "Entrega a tiempo y dentro del presupuesto",
     "mockup": {
-      "statClients": "Clientes",
+      "serviceCommitments": "Compromisos de Servicio",
       "statUptime": "Uptime",
-      "statProjects": "Proyectos",
       "statSupport": "Soporte",
-      "chartLabel": "Rendimiento",
-      "badgeDelivered": "✓ Proyecto entregado",
-      "badgeProductivity": "↑ 34% productividad"
+      "statResponse": "Respuesta",
+      "growthChart": "Crecimiento del Negocio",
+      "satisfaction": "Enfoque total en la satisfacción del cliente",
+      "badgeSecurity": "Operación segura",
+      "badgeGrowth": "Crecimiento sostenible"
     }
   },
   "stats": {

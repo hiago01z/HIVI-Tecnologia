@@ -120,8 +120,8 @@ function AutorAvatar({ autor }: { autor: PostAutor }) {
 
 function PostContent({ post, locale }: { post: BlogPost; locale: Locale }) {
   const t = useTranslations('blog');
-  const titulo = post.titulo[locale] ?? post.titulo['pt-BR'];
-  const conteudo = post.conteudo[locale] ?? post.conteudo['pt-BR'];
+  const titulo = post.titulo[locale] || post.titulo['pt-BR'] || '';
+  const conteudo = post.conteudo[locale] || post.conteudo['pt-BR'] || '';
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
@@ -135,16 +135,13 @@ function PostContent({ post, locale }: { post: BlogPost; locale: Locale }) {
 
       <header className="mb-10">
         {post.imagem_url && (
-          <div className="relative mb-8 overflow-hidden rounded-2xl aspect-video">
-            <Image
-              src={post.imagem_url}
-              alt={titulo}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 768px"
-              className="object-cover"
-            />
-          </div>
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={post.imagem_url}
+            alt={titulo}
+            className="mb-8 w-full rounded-2xl object-cover aspect-video"
+            loading="eager"
+          />
         )}
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#94A3B8]">

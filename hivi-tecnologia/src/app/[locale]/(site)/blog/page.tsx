@@ -5,7 +5,6 @@ import { Link } from '@/i18n/navigation';
 import { getPublishedPosts, searchPosts, POSTS_PER_PAGE } from '@/lib/blog';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { CalendarDays, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { BlogPostPreview } from '@/types/blog';
 import { Suspense } from 'react';
@@ -109,15 +108,13 @@ function BlogCard({ post, locale }: { post: BlogPostPreview; locale: string }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition-shadow hover:shadow-md">
       {post.imagem_url ? (
-        <div className="relative aspect-video overflow-hidden bg-[#EBF3FF]">
-          <Image
-            src={post.imagem_url}
-            alt={post.titulo}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        </div>
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={post.imagem_url}
+          alt={post.titulo}
+          className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+        />
       ) : (
         <div className="aspect-video bg-gradient-to-br from-[#EBF3FF] to-[#C8DFFF]" aria-hidden="true" />
       )}
