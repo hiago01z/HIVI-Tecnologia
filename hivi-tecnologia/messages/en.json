@@ -155,7 +155,12 @@
     "prevPage": "Previous page",
     "nextPage": "Next page",
     "goToPage": "Go to page {page}",
-    "writtenBy": "Written by"
+    "writtenBy": "Written by",
+    "searchPlaceholder": "Search articles...",
+    "searchLabel": "Search the blog",
+    "searchClear": "Clear search",
+    "noSearchResults": "No results for \"{query}\".",
+    "searchResultsCount": "{count, plural, one {# result} other {# results}} for \"{query}\""
   },
   "footer": {
     "description": "Strategic technology solutions for companies seeking growth and innovation.",

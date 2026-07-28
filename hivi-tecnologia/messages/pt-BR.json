@@ -155,7 +155,12 @@
     "prevPage": "Página anterior",
     "nextPage": "Próxima página",
     "goToPage": "Ir para a página {page}",
-    "writtenBy": "Feito por"
+    "writtenBy": "Feito por",
+    "searchPlaceholder": "Buscar artigos...",
+    "searchLabel": "Buscar no blog",
+    "searchClear": "Limpar busca",
+    "noSearchResults": "Nenhum resultado para \"{query}\".",
+    "searchResultsCount": "{count, plural, one {# resultado} other {# resultados}} para \"{query}\""
   },
   "footer": {
     "description": "Soluções tecnológicas estratégicas para empresas que buscam crescimento e inovação.",

@@ -2,12 +2,14 @@ import { setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getPublishedPosts, POSTS_PER_PAGE } from '@/lib/blog';
+import { getPublishedPosts, searchPosts, POSTS_PER_PAGE } from '@/lib/blog';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { CalendarDays, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { BlogPostPreview } from '@/types/blog';
+import { Suspense } from 'react';
+import { BlogSearch } from '@/components/blog/BlogSearch';
 
 export async function generateMetadata({
   params,
@@ -27,25 +29,51 @@ export default async function BlogPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; q?: string }>;
 }) {
   const { locale } = await params;
-  const { page: pageParam } = await searchParams;
+  const { page: pageParam, q } = await searchParams;
   setRequestLocale(locale);
 
-  const page = Math.max(1, parseInt(pageParam ?? '1', 10) || 1);
-  const { posts, total } = await getPublishedPosts(locale as Locale, page);
-  const totalPages = Math.ceil(total / POSTS_PER_PAGE);
+  const query = (q ?? '').trim();
+  const isSearching = query.length > 0;
+
+  let posts: BlogPostPreview[];
+  let total: number;
+  let totalPages: number;
+  let page: number;
+
+  if (isSearching) {
+    const results = await searchPosts(locale as Locale, query);
+    posts = results;
+    total = results.length;
+    totalPages = 1;
+    page = 1;
+  } else {
+    page = Math.max(1, parseInt(pageParam ?? '1', 10) || 1);
+    const result = await getPublishedPosts(locale as Locale, page);
+    posts = result.posts;
+    total = result.total;
+    totalPages = Math.ceil(total / POSTS_PER_PAGE);
+  }
 
   return (
     <>
-      <BlogHero />
-      <BlogGrid posts={posts} locale={locale} page={page} totalPages={totalPages} />
+      <BlogHero initialQuery={query} />
+      <BlogGrid
+        posts={posts}
+        locale={locale}
+        page={page}
+        totalPages={totalPages}
+        isSearching={isSearching}
+        query={query}
+        total={total}
+      />
     </>
   );
 }
 
-function BlogHero() {
+function BlogHero({ initialQuery }: { initialQuery: string }) {
   const t = useTranslations('blog');
   return (
     <section
@@ -60,6 +88,9 @@ function BlogHero() {
         <p className="mx-auto mt-6 max-w-xl text-lg text-[#4B5563]">
           {t('sectionSubtitle')}
         </p>
+        <Suspense>
+          <BlogSearch initialQuery={initialQuery} />
+        </Suspense>
       </div>
     </section>
   );
@@ -123,19 +154,27 @@ function BlogGrid({
   locale,
   page,
   totalPages,
+  isSearching,
+  query,
+  total,
 }: {
   posts: BlogPostPreview[];
   locale: string;
   page: number;
   totalPages: number;
+  isSearching: boolean;
+  query: string;
+  total: number;
 }) {
   const t = useTranslations('blog');
 
-  if (posts.length === 0 && page === 1) {
+  if (posts.length === 0) {
     return (
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#4B5563]">{t('noPostsFound')}</p>
+          <p className="text-[#4B5563]">
+            {isSearching ? t('noSearchResults', { query }) : t('noPostsFound')}
+          </p>
         </div>
       </section>
     );
@@ -144,13 +183,19 @@ function BlogGrid({
   return (
     <section className="py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {isSearching && (
+          <p className="mb-8 text-sm text-[#4B5563]">
+            {t('searchResultsCount', { count: total, query })}
+          </p>
+        )}
+
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <BlogCard key={post.id} post={post} locale={locale} />
           ))}
         </div>
 
-        {totalPages > 1 && (
+        {!isSearching && totalPages > 1 && (
           <nav
             className="mt-16 flex items-center justify-center gap-2"
             aria-label={t('pagination')}
