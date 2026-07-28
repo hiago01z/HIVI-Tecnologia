@@ -27,25 +27,15 @@ export async function createClient() {
 }
 
 export async function createAdminClient() {
-  const cookieStore = await cookies();
-
+  // Cookies devem ser ignorados: o service role key precisa ser usado como
+  // Authorization diretamente, sem sobrescrita pelo JWT do usuário logado.
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
       cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options),
-            );
-          } catch {
-            // Server Component — cookies can only be set in middleware
-          }
-        },
+        getAll() { return []; },
+        setAll() {},
       },
     },
   );
