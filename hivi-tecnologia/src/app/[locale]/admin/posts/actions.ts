@@ -107,9 +107,6 @@ export async function savePostAction(
 
     if (dbError) return { error: dbError };
 
-    revalidatePath(`/${locale}/admin/posts`);
-    revalidatePath(`/${locale}/blog`);
-
     return { ok: true, locale };
   } catch (err) {
     // Captura qualquer exceção inesperada que escaparia silenciosamente

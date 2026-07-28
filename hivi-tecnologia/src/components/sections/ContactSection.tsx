@@ -53,7 +53,11 @@ function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error();
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        console.error('[contato] API error:', body);
+        throw new Error(body.detail || body.error || 'API error');
+      }
       setStatus('success');
       reset();
       fireEvent({ tipo: 'click_contato', pagina: window.location.pathname, locale });

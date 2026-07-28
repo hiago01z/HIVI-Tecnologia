@@ -68,18 +68,20 @@ export function proxy(request: NextRequest): NextResponse {
   }
 
   if (isAdminRoute(pathname)) {
-    // Server Actions chegam como POST — elas autenticam internamente via requireAuth().
-    // O proxy NÃO deve redirecionar POSTs: o redirect seria tratado pelo React como
-    // resposta inválida, zerando o estado silenciosamente sem mostrar erro algum.
-    // Ref: Next.js docs — "Always verify authentication inside each Server Function
-    // rather than relying on Proxy alone."
-    if (request.method !== 'POST') {
-      const authenticated = isAuthenticated(request);
-      if (!authenticated) {
-        const locale = pathname.split('/')[1] ?? routing.defaultLocale;
-        const loginUrl = new URL(`/${locale}/admin`, request.url);
-        return NextResponse.redirect(loginUrl);
-      }
+    if (request.method === 'POST') {
+      // Server Actions são POST para a própria página — autenticam via requireAuth() internamente.
+      // Bypassar intlMiddleware para evitar qualquer interferência com a resposta da action.
+      const response = NextResponse.next();
+      response.headers.set('X-Frame-Options', 'DENY');
+      response.headers.set('X-Content-Type-Options', 'nosniff');
+      return response;
+    }
+
+    const authenticated = isAuthenticated(request);
+    if (!authenticated) {
+      const locale = pathname.split('/')[1] ?? routing.defaultLocale;
+      const loginUrl = new URL(`/${locale}/admin`, request.url);
+      return NextResponse.redirect(loginUrl);
     }
   }
 
