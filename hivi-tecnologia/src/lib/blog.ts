@@ -48,7 +48,7 @@ export async function getPostBySlug(locale: Locale, slug: string): Promise<BlogP
       .from('blog_posts')
       .select('*')
       .eq('publicado', true)
-      .filter(`slug->>'${locale}'`, 'eq', slug)
+      .contains('slug', { [locale]: slug })
       .single();
 
     if (error || !data) return null;
