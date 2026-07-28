@@ -288,7 +288,10 @@
       "save": "Salvar perfil",
       "saving": "Salvando...",
       "success": "Perfil atualizado com sucesso!",
-      "error": "Erro ao salvar perfil"
+      "error": "Erro ao salvar perfil",
+      "changePhoto": "Alterar foto",
+      "uploading": "Enviando...",
+      "photoFormats": "JPG, PNG, WebP ou GIF · máx. 2 MB"
     }
   },
   "clients": {

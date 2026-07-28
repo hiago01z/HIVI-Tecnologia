@@ -288,7 +288,10 @@
       "save": "Save profile",
       "saving": "Saving...",
       "success": "Profile updated successfully!",
-      "error": "Error saving profile"
+      "error": "Error saving profile",
+      "changePhoto": "Change photo",
+      "uploading": "Uploading...",
+      "photoFormats": "JPG, PNG, WebP or GIF · max 2 MB"
     }
   },
   "clients": {
