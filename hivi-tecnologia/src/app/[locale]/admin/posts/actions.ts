@@ -47,7 +47,11 @@ export async function savePostAction(
   _prevState: { error: string } | null,
   formData: FormData,
 ): Promise<{ error: string } | null> {
-  await requireAuth();
+  try {
+    await requireAuth();
+  } catch {
+    return { error: 'Sessão expirada. Faça login novamente.' };
+  }
 
   const id = formData.get('id') as string | null;
   const locale = (formData.get('locale') as string) || 'pt-BR';
@@ -78,22 +82,26 @@ export async function savePostAction(
     atualizado_em: new Date().toISOString(),
   };
 
-  const admin = await createAdminClient();
+  let dbError: string | null = null;
 
-  if (id) {
-    const { error } = await admin.from('blog_posts').update(payload).eq('id', id);
-    if (error) return { error: error.message };
-    revalidatePath(`/${locale}/admin/posts`);
-    revalidatePath(`/${locale}/blog`);
-    redirect(`/${locale}/admin/posts`);
-  } else {
-    const { error } = await admin
-      .from('blog_posts')
-      .insert({ ...payload, criado_em: new Date().toISOString() });
-    if (error) return { error: error.message };
-    revalidatePath(`/${locale}/admin/posts`);
-    revalidatePath(`/${locale}/blog`);
-    redirect(`/${locale}/admin/posts`);
+  try {
+    const admin = await createAdminClient();
+    if (id) {
+      const { error } = await admin.from('blog_posts').update(payload).eq('id', id);
+      if (error) dbError = error.message;
+    } else {
+      const { error } = await admin
+        .from('blog_posts')
+        .insert({ ...payload, criado_em: new Date().toISOString() });
+      if (error) dbError = error.message;
+    }
+  } catch (err) {
+    dbError = err instanceof Error ? err.message : 'Erro desconhecido ao salvar.';
   }
-  return null;
+
+  if (dbError) return { error: dbError };
+
+  revalidatePath(`/${locale}/admin/posts`);
+  revalidatePath(`/${locale}/blog`);
+  redirect(`/${locale}/admin/posts`);
 }

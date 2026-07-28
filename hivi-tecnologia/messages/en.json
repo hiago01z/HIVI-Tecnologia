@@ -251,7 +251,8 @@
       "localeTab": "Language",
       "save": "Save",
       "saveAndPublish": "Save & Publish",
-      "saving": "Saving..."
+      "saving": "Saving...",
+      "errorPrefix": "Error:"
     },
     "contatos": {
       "title": "Received Contacts",

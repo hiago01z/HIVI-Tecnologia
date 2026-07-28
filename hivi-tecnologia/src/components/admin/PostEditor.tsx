@@ -70,7 +70,7 @@ export function PostEditor({ post }: Props) {
   );
   const [imageUrl, setImageUrl] = useState(post?.imagem_url ?? '');
 
-  const [, formAction] = useActionState(savePostAction, null);
+  const [state, formAction] = useActionState(savePostAction, null);
 
   const handleTitleChange = (l: Locale, value: string) => {
     setTitles((prev) => ({ ...prev, [l]: value }));
@@ -177,6 +177,12 @@ export function PostEditor({ post }: Props) {
           <img src={imageUrl} alt="" className="mt-3 h-40 w-full rounded-lg object-cover" />
         )}
       </div>
+
+      {state?.error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <strong>{t('errorPrefix')}</strong> {state.error}
+        </div>
+      )}
 
       <div className="flex justify-end">
         <SaveButtons />

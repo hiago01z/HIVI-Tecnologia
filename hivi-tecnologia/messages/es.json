@@ -251,7 +251,8 @@
       "localeTab": "Idioma",
       "save": "Guardar",
       "saveAndPublish": "Guardar y Publicar",
-      "saving": "Guardando..."
+      "saving": "Guardando...",
+      "errorPrefix": "Error:"
     },
     "contatos": {
       "title": "Contactos Recibidos",
