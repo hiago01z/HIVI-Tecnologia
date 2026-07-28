@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useState, useActionState, useEffect } from 'react';
+import { useState, useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { savePostAction } from '@/app/[locale]/admin/posts/actions';
 import type { BlogPost } from '@/types/blog';
@@ -72,13 +72,20 @@ export function PostEditor({ post }: Props) {
   const [imageUrl, setImageUrl] = useState(post?.imagem_url ?? '');
 
   const [state, formAction] = useActionState(savePostAction, null);
+  const [toast, setToast] = useState<string | null>(null);
+  const navigatingRef = useRef(false);
 
-  // router.push() inside useActionState is unreliable in Next.js 16 — use hard navigation.
   useEffect(() => {
-    if (state && 'ok' in state && state.ok) {
-      window.location.href = `/${state.locale}/admin/posts`;
+    if (!state) return;
+    if ('ok' in state && state.ok && !navigatingRef.current) {
+      navigatingRef.current = true;
+      setToast('Salvo com sucesso! Redirecionando...');
+      setTimeout(() => {
+        window.location.assign(`/${state.locale}/admin/posts`);
+      }, 800);
     }
-    if (state && 'error' in state) {
+    if ('error' in state) {
+      setToast(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [state]);
@@ -96,15 +103,26 @@ export function PostEditor({ post }: Props) {
   const hasError = state && 'error' in state;
 
   return (
+    <>
+      {/* Banner de erro fixo no topo da viewport — sempre visível */}
+      {hasError && (
+        <div className="fixed left-0 right-0 top-0 z-[9999] flex items-center gap-3 bg-red-600 px-6 py-4 text-white shadow-lg">
+          <strong className="shrink-0">{t('errorPrefix')}</strong>
+          <span className="flex-1 text-sm">{state.error}</span>
+          <button type="button" onClick={() => window.location.reload()} className="shrink-0 rounded bg-red-700 px-3 py-1 text-xs hover:bg-red-800">
+            Fechar
+          </button>
+        </div>
+      )}
+      {/* Toast de sucesso */}
+      {toast && (
+        <div className="fixed left-0 right-0 top-0 z-[9999] flex items-center gap-3 bg-green-600 px-6 py-4 text-white shadow-lg">
+          <span className="text-sm font-medium">{toast}</span>
+        </div>
+      )}
     <form action={formAction} noValidate className="space-y-8">
       {post && <input type="hidden" name="id" value={post.id} />}
       <input type="hidden" name="locale" value={locale} />
-
-      {hasError && (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          <strong>{t('errorPrefix')}</strong> {state.error}
-        </div>
-      )}
 
       {/* Hidden fields for all locales */}
       {LOCALES.map((l) => (
@@ -201,5 +219,6 @@ export function PostEditor({ post }: Props) {
         <SaveButtons />
       </div>
     </form>
+    </>
   );
 }
