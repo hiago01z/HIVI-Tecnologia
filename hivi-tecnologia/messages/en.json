@@ -100,7 +100,13 @@
     "vision": "Vision",
     "visionText": "To be the reference technology partner for companies seeking innovation, efficiency and digital security in Brazil.",
     "values": "Values",
-    "valuesItems": ["Technical excellence", "Ethics and transparency", "Continuous innovation", "Customer focus", "Responsibility"]
+    "valuesItems": [
+      "Technical excellence",
+      "Ethics and transparency",
+      "Continuous innovation",
+      "Customer focus",
+      "Responsibility"
+    ]
   },
   "contact": {
     "sectionTitle": "Contact Us",
@@ -148,7 +154,8 @@
     "pagination": "Pagination",
     "prevPage": "Previous page",
     "nextPage": "Next page",
-    "goToPage": "Go to page {page}"
+    "goToPage": "Go to page {page}",
+    "writtenBy": "By"
   },
   "footer": {
     "description": "Strategic technology solutions for companies seeking growth and innovation.",
@@ -267,7 +274,21 @@
       "dashboard": "Dashboard",
       "posts": "Posts",
       "contatos": "Contacts",
-      "logout": "Sign Out"
+      "logout": "Sign Out",
+      "perfil": "Profile"
+    },
+    "profile": {
+      "title": "My Profile",
+      "nameLabel": "Display name",
+      "namePlaceholder": "e.g. John Smith",
+      "photoLabel": "Profile photo URL",
+      "photoHint": "Paste an image link (recommended: square, min. 200×200 px)",
+      "avatarHint": "Avatar preview",
+      "noName": "No name",
+      "save": "Save profile",
+      "saving": "Saving...",
+      "success": "Profile updated successfully!",
+      "error": "Error saving profile"
     }
   },
   "clients": {

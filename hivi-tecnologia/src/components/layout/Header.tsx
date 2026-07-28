@@ -9,7 +9,7 @@ function HiviLogo({ label }: { label: string }) {
     <Link href="/" aria-label={label}>
       <span className="text-2xl font-extrabold tracking-tight">
         <span className="text-[#162268]">HIVI</span>
-        <span className="text-[#1565C0]">.</span>
+        <span className="text-[#1565C0]"> Tecnologia</span>
       </span>
     </Link>
   );

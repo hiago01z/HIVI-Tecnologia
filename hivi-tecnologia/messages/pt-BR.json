@@ -100,7 +100,13 @@
     "vision": "Visão",
     "visionText": "Ser a parceira de tecnologia de referência para empresas que buscam inovação, eficiência e segurança digital no Brasil.",
     "values": "Valores",
-    "valuesItems": ["Excelência técnica", "Ética e transparência", "Inovação contínua", "Foco no cliente", "Responsabilidade"]
+    "valuesItems": [
+      "Excelência técnica",
+      "Ética e transparência",
+      "Inovação contínua",
+      "Foco no cliente",
+      "Responsabilidade"
+    ]
   },
   "contact": {
     "sectionTitle": "Entre em Contato",
@@ -148,7 +154,8 @@
     "pagination": "Paginação",
     "prevPage": "Página anterior",
     "nextPage": "Próxima página",
-    "goToPage": "Ir para a página {page}"
+    "goToPage": "Ir para a página {page}",
+    "writtenBy": "Feito por"
   },
   "footer": {
     "description": "Soluções tecnológicas estratégicas para empresas que buscam crescimento e inovação.",
@@ -267,7 +274,21 @@
       "dashboard": "Dashboard",
       "posts": "Posts",
       "contatos": "Contatos",
-      "logout": "Sair"
+      "logout": "Sair",
+      "perfil": "Perfil"
+    },
+    "profile": {
+      "title": "Meu Perfil",
+      "nameLabel": "Nome de exibição",
+      "namePlaceholder": "Ex: João Silva",
+      "photoLabel": "URL da foto de perfil",
+      "photoHint": "Cole o link de uma imagem (recomendado: quadrada, mín. 200×200 px)",
+      "avatarHint": "Pré-visualização do avatar",
+      "noName": "Sem nome",
+      "save": "Salvar perfil",
+      "saving": "Salvando...",
+      "success": "Perfil atualizado com sucesso!",
+      "error": "Erro ao salvar perfil"
     }
   },
   "clients": {

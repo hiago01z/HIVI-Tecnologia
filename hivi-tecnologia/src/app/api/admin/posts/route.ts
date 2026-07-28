@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     } else {
       const { error } = await admin
         .from('blog_posts')
-        .insert({ ...payload, criado_em: new Date().toISOString() });
+        .insert({ ...payload, autor_id: authData.user.id, criado_em: new Date().toISOString() });
       if (error) dbError = error.message;
     }
 

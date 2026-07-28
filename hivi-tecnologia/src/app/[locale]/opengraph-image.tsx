@@ -73,7 +73,7 @@ export default function Image() {
               color: '#5BA4E5',
             }}
           >
-            .
+            {' '}Tecnologia
           </span>
         </div>
 

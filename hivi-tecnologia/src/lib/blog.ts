@@ -1,8 +1,27 @@
 import { createClient } from '@/lib/supabase/server';
-import type { BlogPost, BlogPostPreview } from '@/types/blog';
+import type { BlogPost, BlogPostPreview, PostAutor } from '@/types/blog';
 import type { Locale } from '@/i18n/routing';
 
 export const POSTS_PER_PAGE = 9;
+
+async function fetchAutores(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  autorIds: (string | null)[],
+): Promise<Map<string, PostAutor>> {
+  const ids = autorIds.filter((id): id is string => Boolean(id));
+  if (ids.length === 0) return new Map();
+
+  const { data } = await supabase
+    .from('profiles')
+    .select('id, nome, foto_url')
+    .in('id', ids);
+
+  const map = new Map<string, PostAutor>();
+  for (const row of data ?? []) {
+    map.set(row.id, { nome: row.nome, foto_url: row.foto_url });
+  }
+  return map;
+}
 
 export async function getPublishedPosts(
   locale: Locale,
@@ -16,12 +35,14 @@ export async function getPublishedPosts(
 
     const { data, error, count } = await supabase
       .from('blog_posts')
-      .select('id, titulo, slug, resumo, imagem_url, publicado, criado_em', { count: 'exact' })
+      .select('id, titulo, slug, resumo, imagem_url, publicado, criado_em, autor_id', { count: 'exact' })
       .eq('publicado', true)
       .order('criado_em', { ascending: false })
       .range(from, to);
 
     if (error || !data) return { posts: [], total: 0 };
+
+    const autores = await fetchAutores(supabase, data.map((r) => r.autor_id));
 
     return {
       posts: data.map((row) => ({
@@ -32,6 +53,7 @@ export async function getPublishedPosts(
         imagem_url: row.imagem_url,
         publicado: row.publicado,
         criado_em: row.criado_em,
+        autor: row.autor_id ? (autores.get(row.autor_id) ?? null) : null,
       })),
       total: count ?? 0,
     };
@@ -53,7 +75,14 @@ export async function getPostBySlug(locale: Locale, slug: string): Promise<BlogP
 
     if (error || !data) return null;
 
-    return data as BlogPost;
+    const post = data as BlogPost;
+
+    if (post.autor_id) {
+      const autores = await fetchAutores(supabase, [post.autor_id]);
+      post.autor = autores.get(post.autor_id) ?? null;
+    }
+
+    return post;
   } catch {
     return null;
   }

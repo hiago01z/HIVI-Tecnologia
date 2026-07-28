@@ -8,8 +8,8 @@ import { routing } from '@/i18n/routing';
 import type { Locale } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { CalendarDays, ArrowLeft } from 'lucide-react';
-import type { BlogPost } from '@/types/blog';
+import { CalendarDays, ArrowLeft, User } from 'lucide-react';
+import type { BlogPost, PostAutor } from '@/types/blog';
 
 export async function generateMetadata({
   params,
@@ -98,6 +98,26 @@ function formatDate(iso: string, locale: string) {
   }).format(new Date(iso));
 }
 
+function AutorAvatar({ autor }: { autor: PostAutor }) {
+  const initials = autor.nome
+    .split(' ')
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase() ?? '')
+    .join('');
+
+  return (
+    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#162268] flex items-center justify-center">
+      {autor.foto_url ? (
+        <Image src={autor.foto_url} alt={autor.nome} fill className="object-cover" sizes="40px" />
+      ) : initials ? (
+        <span className="text-xs font-bold text-white select-none">{initials}</span>
+      ) : (
+        <User size={18} className="text-white/60" aria-hidden="true" />
+      )}
+    </div>
+  );
+}
+
 function PostContent({ post, locale }: { post: BlogPost; locale: Locale }) {
   const t = useTranslations('blog');
   const titulo = post.titulo[locale] ?? post.titulo['pt-BR'];
@@ -127,11 +147,22 @@ function PostContent({ post, locale }: { post: BlogPost; locale: Locale }) {
           </div>
         )}
 
-        <div className="flex items-center gap-2 text-sm text-[#94A3B8]">
-          <CalendarDays size={14} aria-hidden="true" />
-          <time dateTime={post.criado_em}>
-            {t('publishedOn')} {formatDate(post.criado_em, locale)}
-          </time>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#94A3B8]">
+          <div className="flex items-center gap-2">
+            <CalendarDays size={14} aria-hidden="true" />
+            <time dateTime={post.criado_em}>
+              {t('publishedOn')} {formatDate(post.criado_em, locale)}
+            </time>
+          </div>
+
+          {post.autor?.nome && (
+            <div className="flex items-center gap-2">
+              <AutorAvatar autor={post.autor} />
+              <span>
+                {t('writtenBy')} <span className="font-medium text-[#4B5563]">{post.autor.nome}</span>
+              </span>
+            </div>
+          )}
         </div>
 
         <h1 className="mt-4 text-3xl font-extrabold text-[#0D1117] lg:text-4xl leading-tight">

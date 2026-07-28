@@ -2,6 +2,11 @@ import type { Locale } from '@/i18n/routing';
 
 export type LocalizedText = Record<Locale, string>;
 
+export interface PostAutor {
+  nome: string;
+  foto_url: string | null;
+}
+
 export interface BlogPost {
   id: string;
   titulo: LocalizedText;
@@ -12,6 +17,8 @@ export interface BlogPost {
   publicado: boolean;
   criado_em: string;
   atualizado_em: string;
+  autor_id: string | null;
+  autor?: PostAutor | null;
 }
 
 export interface BlogPostPreview {
@@ -22,4 +29,5 @@ export interface BlogPostPreview {
   imagem_url: string | null;
   publicado: boolean;
   criado_em: string;
+  autor?: PostAutor | null;
 }

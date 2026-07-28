@@ -29,7 +29,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm rounded-xl bg-white p-8 shadow-lg">
         <div className="text-center">
           <span className="text-2xl font-extrabold tracking-tight text-[#162268]">
-            HIVI<span className="text-[#1565C0]">.</span>
+            HIVI<span className="text-[#1565C0]"> Tecnologia</span>
           </span>
           <h1 className="mt-3 text-xl font-bold text-[#0D1117]">{t('title')}</h1>
           <p className="mt-1 text-sm text-[#4B5563]">{t('subtitle')}</p>

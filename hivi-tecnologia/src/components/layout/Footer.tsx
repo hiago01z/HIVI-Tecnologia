@@ -61,7 +61,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" aria-label="HIVI Tecnologia">
               <span className="text-2xl font-extrabold tracking-tight text-white">
-                HIVI<span className="text-[#5BA4E5]">.</span>
+                HIVI<span className="text-[#5BA4E5]"> Tecnologia</span>
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-[#CBD5E1]">

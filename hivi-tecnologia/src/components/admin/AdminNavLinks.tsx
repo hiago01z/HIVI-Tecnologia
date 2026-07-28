@@ -7,6 +7,7 @@ const ADMIN_LINKS = [
   { key: 'dashboard', href: '/admin/dashboard' as const },
   { key: 'posts', href: '/admin/posts' as const },
   { key: 'contatos', href: '/admin/contatos' as const },
+  { key: 'perfil', href: '/admin/perfil' as const },
 ] as const;
 
 function isActive(pathname: string, href: string) {
