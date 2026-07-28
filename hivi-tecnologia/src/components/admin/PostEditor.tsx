@@ -83,7 +83,7 @@ export function PostEditor({ post }: Props) {
   const labelCls = 'mb-1.5 block text-sm font-medium text-[#0D1117]';
 
   return (
-    <form action={formAction} className="space-y-8">
+    <form action={formAction} noValidate className="space-y-8">
       {post && <input type="hidden" name="id" value={post.id} />}
       <input type="hidden" name="locale" value={locale} />
 
@@ -166,7 +166,7 @@ export function PostEditor({ post }: Props) {
       <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-black/5">
         <label className={labelCls}>{t('imageLabel')}</label>
         <input
-          type="url"
+          type="text"
           name="imagem_url"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
