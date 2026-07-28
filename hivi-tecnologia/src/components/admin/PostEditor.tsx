@@ -3,7 +3,6 @@
 import { useTranslations, useLocale } from 'next-intl';
 import { useState, useActionState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
-import { useRouter } from 'next/navigation';
 import { savePostAction } from '@/app/[locale]/admin/posts/actions';
 import type { BlogPost } from '@/types/blog';
 import type { Locale } from '@/i18n/routing';
@@ -56,7 +55,6 @@ export function PostEditor({ post }: Props) {
   const t = useTranslations('admin.postEditor');
   const tLang = useTranslations('languageSwitcher');
   const locale = useLocale() as Locale;
-  const router = useRouter();
 
   const [activeTab, setActiveTab] = useState<Locale>(locale);
   const [titles, setTitles] = useState<Record<Locale, string>>(
@@ -75,14 +73,15 @@ export function PostEditor({ post }: Props) {
 
   const [state, formAction] = useActionState(savePostAction, null);
 
-  // Navigate on the client after a successful save — redirect() inside
-  // useActionState actions does not reliably navigate in Next.js 16.
+  // router.push() inside useActionState is unreliable in Next.js 16 — use hard navigation.
   useEffect(() => {
     if (state && 'ok' in state && state.ok) {
-      router.push(`/${state.locale}/admin/posts`);
-      router.refresh();
+      window.location.href = `/${state.locale}/admin/posts`;
     }
-  }, [state, router]);
+    if (state && 'error' in state) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [state]);
 
   const handleTitleChange = (l: Locale, value: string) => {
     setTitles((prev) => ({ ...prev, [l]: value }));
