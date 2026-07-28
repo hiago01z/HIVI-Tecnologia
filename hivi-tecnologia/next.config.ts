@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         hostname: '**.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
+      // Permite qualquer imagem HTTPS (URLs externas inseridas no editor de posts)
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
   headers: async () => [

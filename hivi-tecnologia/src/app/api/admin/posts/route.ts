@@ -32,6 +32,13 @@ export async function POST(request: NextRequest) {
 
     const { id, locale, publish, titles, slugs, summaries, contents, imagem_url } = parsed.data;
 
+    const admin = await createAdminClient();
+
+    // Garante que existe uma linha em profiles para este usuário (requisito da FK)
+    await admin
+      .from('profiles')
+      .upsert({ id: authData.user.id }, { onConflict: 'id', ignoreDuplicates: true });
+
     const payload = {
       titulo: titles,
       slug: slugs,
@@ -39,10 +46,9 @@ export async function POST(request: NextRequest) {
       conteudo: contents,
       imagem_url: imagem_url ?? null,
       publicado: publish,
+      autor_id: authData.user.id,
       atualizado_em: new Date().toISOString(),
     };
-
-    const admin = await createAdminClient();
 
     let dbError: string | null = null;
 
@@ -52,7 +58,7 @@ export async function POST(request: NextRequest) {
     } else {
       const { error } = await admin
         .from('blog_posts')
-        .insert({ ...payload, autor_id: authData.user.id, criado_em: new Date().toISOString() });
+        .insert({ ...payload, criado_em: new Date().toISOString() });
       if (error) dbError = error.message;
     }
 
