@@ -43,10 +43,15 @@ export async function togglePublishAction(formData: FormData) {
   revalidatePath(`/${locale}/blog`);
 }
 
+export type SavePostState =
+  | { error: string }
+  | { ok: true; locale: string }
+  | null;
+
 export async function savePostAction(
-  _prevState: { error: string } | null,
+  _prevState: SavePostState,
   formData: FormData,
-): Promise<{ error: string } | null> {
+): Promise<SavePostState> {
   try {
     await requireAuth();
   } catch {
@@ -103,5 +108,12 @@ export async function savePostAction(
 
   revalidatePath(`/${locale}/admin/posts`);
   revalidatePath(`/${locale}/blog`);
+
+  // Return success so the client can navigate — redirect() inside
+  // useActionState actions is unreliable in Next.js 16.
+  return { ok: true, locale };
+}
+
+export async function redirectToPostsAction(locale: string) {
   redirect(`/${locale}/admin/posts`);
 }

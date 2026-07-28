@@ -1,8 +1,9 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useState, useActionState } from 'react';
+import { useState, useActionState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
+import { useRouter } from 'next/navigation';
 import { savePostAction } from '@/app/[locale]/admin/posts/actions';
 import type { BlogPost } from '@/types/blog';
 import type { Locale } from '@/i18n/routing';
@@ -55,6 +56,8 @@ export function PostEditor({ post }: Props) {
   const t = useTranslations('admin.postEditor');
   const tLang = useTranslations('languageSwitcher');
   const locale = useLocale() as Locale;
+  const router = useRouter();
+
   const [activeTab, setActiveTab] = useState<Locale>(locale);
   const [titles, setTitles] = useState<Record<Locale, string>>(
     LOCALES.reduce((acc, l) => ({ ...acc, [l]: post?.titulo[l] ?? '' }), {} as Record<Locale, string>),
@@ -72,6 +75,15 @@ export function PostEditor({ post }: Props) {
 
   const [state, formAction] = useActionState(savePostAction, null);
 
+  // Navigate on the client after a successful save — redirect() inside
+  // useActionState actions does not reliably navigate in Next.js 16.
+  useEffect(() => {
+    if (state && 'ok' in state && state.ok) {
+      router.push(`/${state.locale}/admin/posts`);
+      router.refresh();
+    }
+  }, [state, router]);
+
   const handleTitleChange = (l: Locale, value: string) => {
     setTitles((prev) => ({ ...prev, [l]: value }));
     if (!slugs[l] || slugs[l] === slugify(titles[l])) {
@@ -82,10 +94,18 @@ export function PostEditor({ post }: Props) {
   const inputCls = 'w-full rounded-lg border border-[#CBD5E1] px-4 py-2.5 text-sm outline-none transition focus:border-[#162268] focus:ring-2 focus:ring-[#162268]/20';
   const labelCls = 'mb-1.5 block text-sm font-medium text-[#0D1117]';
 
+  const hasError = state && 'error' in state;
+
   return (
     <form action={formAction} noValidate className="space-y-8">
       {post && <input type="hidden" name="id" value={post.id} />}
       <input type="hidden" name="locale" value={locale} />
+
+      {hasError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <strong>{t('errorPrefix')}</strong> {state.error}
+        </div>
+      )}
 
       {/* Hidden fields for all locales */}
       {LOCALES.map((l) => (
@@ -177,12 +197,6 @@ export function PostEditor({ post }: Props) {
           <img src={imageUrl} alt="" className="mt-3 h-40 w-full rounded-lg object-cover" />
         )}
       </div>
-
-      {state?.error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          <strong>{t('errorPrefix')}</strong> {state.error}
-        </div>
-      )}
 
       <div className="flex justify-end">
         <SaveButtons />
