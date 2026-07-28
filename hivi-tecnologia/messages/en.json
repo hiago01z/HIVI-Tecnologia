@@ -155,7 +155,7 @@
     "prevPage": "Previous page",
     "nextPage": "Next page",
     "goToPage": "Go to page {page}",
-    "writtenBy": "By"
+    "writtenBy": "Written by"
   },
   "footer": {
     "description": "Strategic technology solutions for companies seeking growth and innovation.",
@@ -260,7 +260,12 @@
       "saveAndPublish": "Save & Publish",
       "saving": "Saving...",
       "errorPrefix": "Error:",
-      "close": "Close"
+      "close": "Close",
+      "switchToHtml": "HTML",
+      "switchToVisual": "Visual",
+      "savedRedirecting": "Saved! Redirecting...",
+      "genericError": "Error saving. Please try again.",
+      "networkError": "Connection error. Check your internet and try again."
     },
     "contatos": {
       "title": "Received Contacts",

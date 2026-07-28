@@ -2,8 +2,14 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import type { BlogPost } from '@/types/blog';
 import type { Locale } from '@/i18n/routing';
+
+const RichTextEditor = dynamic(
+  () => import('./RichTextEditor').then((m) => ({ default: m.RichTextEditor })),
+  { ssr: false, loading: () => <div className="h-[320px] animate-pulse rounded-lg bg-[#E2E8F0]" /> },
+);
 
 const LOCALES: Locale[] = ['pt-BR', 'en', 'es'];
 
@@ -18,6 +24,7 @@ function slugify(text: string): string {
     .replace(/-+/g, '-');
 }
 
+type EditorMode = 'visual' | 'html';
 type SaveResult = { ok: true; locale: string } | { error: string } | null;
 
 interface Props {
@@ -30,6 +37,10 @@ export function PostEditor({ post }: Props) {
   const locale = useLocale() as Locale;
 
   const [activeTab, setActiveTab] = useState<Locale>(locale);
+  const [editorMode, setEditorMode] = useState<Record<Locale, EditorMode>>(
+    LOCALES.reduce((acc, l) => ({ ...acc, [l]: 'visual' as EditorMode }), {} as Record<Locale, EditorMode>),
+  );
+
   const [titles, setTitles] = useState<Record<Locale, string>>(
     LOCALES.reduce((acc, l) => ({ ...acc, [l]: post?.titulo[l] ?? '' }), {} as Record<Locale, string>),
   );
@@ -53,7 +64,7 @@ export function PostEditor({ post }: Props) {
     if (!result) return;
     if ('ok' in result && !navigatingRef.current) {
       navigatingRef.current = true;
-      setToast('Salvo com sucesso! Redirecionando...');
+      setToast(t('savedRedirecting'));
       setTimeout(() => {
         window.location.assign(`/${result.locale}/admin/posts`);
       }, 800);
@@ -62,7 +73,7 @@ export function PostEditor({ post }: Props) {
       setToast(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [result]);
+  }, [result, t]);
 
   const handleSave = async (publish: boolean) => {
     if (isSaving || navigatingRef.current) return;
@@ -90,14 +101,14 @@ export function PostEditor({ post }: Props) {
 
       if (!res.ok) {
         console.error('[PostEditor] save error:', data);
-        setResult({ error: data.error || 'Erro ao salvar. Tente novamente.' });
+        setResult({ error: data.error || t('genericError') });
         return;
       }
 
       setResult({ ok: true, locale: data.locale ?? locale });
     } catch (err) {
       console.error('[PostEditor] network error:', err);
-      setResult({ error: 'Erro de conexão. Verifique sua internet e tente novamente.' });
+      setResult({ error: t('networkError') });
     } finally {
       setIsSaving(false);
     }
@@ -108,6 +119,10 @@ export function PostEditor({ post }: Props) {
     if (!slugs[l] || slugs[l] === slugify(titles[l])) {
       setSlugs((prev) => ({ ...prev, [l]: slugify(value) }));
     }
+  };
+
+  const toggleMode = (l: Locale) => {
+    setEditorMode((prev) => ({ ...prev, [l]: prev[l] === 'visual' ? 'html' : 'visual' }));
   };
 
   const inputCls = 'w-full rounded-lg border border-[#CBD5E1] px-4 py-2.5 text-sm outline-none transition focus:border-[#162268] focus:ring-2 focus:ring-[#162268]/20';
@@ -185,14 +200,42 @@ export function PostEditor({ post }: Props) {
                   />
                 </div>
                 <div>
-                  <label className={labelCls}>{t('contentLabel')}</label>
-                  <textarea
-                    rows={16}
-                    value={contents[l]}
-                    onChange={(e) => setContents((prev) => ({ ...prev, [l]: e.target.value }))}
-                    className={`${inputCls} font-mono text-xs`}
-                    placeholder={t('contentPlaceholder')}
-                  />
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <label className={labelCls.replace('mb-1.5 ', '')}>{t('contentLabel')}</label>
+                    <button
+                      type="button"
+                      onClick={() => toggleMode(l)}
+                      className="flex items-center gap-1.5 rounded-lg border border-[#CBD5E1] px-3 py-1 text-xs font-medium text-[#374151] transition-colors hover:bg-[#EBF3FF] hover:border-[#162268] hover:text-[#162268]"
+                    >
+                      {editorMode[l] === 'visual' ? (
+                        <>
+                          <span>{'</>'}</span>
+                          <span>{t('switchToHtml')}</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>✏️</span>
+                          <span>{t('switchToVisual')}</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {editorMode[l] === 'visual' ? (
+                    <RichTextEditor
+                      value={contents[l]}
+                      onChange={(html) => setContents((prev) => ({ ...prev, [l]: html }))}
+                      placeholder={t('contentPlaceholder')}
+                    />
+                  ) : (
+                    <textarea
+                      rows={16}
+                      value={contents[l]}
+                      onChange={(e) => setContents((prev) => ({ ...prev, [l]: e.target.value }))}
+                      className={`${inputCls} font-mono text-xs`}
+                      placeholder={t('contentPlaceholder')}
+                    />
+                  )}
                 </div>
               </div>
             </div>

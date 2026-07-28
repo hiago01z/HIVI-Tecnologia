@@ -260,7 +260,12 @@
       "saveAndPublish": "Salvar e Publicar",
       "saving": "Salvando...",
       "errorPrefix": "Erro:",
-      "close": "Fechar"
+      "close": "Fechar",
+      "switchToHtml": "HTML",
+      "switchToVisual": "Visual",
+      "savedRedirecting": "Salvo com sucesso! Redirecionando...",
+      "genericError": "Erro ao salvar. Tente novamente.",
+      "networkError": "Erro de conexão. Verifique sua internet e tente novamente."
     },
     "contatos": {
       "title": "Contatos Recebidos",

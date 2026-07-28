@@ -260,7 +260,12 @@
       "saveAndPublish": "Guardar y Publicar",
       "saving": "Guardando...",
       "errorPrefix": "Error:",
-      "close": "Cerrar"
+      "close": "Cerrar",
+      "switchToHtml": "HTML",
+      "switchToVisual": "Visual",
+      "savedRedirecting": "¡Guardado! Redirigiendo...",
+      "genericError": "Error al guardar. Inténtalo de nuevo.",
+      "networkError": "Error de conexión. Verifica tu internet e inténtalo de nuevo."
     },
     "contatos": {
       "title": "Contactos Recibidos",
