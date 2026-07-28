@@ -1,9 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useState, useTransition, useEffect, useRef } from 'react';
-import { savePostAction } from '@/app/[locale]/admin/posts/actions';
-import type { SavePostState } from '@/app/[locale]/admin/posts/actions';
+import { useState, useEffect, useRef } from 'react';
 import type { BlogPost } from '@/types/blog';
 import type { Locale } from '@/i18n/routing';
 
@@ -19,6 +17,8 @@ function slugify(text: string): string {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
 }
+
+type SaveResult = { ok: true; locale: string } | { error: string } | null;
 
 interface Props {
   post?: BlogPost;
@@ -44,49 +44,63 @@ export function PostEditor({ post }: Props) {
   );
   const [imageUrl, setImageUrl] = useState(post?.imagem_url ?? '');
 
-  const [actionState, setActionState] = useState<SavePostState>(null);
-  const [isPending, startTransition] = useTransition();
+  const [result, setResult] = useState<SaveResult>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const navigatingRef = useRef(false);
 
   useEffect(() => {
-    if (!actionState) return;
-    if ('ok' in actionState && actionState.ok && !navigatingRef.current) {
+    if (!result) return;
+    if ('ok' in result && !navigatingRef.current) {
       navigatingRef.current = true;
       setToast('Salvo com sucesso! Redirecionando...');
       setTimeout(() => {
-        window.location.assign(`/${actionState.locale}/admin/posts`);
+        window.location.assign(`/${result.locale}/admin/posts`);
       }, 800);
     }
-    if ('error' in actionState) {
+    if ('error' in result) {
       setToast(null);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [actionState]);
+  }, [result]);
 
-  const handleSave = (publish: boolean) => {
-    if (isPending || navigatingRef.current) return;
+  const handleSave = async (publish: boolean) => {
+    if (isSaving || navigatingRef.current) return;
 
-    const formData = new FormData();
-    if (post?.id) formData.set('id', post.id);
-    formData.set('locale', locale);
-    formData.set('publish', String(publish));
-    for (const l of LOCALES) {
-      formData.set(`titulo_${l}`, titles[l]);
-      formData.set(`slug_${l}`, slugs[l]);
-      formData.set(`resumo_${l}`, summaries[l]);
-      formData.set(`conteudo_${l}`, contents[l]);
-    }
-    formData.set('imagem_url', imageUrl);
+    setIsSaving(true);
+    setResult(null);
 
-    startTransition(async () => {
-      try {
-        const result = await savePostAction(null, formData);
-        setActionState(result);
-      } catch (err) {
-        setActionState({ error: err instanceof Error ? err.message : 'Erro inesperado ao salvar.' });
+    try {
+      const res = await fetch('/api/admin/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: post?.id ?? null,
+          locale,
+          publish,
+          titles,
+          slugs,
+          summaries,
+          contents,
+          imagem_url: imageUrl || null,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error('[PostEditor] save error:', data);
+        setResult({ error: data.error || 'Erro ao salvar. Tente novamente.' });
+        return;
       }
-    });
+
+      setResult({ ok: true, locale: data.locale ?? locale });
+    } catch (err) {
+      console.error('[PostEditor] network error:', err);
+      setResult({ error: 'Erro de conexão. Verifique sua internet e tente novamente.' });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleTitleChange = (l: Locale, value: string) => {
@@ -99,17 +113,17 @@ export function PostEditor({ post }: Props) {
   const inputCls = 'w-full rounded-lg border border-[#CBD5E1] px-4 py-2.5 text-sm outline-none transition focus:border-[#162268] focus:ring-2 focus:ring-[#162268]/20';
   const labelCls = 'mb-1.5 block text-sm font-medium text-[#0D1117]';
 
-  const hasError = actionState && 'error' in actionState;
+  const hasError = result && 'error' in result;
 
   return (
     <>
       {hasError && (
         <div className="fixed left-0 right-0 top-0 z-[9999] flex items-center gap-3 bg-red-600 px-6 py-4 text-white shadow-lg">
           <strong className="shrink-0">{t('errorPrefix')}</strong>
-          <span className="flex-1 text-sm">{actionState.error}</span>
+          <span className="flex-1 text-sm">{result.error}</span>
           <button
             type="button"
-            onClick={() => setActionState(null)}
+            onClick={() => setResult(null)}
             className="shrink-0 rounded bg-red-700 px-3 py-1 text-xs hover:bg-red-800"
           >
             {t('close')}
@@ -203,18 +217,18 @@ export function PostEditor({ post }: Props) {
           <button
             type="button"
             onClick={() => handleSave(false)}
-            disabled={isPending || navigatingRef.current}
+            disabled={isSaving}
             className="rounded-lg border border-[#162268] px-5 py-2.5 text-sm font-semibold text-[#162268] transition-colors hover:bg-[#EBF3FF] disabled:opacity-60"
           >
-            {isPending ? t('saving') : t('save')}
+            {isSaving ? t('saving') : t('save')}
           </button>
           <button
             type="button"
             onClick={() => handleSave(true)}
-            disabled={isPending || navigatingRef.current}
+            disabled={isSaving}
             className="rounded-lg bg-[#162268] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1565C0] disabled:opacity-60"
           >
-            {isPending ? t('saving') : t('saveAndPublish')}
+            {isSaving ? t('saving') : t('saveAndPublish')}
           </button>
         </div>
       </div>
