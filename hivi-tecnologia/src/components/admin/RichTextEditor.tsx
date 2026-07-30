@@ -47,6 +47,15 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
 
+  // Prevents onUpdate from calling onChange before the editor is fully ready.
+  // Tiptap can emit an update during initialization which would overwrite
+  // the caller's state before the user has made any edits.
+  const isReadyRef = useRef(false);
+
+  // Prevents onChange from being called in response to our own setContent()
+  // call (which would create an unnecessary render cycle).
+  const isSyncingRef = useRef(false);
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -58,6 +67,7 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
     ],
     content: value || '',
     onUpdate({ editor }) {
+      if (!isReadyRef.current || isSyncingRef.current) return;
       onChangeRef.current(editor.getHTML());
     },
     editorProps: {
@@ -69,14 +79,25 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
     immediatelyRender: false,
   });
 
-  // Sync external value changes (e.g., switching tabs)
+  // Mark the editor as ready after the first render with a non-null editor.
+  // Effects run after paint, so this runs after any init-time onUpdate calls.
+  useEffect(() => {
+    if (editor && !isReadyRef.current) {
+      isReadyRef.current = true;
+    }
+  }, [editor]);
+
+  // Sync external value changes (e.g., switching locale tabs).
   const lastValueRef = useRef(value);
   useEffect(() => {
-    if (!editor || value === lastValueRef.current) return;
+    if (!editor || !isReadyRef.current) return;
+    if (value === lastValueRef.current) return;
     lastValueRef.current = value;
     const current = editor.getHTML();
     if (current !== value) {
+      isSyncingRef.current = true;
       editor.commands.setContent(value || '');
+      isSyncingRef.current = false;
     }
   }, [editor, value]);
 
@@ -141,10 +162,10 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
         <span className="mx-1 h-5 w-px bg-[#D1D5DB]" />
 
         <ToolbarButton onClick={addLink} active={editor.isActive('link')} title="Inserir link">
-          🔗
+          Link
         </ToolbarButton>
         <ToolbarButton onClick={addImage} title="Inserir imagem">
-          🖼
+          Img
         </ToolbarButton>
 
         <span className="mx-1 h-5 w-px bg-[#D1D5DB]" />

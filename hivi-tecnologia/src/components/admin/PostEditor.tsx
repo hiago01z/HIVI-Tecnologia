@@ -168,8 +168,9 @@ export function PostEditor({ post }: Props) {
             ))}
           </div>
 
-          {LOCALES.map((l) => (
-            <div key={l} className={l === activeTab ? 'block' : 'hidden'}>
+          {LOCALES.map((l) =>
+            l !== activeTab ? null : (
+            <div key={l}>
               <div className="space-y-4">
                 <div>
                   <label className={labelCls}>{t('titleLabel')}</label>
@@ -244,6 +245,7 @@ export function PostEditor({ post }: Props) {
 
         <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-black/5">
           <label className={labelCls}>{t('imageLabel')}</label>
+
           <input
             type="text"
             value={imageUrl}
