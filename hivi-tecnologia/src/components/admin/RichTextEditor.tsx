@@ -48,13 +48,14 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
   onChangeRef.current = onChange;
 
   // Prevents onUpdate from calling onChange before the editor is fully ready.
-  // Tiptap can emit an update during initialization which would overwrite
-  // the caller's state before the user has made any edits.
   const isReadyRef = useRef(false);
 
-  // Prevents onChange from being called in response to our own setContent()
-  // call (which would create an unnecessary render cycle).
+  // Prevents onChange from being called during programmatic setContent() calls.
   const isSyncingRef = useRef(false);
+
+  // Tracks the last HTML value known to both Tiptap and the parent.
+  // Must be declared before useEditor so the onUpdate closure can access it.
+  const lastValueRef = useRef(value);
 
   const editor = useEditor({
     extensions: [
@@ -68,7 +69,14 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
     content: value || '',
     onUpdate({ editor }) {
       if (!isReadyRef.current || isSyncingRef.current) return;
-      onChangeRef.current(editor.getHTML());
+      const html = editor.getHTML();
+      // Skip if Tiptap produced the same HTML as what we already know about.
+      // This blocks spurious onUpdate calls fired during async initialization
+      // (e.g. after immediatelyRender:false finishes), which would otherwise
+      // corrupt the parent's state with Tiptap's empty-doc representation.
+      if (html === lastValueRef.current) return;
+      lastValueRef.current = html;
+      onChangeRef.current(html);
     },
     editorProps: {
       attributes: {
@@ -81,14 +89,17 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
 
   // Mark the editor as ready after the first render with a non-null editor.
   // Effects run after paint, so this runs after any init-time onUpdate calls.
+  // We also sync lastValueRef to Tiptap's actual initial HTML at this point,
+  // so that late-firing async onUpdate calls (which pass the same content)
+  // are correctly identified as no-ops and ignored.
   useEffect(() => {
     if (editor && !isReadyRef.current) {
       isReadyRef.current = true;
+      lastValueRef.current = editor.getHTML();
     }
   }, [editor]);
 
   // Sync external value changes (e.g., switching locale tabs).
-  const lastValueRef = useRef(value);
   useEffect(() => {
     if (!editor || !isReadyRef.current) return;
     if (value === lastValueRef.current) return;
@@ -98,6 +109,11 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
       isSyncingRef.current = true;
       editor.commands.setContent(value || '');
       isSyncingRef.current = false;
+      // After setContent, re-sync lastValueRef to Tiptap's actual state.
+      // Without this, a late async onUpdate from Tiptap would compare against
+      // the prop value (e.g. '') instead of Tiptap's normalised output ('<p></p>'),
+      // causing a false-positive onChange call.
+      lastValueRef.current = editor.getHTML();
     }
   }, [editor, value]);
 

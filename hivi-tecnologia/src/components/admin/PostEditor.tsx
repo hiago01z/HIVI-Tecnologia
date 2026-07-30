@@ -37,8 +37,11 @@ export function PostEditor({ post }: Props) {
   const locale = useLocale() as Locale;
 
   const [activeTab, setActiveTab] = useState<Locale>(locale);
-  const [editorMode, setEditorMode] = useState<Record<Locale, EditorMode>>(
-    LOCALES.reduce((acc, l) => ({ ...acc, [l]: 'visual' as EditorMode }), {} as Record<Locale, EditorMode>),
+  const [editorMode, setEditorMode] = useState<Record<Locale, EditorMode>>(() =>
+    LOCALES.reduce((acc, l) => {
+      const saved = typeof window !== 'undefined' ? localStorage.getItem(`hivi_editorMode_${l}`) : null;
+      return { ...acc, [l]: saved === 'html' ? 'html' : ('visual' as EditorMode) };
+    }, {} as Record<Locale, EditorMode>),
   );
 
   const [titles, setTitles] = useState<Record<Locale, string>>(
@@ -122,7 +125,11 @@ export function PostEditor({ post }: Props) {
   };
 
   const toggleMode = (l: Locale) => {
-    setEditorMode((prev) => ({ ...prev, [l]: prev[l] === 'visual' ? 'html' : 'visual' }));
+    setEditorMode((prev) => {
+      const next: EditorMode = prev[l] === 'visual' ? 'html' : 'visual';
+      try { localStorage.setItem(`hivi_editorMode_${l}`, next); } catch {}
+      return { ...prev, [l]: next };
+    });
   };
 
   const inputCls = 'w-full rounded-lg border border-[#CBD5E1] px-4 py-2.5 text-sm outline-none transition focus:border-[#162268] focus:ring-2 focus:ring-[#162268]/20';
