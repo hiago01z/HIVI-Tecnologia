@@ -64,8 +64,8 @@
         "description": "Atención técnica especializada con tiempos de respuesta ágiles y resolución eficiente de incidentes."
       },
       "desenvolvimentoWeb": {
-        "title": "Desarrollo Web y Apps",
-        "description": "Creación de sitios web, sistemas y aplicaciones modernos, responsivos y de alto rendimiento."
+        "title": "Desarrollo Web",
+        "description": "Creación de sitios web y sistemas web modernos, responsivos y de alto rendimiento."
       },
       "automacaoProcessos": {
         "title": "Automatización de Procesos",
@@ -359,7 +359,7 @@
     "securitySolution": "Identificamos vulnerabilidades, implementamos políticas de seguridad y monitoreamos continuamente para proteger su entorno.",
     "automationChallenge": "¿Procesos manuales que consumen tiempo?",
     "automationSolution": "Automatizamos flujos de trabajo repetitivos, liberando a su equipo para enfocarse en lo que realmente importa.",
-    "devChallenge": "¿Necesita un sitio web, sistema o app?",
+    "devChallenge": "¿Necesita un sitio web o sistema web?",
     "devSolution": "Desarrollamos soluciones digitales modernas, responsivas y de alto rendimiento, desde el concepto hasta el despliegue.",
     "consultingChallenge": "¿TI sin dirección estratégica?",
     "consultingSolution": "Nuestra consultoría especializada alinea la tecnología con los objetivos del negocio, con planificación y hoja de ruta clara.",
@@ -379,5 +379,9 @@
     "whatsappLabel": "Hablar por WhatsApp",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú"
+  },
+  "seo": {
+    "description": "HIVI Tecnologia — consultoría de TI, infraestructura, seguridad de la información y desarrollo web para empresas. Soluciones tecnológicas estratégicas con soporte 24/7.",
+    "keywords": "consultoría de TI, gestión de TI, infraestructura cloud, seguridad de la información, desarrollo web, Business Intelligence, automatización de procesos, soporte de TI, ERP, HIVI Tecnologia"
   }
 }
