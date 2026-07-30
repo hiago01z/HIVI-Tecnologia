@@ -14,7 +14,10 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'hero' });
+  const t = await getTranslations({ locale, namespace: 'seo' });
+
+  const description = t('description');
+  const keywords = t('keywords').split(',').map((k: string) => k.trim());
 
   return {
     metadataBase: new URL(siteUrl),
@@ -22,14 +25,21 @@ export async function generateMetadata({
       default: 'HIVI Tecnologia',
       template: '%s | HIVI Tecnologia',
     },
-    description: t('description'),
+    description,
+    keywords,
+    authors: [{ name: 'HIVI Tecnologia', url: siteUrl }],
     openGraph: {
       siteName: 'HIVI Tecnologia',
+      title: 'HIVI Tecnologia',
+      description,
       locale: locale.replace('-', '_'),
       type: 'website',
+      url: siteUrl,
     },
     twitter: {
       card: 'summary_large_image',
+      title: 'HIVI Tecnologia',
+      description,
     },
     robots: {
       index: true,
