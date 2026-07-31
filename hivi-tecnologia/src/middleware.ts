@@ -38,24 +38,34 @@ function detectLocale(request: NextRequest): string {
 }
 
 function isAdminRoute(pathname: string): boolean {
-  return /^\/[^/]+\/admin\//.test(pathname);
+  return /^\/[^/]+\/admin(\/|$)/.test(pathname);
 }
 
 function isAuthenticated(request: NextRequest): boolean {
   // @supabase/ssr stores session in cookies named sb-{project-ref}-auth-token[.N]
+  // This is a fast pre-check only. Real auth is always verified server-side via getUser().
   return request.cookies.getAll().some(
     (c) => c.name.startsWith('sb-') && c.name.includes('-auth-token') && Boolean(c.value),
   );
 }
 
-export function proxy(request: NextRequest): NextResponse {
+const SECURITY_HEADERS: [string, string][] = [
+  ['X-Frame-Options', 'DENY'],
+  ['X-Content-Type-Options', 'nosniff'],
+];
+
+function applySecurityHeaders(response: NextResponse): NextResponse {
+  for (const [key, value] of SECURITY_HEADERS) {
+    response.headers.set(key, value);
+  }
+  return response;
+}
+
+export default function middleware(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith('/api/')) {
-    const response = NextResponse.next();
-    response.headers.set('X-Frame-Options', 'DENY');
-    response.headers.set('X-Content-Type-Options', 'nosniff');
-    return response;
+    return applySecurityHeaders(NextResponse.next());
   }
 
   if (pathname === '/' || !routing.locales.some(
@@ -69,28 +79,18 @@ export function proxy(request: NextRequest): NextResponse {
 
   if (isAdminRoute(pathname)) {
     if (request.method === 'POST') {
-      // Server Actions são POST para a própria página — autenticam via requireAuth() internamente.
-      // Bypassar intlMiddleware para evitar qualquer interferência com a resposta da action.
-      const response = NextResponse.next();
-      response.headers.set('X-Frame-Options', 'DENY');
-      response.headers.set('X-Content-Type-Options', 'nosniff');
-      return response;
+      // Server Actions are POST to the page itself — authenticated internally via requireAuth().
+      return applySecurityHeaders(NextResponse.next());
     }
 
-    const authenticated = isAuthenticated(request);
-    if (!authenticated) {
+    if (!isAuthenticated(request)) {
       const locale = pathname.split('/')[1] ?? routing.defaultLocale;
       const loginUrl = new URL(`/${locale}/admin`, request.url);
       return NextResponse.redirect(loginUrl);
     }
   }
 
-  const response = intlMiddleware(request);
-
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-
-  return response;
+  return applySecurityHeaders(intlMiddleware(request));
 }
 
 export const config = {

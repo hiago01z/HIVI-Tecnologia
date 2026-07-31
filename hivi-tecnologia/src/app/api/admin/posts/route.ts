@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createClient, createAdminClient } from '@/lib/supabase/server';
+import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
 import { z } from 'zod';
 
 const localeSchema = z.enum(['pt-BR', 'en', 'es']);
@@ -16,18 +17,25 @@ const savePostSchema = z.object({
   imagem_url: z.string().max(2048).nullable().optional(),
 });
 
+export async function OPTIONS(request: NextRequest) {
+  return handlePreflight(request.headers.get('origin'));
+}
+
 export async function POST(request: NextRequest) {
+  const origin = request.headers.get('origin');
+  const corsHeaders = buildCorsHeaders(origin);
+
   try {
     const supabase = await createClient();
     const { data: authData } = await supabase.auth.getUser();
     if (!authData?.user) {
-      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401, headers: corsHeaders });
     }
 
     const body = await request.json();
     const parsed = savePostSchema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: 'Dados inválidos', detail: parsed.error.message }, { status: 422 });
+      return NextResponse.json({ error: 'Dados inválidos' }, { status: 422, headers: corsHeaders });
     }
 
     const { id, locale, publish, titles, slugs, summaries, contents, imagem_url } = parsed.data;
@@ -50,26 +58,25 @@ export async function POST(request: NextRequest) {
       atualizado_em: new Date().toISOString(),
     };
 
-    let dbError: string | null = null;
-
     if (id) {
       const { error } = await admin.from('blog_posts').update(payload).eq('id', id);
-      if (error) dbError = error.message;
+      if (error) {
+        console.error('[/api/admin/posts] update error:', error.code);
+        return NextResponse.json({ error: 'Erro ao salvar post.' }, { status: 500, headers: corsHeaders });
+      }
     } else {
       const { error } = await admin
         .from('blog_posts')
         .insert({ ...payload, criado_em: new Date().toISOString() });
-      if (error) dbError = error.message;
+      if (error) {
+        console.error('[/api/admin/posts] insert error:', error.code);
+        return NextResponse.json({ error: 'Erro ao salvar post.' }, { status: 500, headers: corsHeaders });
+      }
     }
 
-    if (dbError) {
-      console.error('[/api/admin/posts] supabase error:', dbError);
-      return NextResponse.json({ error: dbError }, { status: 500 });
-    }
-
-    return NextResponse.json({ ok: true, locale });
+    return NextResponse.json({ ok: true, locale }, { headers: corsHeaders });
   } catch (err) {
-    console.error('[/api/admin/posts] unexpected error:', err);
-    return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
+    console.error('[/api/admin/posts] unexpected error:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
   }
 }

@@ -58,6 +58,7 @@ export async function loginAction(
 export async function logoutAction(formData: FormData) {
   const locale = (formData.get('locale') as string) || 'pt-BR';
   const supabase = await makeClient();
-  await supabase.auth.signOut();
+  // scope: 'global' revokes the refresh token server-side, invalidating all sessions for this user.
+  await supabase.auth.signOut({ scope: 'global' });
   redirect(`/${locale}/admin`);
 }

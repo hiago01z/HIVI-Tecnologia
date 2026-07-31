@@ -1,14 +1,29 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/server';
+import { checkRateLimit } from '@/lib/rateLimiter';
+import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
 import type { EventoPayload } from '@/types/contato';
 
+export async function OPTIONS(request: NextRequest) {
+  return handlePreflight(request.headers.get('origin'));
+}
+
 export async function POST(request: NextRequest) {
+  const origin = request.headers.get('origin');
+  const corsHeaders = buildCorsHeaders(origin);
+
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
+  const { allowed } = checkRateLimit(`eventos:${ip}`);
+  if (!allowed) {
+    return NextResponse.json({ error: 'Muitas requisições.' }, { status: 429, headers: corsHeaders });
+  }
+
   try {
     const body: EventoPayload = await request.json();
 
     const allowedTypes = ['page_view', 'click_contato', 'click_whatsapp', 'click_servico'];
     if (!allowedTypes.includes(body.tipo)) {
-      return NextResponse.json({ error: 'Tipo inválido' }, { status: 400 });
+      return NextResponse.json({ error: 'Tipo inválido' }, { status: 400, headers: corsHeaders });
     }
 
     const supabase = await createAdminClient();
@@ -21,11 +36,12 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
+      console.error('[/api/eventos] insert error:', error.code);
+      return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true }, { headers: corsHeaders });
   } catch {
-    return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
+    return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
   }
 }
