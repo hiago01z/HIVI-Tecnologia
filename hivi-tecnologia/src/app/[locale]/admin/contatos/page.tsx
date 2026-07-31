@@ -57,7 +57,8 @@ export default async function AdminContatosPage({
     const { data } = await admin
       .from('contatos')
       .select('id, nome, email, telefone, mensagem, locale, consentimento_lgpd, criado_em')
-      .order('criado_em', { ascending: false });
+      .order('criado_em', { ascending: false })
+      .limit(200);
     contatos = data as Contato[] | null;
   } catch {
     contatos = null;

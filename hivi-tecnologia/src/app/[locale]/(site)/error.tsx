@@ -14,7 +14,7 @@ export default function SiteError({ error, reset }: ErrorProps) {
   const t = useTranslations('error');
 
   useEffect(() => {
-    console.error(error);
+    if (process.env.NODE_ENV !== 'production') console.error(error);
   }, [error]);
 
   return (

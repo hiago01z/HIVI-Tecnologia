@@ -35,7 +35,7 @@ function AvatarPreview({
       className="group relative shrink-0 overflow-hidden rounded-full bg-[#162268] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#162268] focus-visible:ring-offset-2"
       style={{ width: size, height: size }}
     >
-      {foto_url ? (
+      {foto_url?.startsWith('https://') ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={foto_url} alt={nome} className="h-full w-full object-cover" />
       ) : initials ? (

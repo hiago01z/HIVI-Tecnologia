@@ -14,7 +14,7 @@ export default function AdminError({ error, reset }: ErrorProps) {
   const t = useTranslations('adminError');
 
   useEffect(() => {
-    console.error(error);
+    if (process.env.NODE_ENV !== 'production') console.error(error);
   }, [error]);
 
   return (
