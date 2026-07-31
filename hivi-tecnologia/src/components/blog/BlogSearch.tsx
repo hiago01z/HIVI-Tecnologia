@@ -18,6 +18,10 @@ export function BlogSearch({ initialQuery = '' }: { initialQuery?: string }) {
     setValue(searchParams.get('q') ?? '');
   }, [searchParams]);
 
+  useEffect(() => {
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, []);
+
   const push = useCallback(
     (q: string) => {
       const params = new URLSearchParams(searchParams.toString());

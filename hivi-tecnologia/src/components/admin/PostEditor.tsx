@@ -68,9 +68,10 @@ export function PostEditor({ post }: Props) {
     if ('ok' in result && !navigatingRef.current) {
       navigatingRef.current = true;
       setToast(t('savedRedirecting'));
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         window.location.assign(`/${result.locale}/admin/posts`);
       }, 800);
+      return () => clearTimeout(timer);
     }
     if ('error' in result) {
       setToast(null);

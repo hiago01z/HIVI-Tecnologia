@@ -22,6 +22,9 @@ export default async function EditPostPage({
   }
   if (!user) redirect(`/${locale}/admin`);
 
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!UUID_RE.test(id)) notFound();
+
   let post: BlogPost | null = null;
   try {
     const admin = await createAdminClient();

@@ -19,13 +19,19 @@ async function makeClient() {
   );
 }
 
+const VALID_LOCALES = ['pt-BR', 'en', 'es'] as const;
+type ValidLocale = (typeof VALID_LOCALES)[number];
+function sanitizeLocale(raw: string | null): ValidLocale {
+  return VALID_LOCALES.includes(raw as ValidLocale) ? (raw as ValidLocale) : 'pt-BR';
+}
+
 export async function loginAction(
   _prevState: { error: 'rateLimited' | 'invalid' } | null,
   formData: FormData,
 ): Promise<{ error: 'rateLimited' | 'invalid' } | null> {
   const headerStore = await headers();
   const ip = headerStore.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
-  const locale = (formData.get('locale') as string) || 'pt-BR';
+  const locale = sanitizeLocale(formData.get('locale') as string | null);
 
   const { allowed } = checkRateLimit(`login:${ip}`);
   if (!allowed) {
@@ -56,7 +62,7 @@ export async function loginAction(
 }
 
 export async function logoutAction(formData: FormData) {
-  const locale = (formData.get('locale') as string) || 'pt-BR';
+  const locale = sanitizeLocale(formData.get('locale') as string | null);
   const supabase = await makeClient();
   // scope: 'global' revokes the refresh token server-side, invalidating all sessions for this user.
   await supabase.auth.signOut({ scope: 'global' });

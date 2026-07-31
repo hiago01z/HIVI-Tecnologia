@@ -13,9 +13,12 @@ export async function POST(request: NextRequest) {
   const corsHeaders = buildCorsHeaders(origin);
 
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
-  const { allowed } = checkRateLimit(`eventos:${ip}`);
+  const { allowed, retryAfter } = checkRateLimit(`eventos:${ip}`);
   if (!allowed) {
-    return NextResponse.json({ error: 'Muitas requisições.' }, { status: 429, headers: corsHeaders });
+    return NextResponse.json({ error: 'Muitas requisições.' }, {
+      status: 429,
+      headers: { ...corsHeaders, 'Retry-After': String(retryAfter ?? 60) },
+    });
   }
 
   try {
