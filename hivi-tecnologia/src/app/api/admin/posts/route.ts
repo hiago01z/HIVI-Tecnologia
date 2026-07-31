@@ -5,16 +5,17 @@ import { sanitizePostHtml } from '@/lib/sanitize';
 import { z } from 'zod';
 
 const localeSchema = z.enum(['pt-BR', 'en', 'es']);
-const localesShape = z.record(z.enum(['pt-BR', 'en', 'es']), z.string());
+const localeKey = z.enum(['pt-BR', 'en', 'es']);
+const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const savePostSchema = z.object({
   id: z.string().uuid().nullable().optional(),
   locale: localeSchema,
   publish: z.boolean(),
-  titles: localesShape,
-  slugs: localesShape,
-  summaries: localesShape,
-  contents: localesShape,
+  titles: z.record(localeKey, z.string().min(1).max(255)),
+  slugs: z.record(localeKey, z.string().min(1).max(255).regex(SLUG_RE, 'Slug deve conter apenas letras minúsculas, números e hífens')),
+  summaries: z.record(localeKey, z.string().max(500)),
+  contents: z.record(localeKey, z.string().max(200_000)),
   imagem_url: z.string().url().max(2048).startsWith('https://').nullable().optional(),
 });
 

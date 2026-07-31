@@ -63,7 +63,7 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
         heading: { levels: [2, 3, 4] },
       }),
       Link.configure({ openOnClick: false, HTMLAttributes: { rel: 'noopener noreferrer' } }),
-      Image.configure({ inline: false, allowBase64: true }),
+      Image.configure({ inline: false, allowBase64: false }),
       Placeholder.configure({ placeholder: placeholder ?? '' }),
     ],
     content: value || '',

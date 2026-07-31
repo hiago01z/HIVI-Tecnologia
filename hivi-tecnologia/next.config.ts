@@ -11,11 +11,6 @@ const nextConfig: NextConfig = {
         hostname: '**.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
-      // Permite qualquer imagem HTTPS (URLs externas inseridas no editor de posts)
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
     ],
   },
   headers: async () => [
@@ -37,7 +32,7 @@ const nextConfig: NextConfig = {
             "script-src 'self' 'unsafe-inline'",
             "style-src 'self' 'unsafe-inline'",
             "img-src 'self' data: blob: https:",
-            "connect-src 'self' https://*.supabase.co",
+            "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
             "font-src 'self'",
             "frame-src 'none'",
             "frame-ancestors 'none'",

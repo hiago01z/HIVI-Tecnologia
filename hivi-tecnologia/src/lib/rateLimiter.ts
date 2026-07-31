@@ -4,7 +4,15 @@ const MAX_ATTEMPTS = 5;
 const WINDOW_MS = 60_000;
 const BLOCK_MS = 15 * 60_000;
 
+function pruneStore(): void {
+  const now = Date.now();
+  for (const [key, entry] of store) {
+    if (now > (entry.blockedUntil ?? entry.resetAt)) store.delete(key);
+  }
+}
+
 export function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
+  if (store.size > 5000) pruneStore();
   const now = Date.now();
   const entry = store.get(ip);
 

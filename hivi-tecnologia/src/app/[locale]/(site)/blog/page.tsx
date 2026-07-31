@@ -34,7 +34,7 @@ export default async function BlogPage({
   const { page: pageParam, q } = await searchParams;
   setRequestLocale(locale);
 
-  const query = (q ?? '').trim();
+  const query = (q ?? '').trim().slice(0, 200);
   const isSearching = query.length > 0;
 
   let posts: BlogPostPreview[];

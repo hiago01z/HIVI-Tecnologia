@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createClient, createAdminClient } from '@/lib/supabase/server';
 import { buildCorsHeaders, handlePreflight, NO_CACHE } from '@/lib/cors';
+import { checkRateLimit } from '@/lib/rateLimiter';
 
 const MAX_BYTES = 2 * 1024 * 1024;
 const ALLOWED: Record<string, string> = {
@@ -41,11 +42,26 @@ export async function POST(request: NextRequest) {
   const origin = request.headers.get('origin');
   const corsHeaders = buildCorsHeaders(origin);
 
+  // Content-Length pre-check — reject oversized bodies before reading them
+  const contentLength = Number(request.headers.get('content-length') ?? 0);
+  if (contentLength > MAX_BYTES * 2) {
+    return NextResponse.json({ error: 'Arquivo muito grande. Máximo 2 MB.' }, { status: 413, headers: corsHeaders });
+  }
+
   try {
     const supabase = await createClient();
     const { data: authData } = await supabase.auth.getUser();
     if (!authData?.user) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401, headers: corsHeaders });
+    }
+
+    // Per-user rate limit: 10 uploads per minute
+    const { allowed, retryAfter } = checkRateLimit(`avatar:${authData.user.id}`);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Muitas requisições. Aguarde antes de tentar novamente.' }, {
+        status: 429,
+        headers: { ...corsHeaders, 'Retry-After': String(retryAfter ?? 60) },
+      });
     }
 
     const formData = await request.formData();
