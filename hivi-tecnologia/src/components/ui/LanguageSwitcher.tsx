@@ -20,7 +20,7 @@ export function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
 
   const switchLocale = (next: Locale) => {
-    document.cookie = `NEXT_LOCALE=${next};path=/;max-age=31536000;SameSite=Lax`;
+    document.cookie = `NEXT_LOCALE=${next};path=/;max-age=31536000;SameSite=Lax;Secure`;
     router.replace(pathname, { locale: next });
     setOpen(false);
   };

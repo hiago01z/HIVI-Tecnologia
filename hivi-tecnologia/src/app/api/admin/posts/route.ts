@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createClient, createAdminClient } from '@/lib/supabase/server';
 import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
+import { sanitizePostHtml } from '@/lib/sanitize';
 import { z } from 'zod';
 
 const localeSchema = z.enum(['pt-BR', 'en', 'es']);
@@ -14,7 +15,7 @@ const savePostSchema = z.object({
   slugs: localesShape,
   summaries: localesShape,
   contents: localesShape,
-  imagem_url: z.string().max(2048).nullable().optional(),
+  imagem_url: z.string().url().max(2048).startsWith('https://').nullable().optional(),
 });
 
 export async function OPTIONS(request: NextRequest) {
@@ -40,6 +41,10 @@ export async function POST(request: NextRequest) {
 
     const { id, locale, publish, titles, slugs, summaries, contents, imagem_url } = parsed.data;
 
+    const sanitizedContents = Object.fromEntries(
+      Object.entries(contents).map(([k, v]) => [k, sanitizePostHtml(v)]),
+    ) as typeof contents;
+
     const admin = await createAdminClient();
 
     // Garante que existe uma linha em profiles para este usuário (requisito da FK)
@@ -51,7 +56,7 @@ export async function POST(request: NextRequest) {
       titulo: titles,
       slug: slugs,
       resumo: summaries,
-      conteudo: contents,
+      conteudo: sanitizedContents,
       imagem_url: imagem_url ?? null,
       publicado: publish,
       autor_id: authData.user.id,

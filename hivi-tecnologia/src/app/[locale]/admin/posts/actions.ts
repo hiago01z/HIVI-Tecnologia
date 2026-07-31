@@ -4,6 +4,11 @@ import { createAdminClient, createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const VALID_LOCALES = ['pt-BR', 'en', 'es'] as const;
+type ValidLocale = (typeof VALID_LOCALES)[number];
+function sanitizeLocale(raw: string | null): ValidLocale {
+  return VALID_LOCALES.includes(raw as ValidLocale) ? (raw as ValidLocale) : 'pt-BR';
+}
 
 async function requireAuth() {
   try {
@@ -19,7 +24,7 @@ export async function deletePostAction(formData: FormData) {
   await requireAuth();
 
   const id = formData.get('id') as string;
-  const locale = (formData.get('locale') as string) || 'pt-BR';
+  const locale = sanitizeLocale(formData.get('locale') as string | null);
 
   if (!id || !UUID_RE.test(id)) return;
 
@@ -35,7 +40,7 @@ export async function togglePublishAction(formData: FormData) {
 
   const id = formData.get('id') as string;
   const published = formData.get('published') === 'true';
-  const locale = (formData.get('locale') as string) || 'pt-BR';
+  const locale = sanitizeLocale(formData.get('locale') as string | null);
 
   if (!id || !UUID_RE.test(id)) return;
 
