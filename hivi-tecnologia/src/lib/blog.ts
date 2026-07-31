@@ -106,7 +106,8 @@ export async function searchPosts(locale: Locale, query: string): Promise<BlogPo
       .from('blog_posts')
       .select('id, titulo, slug, resumo, imagem_url, publicado, criado_em, autor_id')
       .eq('publicado', true)
-      .order('criado_em', { ascending: false });
+      .order('criado_em', { ascending: false })
+      .limit(500);
 
     if (error || !data) return [];
 

@@ -120,19 +120,26 @@ export function RichTextEditor({ value, onChange, placeholder }: Props) {
   const addLink = useCallback(() => {
     if (!editor) return;
     const prev = editor.getAttributes('link').href ?? '';
-    const url = window.prompt('URL do link:', prev);
+    const url = window.prompt('URL do link (https:// ou mailto:):', prev);
     if (url === null) return;
     if (url === '') {
       editor.chain().focus().extendMarkRange('link').unsetLink().run();
-    } else {
+    } else if (url.startsWith('https://') || url.startsWith('mailto:')) {
       editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+    } else {
+      window.alert('Use apenas URLs https:// ou mailto:');
     }
   }, [editor]);
 
   const addImage = useCallback(() => {
     if (!editor) return;
-    const url = window.prompt('URL da imagem:');
-    if (url) editor.chain().focus().setImage({ src: url }).run();
+    const url = window.prompt('URL da imagem (https://):');
+    if (!url) return;
+    if (url.startsWith('https://')) {
+      editor.chain().focus().setImage({ src: url }).run();
+    } else {
+      window.alert('Use apenas URLs https://');
+    }
   }, [editor]);
 
   if (!editor) return null;

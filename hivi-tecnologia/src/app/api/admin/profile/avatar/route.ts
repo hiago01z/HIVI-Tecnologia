@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createClient, createAdminClient } from '@/lib/supabase/server';
-import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
+import { buildCorsHeaders, handlePreflight, NO_CACHE } from '@/lib/cors';
 
 const MAX_BYTES = 2 * 1024 * 1024;
 const ALLOWED: Record<string, string> = {
@@ -9,6 +9,29 @@ const ALLOWED: Record<string, string> = {
   'image/webp': 'webp',
   'image/gif': 'gif',
 };
+
+// Magic byte signatures for each MIME type
+const MAGIC: Record<string, number[][]> = {
+  'image/jpeg': [[0xFF, 0xD8, 0xFF]],
+  'image/png': [[0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]],
+  'image/gif': [[0x47, 0x49, 0x46, 0x38, 0x37, 0x61], [0x47, 0x49, 0x46, 0x38, 0x39, 0x61]],
+  // WebP: first 4 bytes are RIFF, bytes 8-11 are WEBP
+  'image/webp': [[0x52, 0x49, 0x46, 0x46]],
+};
+
+function hasMagicBytes(buffer: ArrayBuffer, mimeType: string): boolean {
+  const bytes = new Uint8Array(buffer);
+  const sigs = MAGIC[mimeType];
+  if (!sigs) return false;
+  const matched = sigs.some((sig) => sig.every((b, i) => bytes[i] === b));
+  if (!matched) return false;
+  if (mimeType === 'image/webp') {
+    if (bytes.length < 12) return false;
+    const webp = [0x57, 0x45, 0x42, 0x50];
+    return webp.every((b, i) => bytes[8 + i] === b);
+  }
+  return true;
+}
 
 export async function OPTIONS(request: NextRequest) {
   return handlePreflight(request.headers.get('origin'));
@@ -44,8 +67,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Arquivo muito grande. Máximo 2 MB.' }, { status: 422, headers: corsHeaders });
     }
 
-    const path = `${authData.user.id}/avatar.${ext}`;
     const buffer = await file.arrayBuffer();
+
+    if (!hasMagicBytes(buffer, file.type)) {
+      return NextResponse.json(
+        { error: 'Arquivo inválido. O conteúdo não corresponde ao tipo declarado.' },
+        { status: 422, headers: corsHeaders },
+      );
+    }
+
+    const path = `${authData.user.id}/avatar.${ext}`;
 
     const admin = await createAdminClient();
 
@@ -63,7 +94,7 @@ export async function POST(request: NextRequest) {
     // Cache-bust to force reload after replacement
     const url = `${publicUrl}?t=${Date.now()}`;
 
-    return NextResponse.json({ url }, { headers: corsHeaders });
+    return NextResponse.json({ url }, { headers: { ...corsHeaders, ...NO_CACHE } });
   } catch {
     return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
   }

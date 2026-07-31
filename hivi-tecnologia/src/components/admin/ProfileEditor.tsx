@@ -74,12 +74,18 @@ export function ProfileEditor() {
   const t = useTranslations('admin.profile');
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const statusTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [nome, setNome] = useState('');
   const [fotoUrl, setFotoUrl] = useState('');
   const [pageStatus, setPageStatus] = useState<'loading' | 'idle' | 'saving' | 'success' | 'error'>('loading');
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    return () => { if (statusTimerRef.current) clearTimeout(statusTimerRef.current); };
+  }, []);
 
   useEffect(() => {
     fetch('/api/admin/profile')
@@ -115,8 +121,8 @@ export function ProfileEditor() {
 
       setFotoUrl(body.url);
       setUploadStatus('idle');
-    } catch (err) {
-      setUploadError(err instanceof Error ? err.message : 'Erro de rede');
+    } catch {
+      setUploadError('Erro de rede. Tente novamente.');
       setUploadStatus('error');
     }
   };
@@ -141,9 +147,10 @@ export function ProfileEditor() {
       }
 
       setPageStatus('success');
-      setTimeout(() => setPageStatus('idle'), 3000);
-    } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : 'Erro de rede');
+      if (statusTimerRef.current) clearTimeout(statusTimerRef.current);
+      statusTimerRef.current = setTimeout(() => setPageStatus('idle'), 3000);
+    } catch {
+      setErrorMsg('Erro de rede. Tente novamente.');
       setPageStatus('error');
     }
   };
