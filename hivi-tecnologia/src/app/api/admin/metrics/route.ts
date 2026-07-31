@@ -1,8 +1,15 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { createAdminClient } from '@/lib/supabase/server';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient, createClient } from '@/lib/supabase/server';
+import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
+
+export async function OPTIONS(request: NextRequest) {
+  return handlePreflight(request.headers.get('origin'));
+}
 
 export async function GET(request: NextRequest) {
+  const origin = request.headers.get('origin');
+  const corsHeaders = buildCorsHeaders(origin);
+
   let user = null;
   try {
     const supabase = await createClient();
@@ -11,33 +18,49 @@ export async function GET(request: NextRequest) {
   } catch {
     user = null;
   }
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!user) {
+    return NextResponse.json({ error: 'Não autorizado' }, { status: 401, headers: corsHeaders });
+  }
 
   const since = request.nextUrl.searchParams.get('since');
-  if (!since) return NextResponse.json({ error: 'Missing since' }, { status: 400 });
+  if (!since || isNaN(Date.parse(since))) {
+    return NextResponse.json({ error: 'Parâmetro inválido' }, { status: 400, headers: corsHeaders });
+  }
 
-  const admin = await createAdminClient();
-  const { data, error } = await admin
-    .from('eventos')
-    .select('tipo')
-    .gte('criado_em', since);
+  try {
+    const admin = await createAdminClient();
+    const { data, error } = await admin
+      .from('eventos')
+      .select('tipo')
+      .gte('criado_em', since);
 
-  if (error) return NextResponse.json({ error: 'Internal error' }, { status: 500 });
+    if (error) {
+      console.error('[/api/admin/metrics] eventos error:', error.code);
+      return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
+    }
 
-  const counts = {
-    page_view: 0,
-    click_contato: 0,
-    click_whatsapp: 0,
-    click_servico: 0,
-  };
+    const counts = {
+      page_view: 0,
+      click_contato: 0,
+      click_whatsapp: 0,
+      click_servico: 0,
+    };
 
-  (data ?? []).forEach(({ tipo }: { tipo: string }) => {
-    if (tipo in counts) counts[tipo as keyof typeof counts]++;
-  });
+    (data ?? []).forEach(({ tipo }: { tipo: string }) => {
+      if (tipo in counts) counts[tipo as keyof typeof counts]++;
+    });
 
-  const { count: totalContacts } = await admin
-    .from('contatos')
-    .select('*', { count: 'exact', head: true });
+    const { count: totalContacts, error: contactError } = await admin
+      .from('contatos')
+      .select('*', { count: 'exact', head: true });
 
-  return NextResponse.json({ ...counts, totalContacts: totalContacts ?? 0 });
+    if (contactError) {
+      console.error('[/api/admin/metrics] contatos error:', contactError.code);
+      return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
+    }
+
+    return NextResponse.json({ ...counts, totalContacts: totalContacts ?? 0 }, { headers: corsHeaders });
+  } catch {
+    return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
+  }
 }

@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/server';
-import type { ContatoPayload } from '@/types/contato';
 import { checkRateLimit } from '@/lib/rateLimiter';
+import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
+import type { ContatoPayload } from '@/types/contato';
 import { z } from 'zod';
 
 const contatoSchema = z.object({
@@ -13,19 +14,26 @@ const contatoSchema = z.object({
   consentimento_lgpd: z.literal(true),
 });
 
-export async function POST(request: NextRequest) {
-  try {
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
-    const { allowed } = checkRateLimit(`contato:${ip}`);
-    if (!allowed) {
-      return NextResponse.json({ error: 'Muitas tentativas. Tente mais tarde.' }, { status: 429 });
-    }
+export async function OPTIONS(request: NextRequest) {
+  return handlePreflight(request.headers.get('origin'));
+}
 
+export async function POST(request: NextRequest) {
+  const origin = request.headers.get('origin');
+  const corsHeaders = buildCorsHeaders(origin);
+
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1';
+  const { allowed } = checkRateLimit(`contato:${ip}`);
+  if (!allowed) {
+    return NextResponse.json({ error: 'Muitas tentativas. Tente mais tarde.' }, { status: 429, headers: corsHeaders });
+  }
+
+  try {
     const body: ContatoPayload = await request.json();
 
     const parsed = contatoSchema.safeParse(body);
     if (!parsed.success) {
-      return NextResponse.json({ error: 'Dados inválidos' }, { status: 422 });
+      return NextResponse.json({ error: 'Dados inválidos' }, { status: 422, headers: corsHeaders });
     }
 
     const supabase = await createAdminClient();
@@ -40,12 +48,12 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      console.error('[/api/contato] supabase insert error:', error.message, error.code);
-      return NextResponse.json({ error: 'Erro ao salvar', detail: error.message }, { status: 500 });
+      console.error('[/api/contato] insert error:', error.code);
+      return NextResponse.json({ error: 'Erro ao salvar. Tente novamente.' }, { status: 500, headers: corsHeaders });
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true }, { headers: corsHeaders });
   } catch {
-    return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
+    return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
   }
 }
