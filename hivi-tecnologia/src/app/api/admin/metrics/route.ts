@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createAdminClient, createClient } from '@/lib/supabase/server';
-import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
+import { buildCorsHeaders, handlePreflight, NO_CACHE } from '@/lib/cors';
 
 export async function OPTIONS(request: NextRequest) {
   return handlePreflight(request.headers.get('origin'));
@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
     }
 
-    return NextResponse.json({ ...counts, totalContacts: totalContacts ?? 0 }, { headers: corsHeaders });
+    return NextResponse.json({ ...counts, totalContacts: totalContacts ?? 0 }, { headers: { ...corsHeaders, ...NO_CACHE } });
   } catch {
     return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
   }

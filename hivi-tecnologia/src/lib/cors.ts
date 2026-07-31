@@ -1,5 +1,8 @@
 const ALLOWED_ORIGIN = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivi.com.br').replace(/\/$/, '');
 
+/** Add to admin API responses to prevent CDN/proxy caching of sensitive data. */
+export const NO_CACHE: Record<string, string> = { 'Cache-Control': 'no-store, private' };
+
 /**
  * Returns CORS headers for same-site API routes.
  * Only the project's own origin is allowed — never reflects arbitrary Origin values.

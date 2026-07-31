@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createClient, createAdminClient } from '@/lib/supabase/server';
-import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
+import { buildCorsHeaders, handlePreflight, NO_CACHE } from '@/lib/cors';
 import { sanitizePostHtml } from '@/lib/sanitize';
 import { z } from 'zod';
 
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ ok: true, locale }, { headers: corsHeaders });
+    return NextResponse.json({ ok: true, locale }, { headers: { ...corsHeaders, ...NO_CACHE } });
   } catch (err) {
     console.error('[/api/admin/posts] unexpected error:', err instanceof Error ? err.message : err);
     return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });

@@ -1,11 +1,11 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
+import { buildCorsHeaders, handlePreflight, NO_CACHE } from '@/lib/cors';
 import { z } from 'zod';
 
 const updateSchema = z.object({
   nome: z.string().min(1).max(120),
-  foto_url: z.string().url().max(2048).nullable().optional(),
+  foto_url: z.string().url().max(2048).startsWith('https://').nullable().optional(),
 });
 
 export async function OPTIONS(request: NextRequest) {
@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
     }
 
-    return NextResponse.json(data ?? { id: authData.user.id, nome: '', foto_url: null }, { headers: corsHeaders });
+    return NextResponse.json(data ?? { id: authData.user.id, nome: '', foto_url: null }, { headers: { ...corsHeaders, ...NO_CACHE } });
   } catch {
     return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
   }
@@ -71,7 +71,7 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: 'Erro ao salvar perfil.' }, { status: 500, headers: corsHeaders });
     }
 
-    return NextResponse.json({ ok: true }, { headers: corsHeaders });
+    return NextResponse.json({ ok: true }, { headers: { ...corsHeaders, ...NO_CACHE } });
   } catch {
     return NextResponse.json({ error: 'Erro interno' }, { status: 500, headers: corsHeaders });
   }

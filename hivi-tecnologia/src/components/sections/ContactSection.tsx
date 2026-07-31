@@ -68,7 +68,7 @@ function ContactForm() {
       fireEvent({ tipo: 'click_contato', pagina: window.location.pathname, locale });
     } catch (err) {
       console.error('[contato] network error:', err);
-      setErrorDetail(err instanceof Error ? err.message : 'Erro de rede');
+      setErrorDetail(null);
       setStatus('error');
     }
   };

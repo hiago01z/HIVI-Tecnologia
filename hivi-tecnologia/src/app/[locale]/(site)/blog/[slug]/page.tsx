@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
+import { sanitizePostHtml } from '@/lib/sanitize';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import { getPostBySlug } from '@/lib/blog';
@@ -121,7 +122,7 @@ function AutorAvatar({ autor }: { autor: PostAutor }) {
 function PostContent({ post, locale }: { post: BlogPost; locale: Locale }) {
   const t = useTranslations('blog');
   const titulo = post.titulo[locale] || post.titulo['pt-BR'] || '';
-  const conteudo = post.conteudo[locale] || post.conteudo['pt-BR'] || '';
+  const conteudo = sanitizePostHtml(post.conteudo[locale] || post.conteudo['pt-BR'] || '');
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6">

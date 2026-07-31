@@ -2,7 +2,20 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/server';
 import { checkRateLimit } from '@/lib/rateLimiter';
 import { buildCorsHeaders, handlePreflight } from '@/lib/cors';
-import type { EventoPayload } from '@/types/contato';
+import { z } from 'zod';
+
+const eventoSchema = z.object({
+  tipo: z.enum(['page_view', 'click_contato', 'click_whatsapp', 'click_servico']),
+  pagina: z.string().max(255).optional(),
+  locale: z.string().max(10).optional(),
+  metadados: z
+    .record(
+      z.string().max(50),
+      z.union([z.string().max(200), z.number(), z.boolean()]),
+    )
+    .refine((obj) => Object.keys(obj).length <= 10, 'Máximo 10 campos')
+    .optional(),
+});
 
 export async function OPTIONS(request: NextRequest) {
   return handlePreflight(request.headers.get('origin'));
@@ -22,20 +35,19 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body: EventoPayload = await request.json();
-
-    const allowedTypes = ['page_view', 'click_contato', 'click_whatsapp', 'click_servico'];
-    if (!allowedTypes.includes(body.tipo)) {
-      return NextResponse.json({ error: 'Tipo inválido' }, { status: 400, headers: corsHeaders });
+    const body = await request.json();
+    const parsed = eventoSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Payload inválido' }, { status: 400, headers: corsHeaders });
     }
 
     const supabase = await createAdminClient();
 
     const { error } = await supabase.from('eventos').insert({
-      tipo: body.tipo,
-      pagina: body.pagina?.slice(0, 255) ?? '/',
-      locale: body.locale?.slice(0, 10) ?? 'pt-BR',
-      metadados: body.metadados ?? {},
+      tipo: parsed.data.tipo,
+      pagina: parsed.data.pagina ?? '/',
+      locale: parsed.data.locale ?? 'pt-BR',
+      metadados: parsed.data.metadados ?? {},
     });
 
     if (error) {
