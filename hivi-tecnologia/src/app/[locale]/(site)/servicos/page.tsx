@@ -29,7 +29,7 @@ export default async function ServicosPage({
   return (
     <>
       <ServicesPageHero />
-      <ServicesSection />
+      <ServicesSection showHeading={false} />
       <CtaBanner />
     </>
   );
