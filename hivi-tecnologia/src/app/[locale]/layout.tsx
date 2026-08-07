@@ -47,9 +47,9 @@ export async function generateMetadata({
       googleBot: { index: true, follow: true },
     },
     icons: {
-      icon: [{ url: '/icon', type: 'image/svg+xml', sizes: 'any' }],
+      icon: [{ url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],
       apple: [{ url: '/apple-icon', type: 'image/png', sizes: '180x180' }],
-      shortcut: '/icon',
+      shortcut: '/favicon.svg',
     },
   };
 }
