@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { Target, Eye } from 'lucide-react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
-export function AboutSection() {
+export function AboutSection({ showHeading = true }: { showHeading?: boolean }) {
   const t = useTranslations('about');
   const values = t.raw('valuesItems') as string[];
 
@@ -10,17 +10,19 @@ export function AboutSection() {
     <section className="bg-[#eef4ff] py-[88px]" aria-label={t('sectionTitle')}>
       <div className="mx-auto max-w-[1160px] px-6 sm:px-8">
         {/* Heading */}
-        <AnimateOnScroll>
-          <div className="mb-[52px] text-center">
-            <h2 className="text-[42px] font-extrabold tracking-[-1px] text-[#0f1b2d]">
-              {t('sectionTitle')}
-            </h2>
-            <div className="mx-auto mt-3.5 mb-[18px] h-1 w-16 rounded-full bg-[#2563eb]" aria-hidden="true" />
-            <p className="mx-auto max-w-[640px] text-[17px] text-[#64748b]">
-              {t('sectionSubtitle')}
-            </p>
-          </div>
-        </AnimateOnScroll>
+        {showHeading && (
+          <AnimateOnScroll>
+            <div className="mb-[52px] text-center">
+              <h2 className="text-[42px] font-extrabold tracking-[-1px] text-[#0f1b2d]">
+                {t('sectionTitle')}
+              </h2>
+              <div className="mx-auto mt-3.5 mb-[18px] h-1 w-16 rounded-full bg-[#2563eb]" aria-hidden="true" />
+              <p className="mx-auto max-w-[640px] text-[17px] text-[#64748b]">
+                {t('sectionSubtitle')}
+              </p>
+            </div>
+          </AnimateOnScroll>
+        )}
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
           {/* Left — description + values */}
