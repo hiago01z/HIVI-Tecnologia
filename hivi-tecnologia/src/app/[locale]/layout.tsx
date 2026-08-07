@@ -46,6 +46,11 @@ export async function generateMetadata({
       follow: true,
       googleBot: { index: true, follow: true },
     },
+    icons: {
+      icon: [{ url: '/icon', type: 'image/svg+xml', sizes: 'any' }],
+      apple: [{ url: '/apple-icon', type: 'image/png', sizes: '180x180' }],
+      shortcut: '/icon',
+    },
   };
 }
 

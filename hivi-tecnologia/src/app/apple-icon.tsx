@@ -13,18 +13,19 @@ export default function AppleIcon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#162268',
-          borderRadius: 18,
+          backgroundImage: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)',
+          borderRadius: 36,
         }}
       >
         <span
           style={{
-            color: 'white',
-            fontSize: 118,
+            color: '#ffffff',
+            fontSize: 114,
             fontWeight: 800,
             fontFamily: 'sans-serif',
             lineHeight: 1,
-            letterSpacing: '-4px',
+            letterSpacing: '-3px',
+            paddingTop: 4,
           }}
         >
           H
