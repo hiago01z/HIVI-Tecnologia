@@ -49,14 +49,16 @@ function isAuthenticated(request: NextRequest): boolean {
   );
 }
 
-const SECURITY_HEADERS: [string, string][] = [
-  ['X-Frame-Options', 'DENY'],
+const SECURITY_HEADERS_BASE: [string, string][] = [
   ['X-Content-Type-Options', 'nosniff'],
 ];
 
-function applySecurityHeaders(response: NextResponse): NextResponse {
-  for (const [key, value] of SECURITY_HEADERS) {
+function applySecurityHeaders(response: NextResponse, adminRoute = false): NextResponse {
+  for (const [key, value] of SECURITY_HEADERS_BASE) {
     response.headers.set(key, value);
+  }
+  if (adminRoute) {
+    response.headers.set('X-Frame-Options', 'DENY');
   }
   return response;
 }
@@ -80,7 +82,7 @@ export default function middleware(request: NextRequest): NextResponse {
   if (isAdminRoute(pathname)) {
     if (request.method === 'POST') {
       // Server Actions are POST to the page itself — authenticated internally via requireAuth().
-      return applySecurityHeaders(NextResponse.next());
+      return applySecurityHeaders(NextResponse.next(), true);
     }
 
     if (!isAuthenticated(request)) {
@@ -88,6 +90,8 @@ export default function middleware(request: NextRequest): NextResponse {
       const loginUrl = new URL(`/${locale}/admin`, request.url);
       return NextResponse.redirect(loginUrl);
     }
+
+    return applySecurityHeaders(intlMiddleware(request), true);
   }
 
   return applySecurityHeaders(intlMiddleware(request));
