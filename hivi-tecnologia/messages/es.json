@@ -184,27 +184,31 @@
       },
       "dataCollected": {
         "title": "2. Datos Recopilados",
-        "content": "Recopilamos los siguientes datos cuando utiliza nuestro formulario de contacto: nombre completo, dirección de correo electrónico, teléfono (opcional) y mensaje. También recopilamos datos de navegación anonimizados para análisis del uso del sitio."
+        "content": "Recopilamos los siguientes datos personales cuando completa nuestro formulario de contacto: nombre completo, dirección de correo electrónico, teléfono (opcional) y mensaje. También registramos eventos de navegación anonimizados — como visualizaciones de página y clics en botones de contacto — identificados únicamente por tipo de acción, ruta de página e idioma del navegador. Estos registros no contienen dirección IP, cookies, identificadores de dispositivo ni ningún otro dato personal, y están técnicamente fuera de la definición de 'datos personales' conforme al Art. 5°, I de la LGPD. Por lo tanto, no requieren consentimiento previo."
       },
       "purpose": {
         "title": "3. Finalidad del Tratamiento",
-        "content": "Sus datos se utilizan exclusivamente para: responder a su contacto, enviar información sobre nuestros servicios (con consentimiento) y mejorar nuestra plataforma."
+        "content": "Los datos personales recopilados a través del formulario se utilizan exclusivamente para: responder a su solicitud de contacto y, con su consentimiento expreso, enviar información sobre nuestros servicios. Los eventos analíticos anonimizados se utilizan para comprender el uso del sitio y mejorar la experiencia de los visitantes, sin identificación individual."
       },
       "retention": {
         "title": "4. Retención de Datos",
-        "content": "Conservamos sus datos durante el período necesario para cumplir con la finalidad del contacto, o durante el plazo legal aplicable, tras el cual se eliminan de forma segura."
+        "content": "Los datos personales del formulario de contacto se conservan durante un máximo de 2 (dos) años desde la fecha de recepción, o hasta que usted solicite su eliminación antes de que venza ese plazo. Los registros analíticos anonimizados no están sujetos a plazo de eliminación, ya que no constituyen datos personales en los términos de la LGPD (Art. 5°, I)."
       },
       "rights": {
         "title": "5. Sus Derechos (LGPD)",
-        "content": "Usted tiene derecho a: confirmar la existencia del tratamiento, acceder a sus datos, corregir datos incompletos, solicitar anonimización o eliminación, revocar el consentimiento en cualquier momento."
+        "content": "De conformidad con el Art. 18 de la LGPD, usted tiene derecho a: confirmar la existencia del tratamiento; acceder a sus datos; corregir datos incompletos o inexactos; solicitar anonimización, bloqueo o eliminación de datos innecesarios; obtener portabilidad de datos; revocar el consentimiento en cualquier momento sin que ello afecte la licitud del tratamiento anterior. Para ejercer cualquiera de estos derechos, comuníquese con nuestro Delegado de Protección de Datos en el correo electrónico indicado en la sección 8."
       },
       "security": {
         "title": "6. Seguridad",
-        "content": "Adoptamos medidas técnicas y administrativas para proteger sus datos contra el acceso no autorizado, destrucción o divulgación indebida."
+        "content": "Adoptamos medidas técnicas y administrativas para proteger sus datos: control de acceso basado en roles (Row Level Security), cifrado TLS/HTTPS obligatorio en tránsito, autenticación segura para administradores y cabeceras HTTP de seguridad (HSTS, CSP, X-Frame-Options). El acceso a datos personales está restringido exclusivamente a los administradores autorizados de HIVI Tecnologia."
       },
       "contact": {
-        "title": "7. Contacto del Delegado de Protección de Datos",
-        "content": "Para ejercer sus derechos o aclarar dudas, contáctenos por correo electrónico:"
+        "title": "8. Contacto del Delegado de Protección de Datos",
+        "content": "Para ejercer sus derechos, solicitar la eliminación de datos o aclarar cualquier duda sobre el tratamiento, comuníquese con nuestro Delegado de Protección de Datos (DPO) por correo electrónico:"
+      },
+      "subprocessors": {
+        "title": "7. Subencargados y Transferencias Internacionales",
+        "content": "Sus datos se procesan con la asistencia de los siguientes subencargados: Supabase, Inc. (Estados Unidos de América) — base de datos, autenticación y almacenamiento de archivos. Supabase puede procesar datos en servidores ubicados fuera de Brasil. Esta transferencia internacional se realiza sobre la base de salvaguardas contractuales que garantizan un nivel de protección adecuado conforme al Art. 33 de la LGPD. Para más detalles, consulte la política de privacidad de Supabase en supabase.com/privacy."
       }
     }
   },

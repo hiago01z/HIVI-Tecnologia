@@ -4,7 +4,7 @@ export interface ContatoPayload {
   telefone?: string;
   mensagem: string;
   locale: string;
-  consentimento_lgpd: boolean;
+  consentimento_lgpd: true;
 }
 
 export interface EventoPayload {
