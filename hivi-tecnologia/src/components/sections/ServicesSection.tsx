@@ -21,24 +21,26 @@ const SERVICE_ICONS: Record<ServiceKey, React.ElementType> = {
   ti360: Monitor,
 };
 
-export function ServicesSection() {
+export function ServicesSection({ showHeading = true }: { showHeading?: boolean }) {
   const t = useTranslations();
 
   return (
     <section className="bg-white py-[88px]" aria-label={t('services.sectionTitle')}>
       <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
         {/* Heading */}
-        <AnimateOnScroll>
-          <div className="mb-[52px] text-center">
-            <h2 className="text-[42px] font-extrabold tracking-[-1px] text-[#0f1b2d]">
-              {t('services.sectionTitle')}
-            </h2>
-            <div className="mx-auto mt-3.5 mb-[18px] h-1 w-16 rounded-full bg-[#2563eb]" aria-hidden="true" />
-            <p className="mx-auto max-w-[620px] text-[17px] text-[#64748b]">
-              {t('services.sectionSubtitle')}
-            </p>
-          </div>
-        </AnimateOnScroll>
+        {showHeading && (
+          <AnimateOnScroll>
+            <div className="mb-[52px] text-center">
+              <h2 className="text-[42px] font-extrabold tracking-[-1px] text-[#0f1b2d]">
+                {t('services.sectionTitle')}
+              </h2>
+              <div className="mx-auto mt-3.5 mb-[18px] h-1 w-16 rounded-full bg-[#2563eb]" aria-hidden="true" />
+              <p className="mx-auto max-w-[620px] text-[17px] text-[#64748b]">
+                {t('services.sectionSubtitle')}
+              </p>
+            </div>
+          </AnimateOnScroll>
+        )}
 
         {/* Grid */}
         <div className="grid grid-cols-1 gap-[22px] sm:grid-cols-2 lg:grid-cols-3">
