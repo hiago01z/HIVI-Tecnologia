@@ -29,7 +29,7 @@ export default async function SobrePage({
   return (
     <>
       <AboutPageHero />
-      <AboutSection />
+      <AboutSection showHeading={false} />
       <ContactSection />
     </>
   );
