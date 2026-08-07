@@ -38,7 +38,7 @@ function detectLocale(request: NextRequest): string {
 }
 
 function isAdminRoute(pathname: string): boolean {
-  return /^\/[^/]+\/admin(\/|$)/.test(pathname);
+  return /^\/[^/]+\/admin\//.test(pathname);
 }
 
 function isAuthenticated(request: NextRequest): boolean {
