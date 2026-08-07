@@ -184,27 +184,31 @@
       },
       "dataCollected": {
         "title": "2. Dados Coletados",
-        "content": "Coletamos os seguintes dados quando você utiliza nosso formulário de contato: nome completo, endereço de e-mail, telefone (opcional) e mensagem. Também coletamos dados de navegação anonimizados para análise de uso do site."
+        "content": "Coletamos os seguintes dados pessoais quando você preenche nosso formulário de contato: nome completo, endereço de e-mail, telefone (opcional) e mensagem. Também registramos eventos de navegação anonimizados — como visualizações de página e cliques em botões de contato — identificados apenas pelo tipo de ação, caminho da página e idioma do navegador. Esses registros não contêm endereço IP, cookies, identificadores de dispositivo ou qualquer outro dado pessoal, sendo tecnicamente distintos do conceito de 'dados pessoais' conforme o Art. 5°, I da LGPD. Por isso, não exigem consentimento prévio."
       },
       "purpose": {
         "title": "3. Finalidade do Tratamento",
-        "content": "Seus dados são utilizados exclusivamente para: responder ao seu contato, enviar informações sobre nossos serviços (mediante consentimento) e melhorar nossa plataforma."
+        "content": "Os dados pessoais coletados via formulário são utilizados exclusivamente para: responder à sua solicitação de contato e, mediante consentimento expresso, enviar informações sobre nossos serviços. Os eventos analíticos anonimizados são utilizados para entender o uso do site e melhorar a experiência dos visitantes, sem identificação individual."
       },
       "retention": {
         "title": "4. Retenção dos Dados",
-        "content": "Mantemos seus dados pelo período necessário para atender à finalidade do contato, ou pelo prazo legal aplicável, após o qual são excluídos de forma segura."
+        "content": "Os dados pessoais do formulário de contato são mantidos por até 2 (dois) anos a partir da data de recebimento, ou até que você solicite a exclusão antes desse prazo. Os registros analíticos anonimizados não estão sujeitos a prazo de exclusão, pois não constituem dados pessoais nos termos da LGPD (Art. 5°, I)."
       },
       "rights": {
         "title": "5. Seus Direitos (LGPD)",
-        "content": "Você tem direito a: confirmar a existência de tratamento, acessar seus dados, corrigir dados incompletos, solicitar anonimização ou exclusão, revogar o consentimento a qualquer momento."
+        "content": "Em conformidade com o Art. 18 da LGPD, você tem direito a: confirmar a existência do tratamento; acessar seus dados; corrigir dados incompletos ou inexatos; solicitar anonimização, bloqueio ou eliminação de dados desnecessários; obter portabilidade; revogar o consentimento a qualquer momento, sem prejuízo da licitude do tratamento realizado anteriormente. Para exercer qualquer destes direitos, entre em contato com nosso Encarregado de Proteção de Dados pelo e-mail indicado na seção 8."
       },
       "security": {
         "title": "6. Segurança",
-        "content": "Adotamos medidas técnicas e administrativas para proteger seus dados contra acesso não autorizado, destruição ou divulgação indevida."
+        "content": "Adotamos medidas técnicas e administrativas para proteger seus dados: controle de acesso baseado em funções (Row Level Security), criptografia em trânsito (TLS/HTTPS obrigatório), autenticação segura para administradores e cabeçalhos HTTP de segurança (HSTS, CSP, X-Frame-Options). O acesso a dados pessoais é restrito exclusivamente aos administradores autorizados da HIVI Tecnologia."
       },
       "contact": {
-        "title": "7. Contato do Encarregado",
-        "content": "Para exercer seus direitos ou esclarecer dúvidas, entre em contato pelo e-mail:"
+        "title": "8. Contato do Encarregado (DPO)",
+        "content": "Para exercer seus direitos, solicitar exclusão de dados ou esclarecer dúvidas sobre o tratamento, entre em contato com nosso Encarregado de Proteção de Dados (DPO) pelo e-mail:"
+      },
+      "subprocessors": {
+        "title": "7. Subprocessadores e Transferência Internacional",
+        "content": "Seus dados são processados com o auxílio dos seguintes subprocessadores: Supabase, Inc. (Estados Unidos da América) — banco de dados, autenticação e armazenamento de arquivos. A Supabase pode processar dados em servidores localizados fora do Brasil. Essa transferência internacional é realizada com base em salvaguardas contratuais que garantem nível de proteção adequado, nos termos do Art. 33 da LGPD. Para mais detalhes, consulte a política de privacidade da Supabase em supabase.com/privacy."
       }
     }
   },

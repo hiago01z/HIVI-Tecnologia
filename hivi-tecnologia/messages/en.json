@@ -184,27 +184,31 @@
       },
       "dataCollected": {
         "title": "2. Data Collected",
-        "content": "We collect the following data when you use our contact form: full name, email address, phone (optional) and message. We also collect anonymized browsing data for website usage analysis."
+        "content": "We collect the following personal data when you fill out our contact form: full name, email address, phone number (optional) and message. We also record anonymized navigation events — such as page views and clicks on contact buttons — identified only by action type, page path, and browser language. These records contain no IP address, cookies, device identifiers, or any other personal data, and are technically outside the definition of 'personal data' under LGPD Art. 5°, I. They therefore do not require prior consent."
       },
       "purpose": {
         "title": "3. Processing Purpose",
-        "content": "Your data is used exclusively to: respond to your contact, send information about our services (with consent) and improve our platform."
+        "content": "Personal data collected via the contact form is used exclusively to: respond to your inquiry and, with your explicit consent, send information about our services. Anonymous analytics events are used to understand site usage and improve the visitor experience, without individual identification."
       },
       "retention": {
         "title": "4. Data Retention",
-        "content": "We keep your data for the period necessary to fulfill the purpose of contact, or for the applicable legal period, after which it is securely deleted."
+        "content": "Personal data from the contact form is retained for up to 2 (two) years from the date of receipt, or until you request deletion before that period expires. Anonymized analytics records are not subject to a deletion period, as they do not constitute personal data under LGPD (Art. 5°, I)."
       },
       "rights": {
         "title": "5. Your Rights (LGPD)",
-        "content": "You have the right to: confirm the existence of processing, access your data, correct incomplete data, request anonymization or deletion, revoke consent at any time."
+        "content": "In accordance with LGPD Art. 18, you have the right to: confirm the existence of processing; access your data; correct incomplete or inaccurate data; request anonymization, blocking, or deletion of unnecessary data; obtain data portability; revoke consent at any time without affecting the lawfulness of processing carried out beforehand. To exercise any of these rights, contact our Data Protection Officer at the email address listed in section 8."
       },
       "security": {
         "title": "6. Security",
-        "content": "We adopt technical and administrative measures to protect your data against unauthorized access, destruction or improper disclosure."
+        "content": "We adopt technical and administrative measures to protect your data: role-based access control (Row Level Security), mandatory TLS/HTTPS encryption in transit, secure authentication for administrators, and HTTP security headers (HSTS, CSP, X-Frame-Options). Access to personal data is restricted exclusively to authorized HIVI Tecnologia administrators."
       },
       "contact": {
-        "title": "7. Data Protection Officer Contact",
-        "content": "To exercise your rights or clarify doubts, contact us by email:"
+        "title": "8. Data Protection Officer Contact",
+        "content": "To exercise your rights, request data deletion, or clarify any doubts about our data processing, contact our Data Protection Officer (DPO) by email:"
+      },
+      "subprocessors": {
+        "title": "7. Sub-processors and International Transfers",
+        "content": "Your data is processed with the assistance of the following sub-processors: Supabase, Inc. (United States of America) — database, authentication and file storage. Supabase may process data on servers located outside Brazil. This international transfer is carried out based on contractual safeguards that ensure an adequate level of protection in accordance with LGPD Art. 33. For more details, see Supabase's privacy policy at supabase.com/privacy."
       }
     }
   },
