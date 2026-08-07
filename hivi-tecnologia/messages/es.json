@@ -8,6 +8,7 @@
     "privacy": "Política de Privacidad"
   },
   "hero": {
+    "challengesLabel": "Desafíos de TI",
     "eyebrow": "Consultoría • Gestión de TI • Infraestructura • Desarrollo Web",
     "title": "Soluciones Tecnológicas Estratégicas para Empresas",
     "description": "Transformamos su empresa con tecnología de vanguardia, consultoría especializada y soporte continuo. Resultados reales, crecimiento sostenible.",
@@ -110,6 +111,7 @@
   "contact": {
     "sectionTitle": "Contáctenos",
     "sectionSubtitle": "Estamos listos para ayudar a su empresa a crecer con tecnología",
+    "ctaTitle": "¿Listo para transformar su empresa?",
     "ctaText": "Programe una conversación sin compromiso con nuestros especialistas y descubra cómo podemos transformar su empresa.",
     "phone": "Teléfono",
     "whatsapp": "WhatsApp",

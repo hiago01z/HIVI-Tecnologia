@@ -1,35 +1,34 @@
 import { useTranslations } from 'next-intl';
-import { Activity, Headphones, Timer } from 'lucide-react';
-import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
 const STATS = [
-  { valueKey: 'stats.uptimeValue', labelKey: 'stats.uptime', Icon: Activity },
-  { valueKey: 'stats.responseValue', labelKey: 'stats.response', Icon: Timer },
-  { valueKey: 'stats.supportValue', labelKey: 'stats.support', Icon: Headphones },
+  { valueKey: 'stats.uptimeValue', labelKey: 'stats.uptime', color: '#4ade80' },
+  { valueKey: 'stats.responseValue', labelKey: 'stats.response', color: '#fbbf24' },
+  { valueKey: 'stats.supportValue', labelKey: 'stats.support', color: '#60a5fa' },
 ] as const;
 
 export function StatsSection() {
   const t = useTranslations();
 
   return (
-    <section className="bg-[#162268] py-20" aria-label={t('common.statsSection')}>
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {STATS.map(({ valueKey, labelKey, Icon }, index) => (
-            <AnimateOnScroll key={valueKey} delay={index * 100}>
-              <div className="flex flex-col items-center rounded-xl border border-white/15 bg-white/7 p-8 text-center">
-                <Icon
-                  size={40}
-                  className="text-white/70"
-                  aria-hidden="true"
-                  strokeWidth={1.5}
-                />
-                <p className="mt-4 text-4xl font-extrabold text-white lg:text-5xl">
-                  {t(valueKey)}
-                </p>
-                <p className="mt-2 text-sm text-[#CBD5E1]">{t(labelKey)}</p>
-              </div>
-            </AnimateOnScroll>
+    <section
+      className="py-14"
+      aria-label={t('common.statsSection')}
+      style={{ background: 'linear-gradient(120deg, #1e3a8a 0%, #1d4ed8 55%, #1e293b 100%)' }}
+    >
+      <div className="mx-auto max-w-[1100px] px-6 sm:px-8">
+        <div className="grid grid-cols-1 divide-y divide-white/15 sm:grid-cols-3 sm:divide-x sm:divide-y-0 text-center">
+          {STATS.map(({ valueKey, labelKey, color }) => (
+            <div key={valueKey} className="py-10 sm:py-0 sm:px-8">
+              <p
+                className="text-[52px] font-extrabold leading-none tracking-[-1px]"
+                style={{ color }}
+              >
+                {t(valueKey)}
+              </p>
+              <p className="mt-2.5 text-[15px] font-semibold tracking-[.4px] text-[#cbd5e1]">
+                {t(labelKey)}
+              </p>
+            </div>
           ))}
         </div>
       </div>

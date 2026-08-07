@@ -27,10 +27,10 @@ export function ServiceCardLink({ serviceKey, label, isFeatured }: Props) {
     <Link
       href="/sobre#contato"
       onClick={handleClick}
-      className={`mt-6 inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 ${
+      className={`mt-auto flex w-full items-center justify-center gap-2 rounded-[10px] px-4 py-[11px] text-sm font-semibold transition-colors focus-visible:outline-2 ${
         isFeatured
-          ? 'bg-white text-[#1565C0] hover:bg-[#EBF3FF] focus-visible:outline-white'
-          : 'bg-[#1565C0] text-white hover:bg-[#1976D2] focus-visible:outline-[#1565C0]'
+          ? 'bg-white text-[#1d4ed8] hover:bg-[#eef4ff] focus-visible:outline-white'
+          : 'border border-[#dbe6f7] bg-white text-[#1d4ed8] hover:border-[#2563eb] focus-visible:outline-[#2563eb]'
       }`}
     >
       {label}

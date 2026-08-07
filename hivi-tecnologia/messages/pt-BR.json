@@ -18,6 +18,7 @@
     "check2": "Infraestrutura e cloud sob medida para seu negócio",
     "check3": "Suporte técnico 24/7 para sua operação",
     "check4": "Entrega dentro do prazo e orçamento definido",
+    "challengesLabel": "Desafios de TI",
     "mockup": {
       "serviceCommitments": "Compromissos de Serviço",
       "statUptime": "Uptime",
@@ -110,6 +111,7 @@
   "contact": {
     "sectionTitle": "Entre em Contato",
     "sectionSubtitle": "Estamos prontos para ajudar sua empresa a crescer com tecnologia",
+    "ctaTitle": "Pronto para transformar sua empresa?",
     "ctaText": "Agende uma conversa sem compromisso com nossos especialistas e descubra como podemos transformar sua empresa.",
     "phone": "Telefone",
     "whatsapp": "WhatsApp",

@@ -18,6 +18,7 @@
     "check2": "Tailored infrastructure and cloud solutions for your business",
     "check3": "24/7 technical support for your operations",
     "check4": "On-time and on-budget delivery",
+    "challengesLabel": "IT Challenges",
     "mockup": {
       "serviceCommitments": "Service Commitments",
       "statUptime": "Uptime",
@@ -110,6 +111,7 @@
   "contact": {
     "sectionTitle": "Contact Us",
     "sectionSubtitle": "We're ready to help your company grow with technology",
+    "ctaTitle": "Ready to transform your company?",
     "ctaText": "Schedule a no-obligation conversation with our specialists and discover how we can transform your company.",
     "phone": "Phone",
     "whatsapp": "WhatsApp",

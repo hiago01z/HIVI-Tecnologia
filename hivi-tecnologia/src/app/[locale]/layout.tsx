@@ -1,7 +1,7 @@
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages, setRequestLocale, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
 import '@/app/globals.css';
@@ -49,10 +49,11 @@ export async function generateMetadata({
   };
 }
 
-const inter = Inter({
-  variable: '--font-inter',
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: '--font-plus-jakarta',
   subsets: ['latin'],
   display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export function generateStaticParams() {
@@ -114,7 +115,7 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} className={inter.variable}>
+    <html lang={locale} className={plusJakartaSans.variable}>
       <body className="min-h-screen flex flex-col antialiased">
         <script
           type="application/ld+json"

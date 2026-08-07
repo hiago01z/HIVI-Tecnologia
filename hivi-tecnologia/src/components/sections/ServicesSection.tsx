@@ -25,71 +25,80 @@ export function ServicesSection() {
   const t = useTranslations();
 
   return (
-    <section className="bg-white py-24" aria-label={t('services.sectionTitle')}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-[88px]" aria-label={t('services.sectionTitle')}>
+      <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
         {/* Heading */}
         <AnimateOnScroll>
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-[#0D1117] lg:text-4xl">
+          <div className="mb-[52px] text-center">
+            <h2 className="text-[42px] font-extrabold tracking-[-1px] text-[#0f1b2d]">
               {t('services.sectionTitle')}
             </h2>
-            <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1565C0]" aria-hidden="true" />
-            <p className="mx-auto mt-5 max-w-2xl text-[#4B5563]">
+            <div className="mx-auto mt-3.5 mb-[18px] h-1 w-16 rounded-full bg-[#2563eb]" aria-hidden="true" />
+            <p className="mx-auto max-w-[620px] text-[17px] text-[#64748b]">
               {t('services.sectionSubtitle')}
             </p>
           </div>
         </AnimateOnScroll>
 
         {/* Grid */}
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICE_KEYS.map((key) => {
+        <div className="grid grid-cols-1 gap-[22px] sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICE_KEYS.map((key, index) => {
             const isFeatured = FEATURED_SERVICES.includes(key);
             const Icon = SERVICE_ICONS[key];
 
             return (
-              <div
-                key={key}
-                className={`flex flex-col rounded-xl p-6 transition-shadow hover:shadow-xl ${
-                  isFeatured
-                    ? 'bg-[#1565C0] shadow-[0_4px_20px_rgba(21,101,192,0.35)]'
-                    : 'bg-[#EBF3FF] shadow-[0_2px_8px_rgba(21,101,192,0.08)]'
-                }`}
-              >
+              <AnimateOnScroll key={key} delay={Math.min(index % 3, 2) * 80}>
                 <div
-                  className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${
-                    isFeatured ? 'bg-white/15' : 'bg-[#1565C0]/10'
+                  className={`flex h-full flex-col rounded-[18px] p-[26px] transition-shadow hover:shadow-xl ${
+                    isFeatured
+                      ? 'text-white'
+                      : 'border border-[#e6eefb] bg-[#f5f8fd]'
                   }`}
+                  style={
+                    isFeatured
+                      ? {
+                          background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
+                          boxShadow: '0 24px 40px -22px rgba(37,99,235,.65)',
+                        }
+                      : undefined
+                  }
                 >
-                  <Icon
-                    size={24}
-                    className={isFeatured ? 'text-white' : 'text-[#1565C0]'}
-                    aria-hidden="true"
-                    strokeWidth={1.5}
+                  <div
+                    className={`mb-[18px] flex h-12 w-12 items-center justify-center rounded-xl ${
+                      isFeatured ? 'bg-white/[.18]' : 'bg-[#eaf1ff]'
+                    }`}
+                  >
+                    <Icon
+                      size={24}
+                      className={isFeatured ? 'text-white' : 'text-[#2563eb]'}
+                      aria-hidden="true"
+                      strokeWidth={1.8}
+                    />
+                  </div>
+
+                  <h3
+                    className={`mb-2.5 text-[18px] font-bold leading-tight ${
+                      isFeatured ? 'text-white' : 'text-[#0f1b2d]'
+                    }`}
+                  >
+                    {t(`services.items.${key}.title`)}
+                  </h3>
+
+                  <p
+                    className={`mb-5 flex-1 text-[14px] leading-[1.55] ${
+                      isFeatured ? 'text-white/88' : 'text-[#64748b]'
+                    }`}
+                  >
+                    {t(`services.items.${key}.description`)}
+                  </p>
+
+                  <ServiceCardLink
+                    serviceKey={key}
+                    label={t('services.contactUs')}
+                    isFeatured={isFeatured}
                   />
                 </div>
-
-                <h3
-                  className={`text-lg font-semibold ${
-                    isFeatured ? 'text-white' : 'text-[#0D1117]'
-                  }`}
-                >
-                  {t(`services.items.${key}.title`)}
-                </h3>
-
-                <p
-                  className={`mt-2 flex-1 text-sm leading-relaxed ${
-                    isFeatured ? 'text-white/80' : 'text-[#4B5563]'
-                  }`}
-                >
-                  {t(`services.items.${key}.description`)}
-                </p>
-
-                <ServiceCardLink
-                  serviceKey={key}
-                  label={t('services.contactUs')}
-                  isFeatured={isFeatured}
-                />
-              </div>
+              </AnimateOnScroll>
             );
           })}
         </div>
