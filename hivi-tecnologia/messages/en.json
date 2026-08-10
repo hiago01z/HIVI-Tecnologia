@@ -43,6 +43,7 @@
     "sectionSubtitle": "Focused on Web Development and IT Consulting — with complementary solutions for your other business challenges.",
     "learnMore": "Learn more",
     "contactUs": "Talk to a specialist",
+    "secondaryTitle": "Other solutions we offer",
     "items": {
       "consultoriaTI": {
         "title": "IT Consulting",
@@ -171,7 +172,7 @@
     "legal": "Legal",
     "privacy": "Privacy Policy",
     "rights": "All rights reserved.",
-    "tagline": "Consulting • IT Management • Infrastructure • Web Development"
+    "tagline": "IT Consulting • Web Development • Automation • IT Support"
   },
   "privacy": {
     "title": "Privacy Policy",

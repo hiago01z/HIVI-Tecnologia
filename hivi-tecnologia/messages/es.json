@@ -43,6 +43,7 @@
     "sectionSubtitle": "Enfocado en Desarrollo Web y Consultoría de TI — con soluciones complementarias para otros desafíos de su negocio.",
     "learnMore": "Saber más",
     "contactUs": "Hablar con un especialista",
+    "secondaryTitle": "Otras soluciones que ofrecemos",
     "items": {
       "consultoriaTI": {
         "title": "Consultoría de TI",
@@ -171,7 +172,7 @@
     "legal": "Legal",
     "privacy": "Política de Privacidad",
     "rights": "Todos los derechos reservados.",
-    "tagline": "Consultoría • Gestión de TI • Infraestructura • Desarrollo Web"
+    "tagline": "Consultoría de TI • Desarrollo Web • Automatización • Soporte"
   },
   "privacy": {
     "title": "Política de Privacidad",
