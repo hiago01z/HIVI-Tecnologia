@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 
 const CHALLENGES = [
   {
-    challengeKey: 'infraChallenge' as const,
-    solutionKey: 'infraSolution' as const,
+    challengeKey: 'devChallenge' as const,
+    solutionKey: 'devSolution' as const,
     num: '01',
     accentBg: 'rgba(37,99,235,.06)',
     barColor: '#2563eb',
@@ -14,8 +14,8 @@ const CHALLENGES = [
     numColor: '#2563eb',
   },
   {
-    challengeKey: 'securityChallenge' as const,
-    solutionKey: 'securitySolution' as const,
+    challengeKey: 'consultingChallenge' as const,
+    solutionKey: 'consultingSolution' as const,
     num: '02',
     accentBg: 'rgba(22,163,74,.06)',
     barColor: '#16a34a',
@@ -32,8 +32,8 @@ const CHALLENGES = [
     numColor: '#d97706',
   },
   {
-    challengeKey: 'devChallenge' as const,
-    solutionKey: 'devSolution' as const,
+    challengeKey: 'siteDesatualizadoChallenge' as const,
+    solutionKey: 'siteDesatualizadoSolution' as const,
     num: '04',
     accentBg: 'rgba(37,99,235,.06)',
     barColor: '#2563eb',
@@ -41,8 +41,8 @@ const CHALLENGES = [
     numColor: '#2563eb',
   },
   {
-    challengeKey: 'consultingChallenge' as const,
-    solutionKey: 'consultingSolution' as const,
+    challengeKey: 'suporteChallenge' as const,
+    solutionKey: 'suporteSolution' as const,
     num: '05',
     accentBg: 'rgba(22,163,74,.06)',
     barColor: '#16a34a',
@@ -50,8 +50,8 @@ const CHALLENGES = [
     numColor: '#16a34a',
   },
   {
-    challengeKey: 'erpChallenge' as const,
-    solutionKey: 'erpSolution' as const,
+    challengeKey: 'tecnologiaCaraChallenge' as const,
+    solutionKey: 'tecnologiaCaraSolution' as const,
     num: '06',
     accentBg: 'rgba(245,158,11,.07)',
     barColor: '#f59e0b',
