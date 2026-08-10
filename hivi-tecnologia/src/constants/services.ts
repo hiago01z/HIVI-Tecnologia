@@ -1,11 +1,11 @@
 export const SERVICE_KEYS = [
-  'consultoriaTI',
-  'gestaoProjetos',
-  'infraestrutura',
-  'segurancaInfo',
-  'suporteTI',
   'desenvolvimentoWeb',
+  'consultoriaTI',
   'automacaoProcessos',
+  'suporteTI',
+  'infraestrutura',
+  'gestaoProjetos',
+  'segurancaInfo',
   'businessIntelligence',
   'migracaoCloud',
   'erp',
@@ -15,7 +15,6 @@ export const SERVICE_KEYS = [
 export type ServiceKey = (typeof SERVICE_KEYS)[number];
 
 export const FEATURED_SERVICES: ServiceKey[] = [
-  'consultoriaTI',
   'desenvolvimentoWeb',
-  'infraestrutura',
+  'consultoriaTI',
 ];

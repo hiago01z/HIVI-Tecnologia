@@ -8,16 +8,16 @@
     "privacy": "Política de Privacidade"
   },
   "hero": {
-    "eyebrow": "Consultoria • Gestão de TI • Infraestrutura • Desenvolvimento Web",
-    "title": "Soluções Tecnológicas Estratégicas para Empresas",
-    "description": "Transformamos sua empresa com tecnologia de ponta, consultoria especializada e suporte contínuo. Resultados reais, crescimento sustentável.",
+    "eyebrow": "Desenvolvimento Web • Consultoria Estratégica de TI",
+    "title": "Tecnologia clara, direta e sob medida para o seu negócio",
+    "description": "Desenvolvo sites e sistemas web, e ofereço consultoria estratégica em TI — atendimento pessoal, sem intermediários, do diagnóstico ao resultado.",
     "ctaPrimary": "Entrar em Contato",
     "ctaSecondary": "Conhecer Serviços",
-    "imageAlt": "Profissionais de tecnologia trabalhando em soluções inovadoras",
-    "check1": "Consultoria tecnológica especializada e estratégica",
-    "check2": "Infraestrutura e cloud sob medida para seu negócio",
-    "check3": "Suporte técnico 24/7 para sua operação",
-    "check4": "Entrega dentro do prazo e orçamento definido",
+    "imageAlt": "Profissional de tecnologia trabalhando em soluções sob medida",
+    "check1": "Consultoria estratégica alinhada aos seus objetivos de negócio",
+    "check2": "Desenvolvimento web moderno, responsivo e de alta performance",
+    "check3": "Atendimento direto com quem executa e entrega o projeto",
+    "check4": "Acompanhamento próximo do início ao fim",
     "challengesLabel": "Desafios de TI",
     "mockup": {
       "serviceCommitments": "Compromissos de Serviço",
@@ -31,22 +31,22 @@
     }
   },
   "stats": {
-    "uptime": "Disponibilidade",
-    "response": "Tempo de Resposta",
-    "support": "Suporte Técnico",
-    "uptimeValue": "99,9%",
-    "responseValue": "< 4h",
-    "supportValue": "24/7"
+    "uptime": "Você fala com quem executa",
+    "response": "Resposta em horário comercial",
+    "support": "Do início ao fim",
+    "uptimeValue": "Direto",
+    "responseValue": "Ágil",
+    "supportValue": "Próximo"
   },
   "services": {
     "sectionTitle": "Nossos Serviços",
-    "sectionSubtitle": "Soluções completas para todas as necessidades de tecnologia da sua empresa",
+    "sectionSubtitle": "Foco em Desenvolvimento Web e Consultoria de TI — com soluções complementares para outros desafios do seu negócio.",
     "learnMore": "Saiba mais",
     "contactUs": "Falar com especialista",
     "items": {
       "consultoriaTI": {
         "title": "Consultoria de TI",
-        "description": "Análise estratégica e planejamento tecnológico para impulsionar o crescimento do seu negócio."
+        "description": "Diagnóstico e planejamento estratégico de TI para alinhar tecnologia aos objetivos reais do seu negócio."
       },
       "gestaoProjetos": {
         "title": "Gestão de Projetos de TI",
@@ -62,11 +62,11 @@
       },
       "suporteTI": {
         "title": "Suporte de TI",
-        "description": "Atendimento técnico especializado com tempos de resposta ágeis e resolução eficiente de incidentes."
+        "description": "Atendimento técnico pontual por pacote de horas — sem mensalidade fixa, ideal para demandas esporádicas."
       },
       "desenvolvimentoWeb": {
         "title": "Desenvolvimento Web",
-        "description": "Criação de sites e sistemas web modernos, responsivos e de alta performance."
+        "description": "Sites institucionais, landing pages e sistemas web modernos, responsivos e de alta performance — do conceito ao deploy."
       },
       "automacaoProcessos": {
         "title": "Automação de Processos",
@@ -92,9 +92,9 @@
   },
   "about": {
     "sectionTitle": "Sobre a HIVI Tecnologia",
-    "sectionSubtitle": "Uma empresa que acredita no poder da tecnologia para transformar negócios",
-    "description1": "A HIVI Tecnologia é uma empresa de consultoria especializada em soluções tecnológicas para empresas de todos os portes. Fundada com o objetivo de democratizar o acesso a tecnologia de qualidade, unimos expertise técnica com visão estratégica de negócios.",
-    "description2": "Nossa equipe de especialistas trabalha lado a lado com os clientes para entender seus desafios e entregar soluções que geram resultados reais e mensuráveis.",
+    "sectionSubtitle": "Profissional de TI comprometido com honestidade, proximidade e entregas reais",
+    "description1": "A HIVI Tecnologia é operada por um profissional especializado em soluções tecnológicas para empresas. Com formação em Gestão de TI e foco em resultados práticos, atuo com transparência total: você sabe exatamente com quem está falando e quem vai executar o projeto.",
+    "description2": "Trabalho lado a lado com cada cliente para entender seus desafios e entregar soluções que geram valor real — sem promessas vazias, sem intermediários, com comprometimento do início ao fim.",
     "mission": "Missão",
     "missionText": "Transformar empresas por meio de soluções tecnológicas estratégicas, criando valor sustentável e impulsionando o crescimento dos nossos clientes.",
     "vision": "Visão",
@@ -110,9 +110,9 @@
   },
   "contact": {
     "sectionTitle": "Entre em Contato",
-    "sectionSubtitle": "Estamos prontos para ajudar sua empresa a crescer com tecnologia",
+    "sectionSubtitle": "Pronto para ajudar sua empresa a crescer com tecnologia",
     "ctaTitle": "Pronto para transformar sua empresa?",
-    "ctaText": "Agende uma conversa sem compromisso com nossos especialistas e descubra como podemos transformar sua empresa.",
+    "ctaText": "Agende uma conversa sem compromisso e descubra como a tecnologia pode ser um ativo estratégico para o seu negócio.",
     "phone": "Telefone",
     "whatsapp": "WhatsApp",
     "email": "E-mail",
@@ -387,7 +387,7 @@
     "closeMenu": "Fechar menu"
   },
   "seo": {
-    "description": "HIVI Tecnologia — consultoria de TI, infraestrutura, segurança da informação e desenvolvimento web para empresas. Soluções tecnológicas estratégicas com suporte 24/7.",
+    "description": "HIVI Tecnologia — consultoria estratégica de TI e desenvolvimento web para empresas. Atendimento direto, sem intermediários, do diagnóstico ao resultado.",
     "keywords": "consultoria de TI, gestão de TI, infraestrutura cloud, segurança da informação, desenvolvimento web, Business Intelligence, automação de processos, suporte de TI, ERP, HIVI Tecnologia"
   }
 }

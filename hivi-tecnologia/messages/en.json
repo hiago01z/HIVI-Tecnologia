@@ -8,16 +8,16 @@
     "privacy": "Privacy Policy"
   },
   "hero": {
-    "eyebrow": "Consulting • IT Management • Infrastructure • Web Development",
-    "title": "Strategic Technology Solutions for Businesses",
-    "description": "We transform your company with cutting-edge technology, specialized consulting and continuous support. Real results, sustainable growth.",
+    "eyebrow": "Web Development • Strategic IT Consulting",
+    "title": "Clear, direct technology tailored to your business",
+    "description": "I build websites and web systems, and provide strategic IT consulting — personal service, no intermediaries, from diagnosis to results.",
     "ctaPrimary": "Contact Us",
     "ctaSecondary": "View Services",
-    "imageAlt": "Technology professionals working on innovative solutions",
-    "check1": "Specialized and strategic technology consulting",
-    "check2": "Tailored infrastructure and cloud solutions for your business",
-    "check3": "24/7 technical support for your operations",
-    "check4": "On-time and on-budget delivery",
+    "imageAlt": "IT professional working on tailored technology solutions",
+    "check1": "Strategic consulting aligned with your business objectives",
+    "check2": "Modern, responsive and high-performance web development",
+    "check3": "Direct contact with the person who executes and delivers",
+    "check4": "Close follow-up from start to finish",
     "challengesLabel": "IT Challenges",
     "mockup": {
       "serviceCommitments": "Service Commitments",
@@ -31,22 +31,22 @@
     }
   },
   "stats": {
-    "uptime": "Availability",
-    "response": "Response Time",
-    "support": "Technical Support",
-    "uptimeValue": "99.9%",
-    "responseValue": "< 4h",
-    "supportValue": "24/7"
+    "uptime": "You talk to who does the work",
+    "response": "Response during business hours",
+    "support": "From start to finish",
+    "uptimeValue": "Direct",
+    "responseValue": "Agile",
+    "supportValue": "Personal"
   },
   "services": {
     "sectionTitle": "Our Services",
-    "sectionSubtitle": "Complete solutions for all your company's technology needs",
+    "sectionSubtitle": "Focused on Web Development and IT Consulting — with complementary solutions for your other business challenges.",
     "learnMore": "Learn more",
     "contactUs": "Talk to a specialist",
     "items": {
       "consultoriaTI": {
         "title": "IT Consulting",
-        "description": "Strategic analysis and technology planning to drive your business growth."
+        "description": "Strategic IT diagnosis and planning to align technology with your real business objectives."
       },
       "gestaoProjetos": {
         "title": "IT Project Management",
@@ -62,11 +62,11 @@
       },
       "suporteTI": {
         "title": "IT Support",
-        "description": "Specialized technical support with fast response times and efficient incident resolution."
+        "description": "On-demand technical support by hour packages — no fixed monthly fee, ideal for sporadic needs."
       },
       "desenvolvimentoWeb": {
         "title": "Web Development",
-        "description": "Creation of modern, responsive and high-performance websites and web systems."
+        "description": "Institutional websites, landing pages and modern web systems — responsive, high-performance, from concept to deployment."
       },
       "automacaoProcessos": {
         "title": "Process Automation",
@@ -92,9 +92,9 @@
   },
   "about": {
     "sectionTitle": "About HIVI Tecnologia",
-    "sectionSubtitle": "A company that believes in the power of technology to transform businesses",
-    "description1": "HIVI Tecnologia is a consulting company specialized in technology solutions for companies of all sizes. Founded with the goal of democratizing access to quality technology, we combine technical expertise with strategic business vision.",
-    "description2": "Our team of specialists works side by side with clients to understand their challenges and deliver solutions that generate real, measurable results.",
+    "sectionSubtitle": "IT professional committed to honesty, proximity and real deliverables",
+    "description1": "HIVI Tecnologia is operated by a specialized IT professional. With a background in IT Management and a focus on practical results, I work with full transparency — you always know exactly who you're talking to and who will execute your project.",
+    "description2": "I work side by side with each client to understand their challenges and deliver solutions that generate real value — no empty promises, no intermediaries, with commitment from start to finish.",
     "mission": "Mission",
     "missionText": "Transform companies through strategic technology solutions, creating sustainable value and driving the growth of our clients.",
     "vision": "Vision",
@@ -110,9 +110,9 @@
   },
   "contact": {
     "sectionTitle": "Contact Us",
-    "sectionSubtitle": "We're ready to help your company grow with technology",
+    "sectionSubtitle": "Ready to help your company grow with technology",
     "ctaTitle": "Ready to transform your company?",
-    "ctaText": "Schedule a no-obligation conversation with our specialists and discover how we can transform your company.",
+    "ctaText": "Schedule a no-obligation conversation and find out how technology can be a strategic asset for your business.",
     "phone": "Phone",
     "whatsapp": "WhatsApp",
     "email": "Email",
@@ -387,7 +387,7 @@
     "closeMenu": "Close menu"
   },
   "seo": {
-    "description": "HIVI Tecnologia — IT consulting, infrastructure, information security and web development for businesses. Strategic technology solutions with 24/7 support.",
+    "description": "HIVI Tecnologia — strategic IT consulting and web development for businesses. Direct service, no intermediaries, from diagnosis to results.",
     "keywords": "IT consulting, IT management, cloud infrastructure, information security, web development, Business Intelligence, process automation, IT support, ERP, HIVI Tecnologia"
   }
 }
