@@ -1,17 +1,17 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import {
-  Server, Shield, Zap, Code2, Brain, Database, ArrowRight,
+  Zap, Code2, Brain, Globe, Headphones, TrendingUp, ArrowRight,
 } from 'lucide-react';
 import { AnimateOnScroll } from '@/components/ui/AnimateOnScroll';
 
 const CHALLENGES = [
-  { icon: Server, challengeKey: 'infraChallenge', solutionKey: 'infraSolution' },
-  { icon: Shield, challengeKey: 'securityChallenge', solutionKey: 'securitySolution' },
-  { icon: Zap, challengeKey: 'automationChallenge', solutionKey: 'automationSolution' },
-  { icon: Code2, challengeKey: 'devChallenge', solutionKey: 'devSolution' },
-  { icon: Brain, challengeKey: 'consultingChallenge', solutionKey: 'consultingSolution' },
-  { icon: Database, challengeKey: 'erpChallenge', solutionKey: 'erpSolution' },
+  { icon: Code2,       challengeKey: 'devChallenge',                solutionKey: 'devSolution'                },
+  { icon: Brain,       challengeKey: 'consultingChallenge',          solutionKey: 'consultingSolution'          },
+  { icon: Zap,         challengeKey: 'automationChallenge',          solutionKey: 'automationSolution'          },
+  { icon: Globe,       challengeKey: 'siteDesatualizadoChallenge',   solutionKey: 'siteDesatualizadoSolution'   },
+  { icon: Headphones,  challengeKey: 'suporteChallenge',             solutionKey: 'suporteSolution'             },
+  { icon: TrendingUp,  challengeKey: 'tecnologiaCaraChallenge',      solutionKey: 'tecnologiaCaraSolution'      },
 ] as const;
 
 export function SolutionsSection() {
