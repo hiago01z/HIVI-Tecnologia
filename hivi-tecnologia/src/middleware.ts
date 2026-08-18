@@ -59,6 +59,10 @@ function applySecurityHeaders(response: NextResponse, adminRoute = false): NextR
   }
   if (adminRoute) {
     response.headers.set('X-Frame-Options', 'DENY');
+  } else {
+    // Remove X-Frame-Options for public routes so CSP frame-ancestors controls embedding.
+    // This allows the portfolio site to embed this page in an iframe.
+    response.headers.delete('X-Frame-Options');
   }
   return response;
 }
