@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
             "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
             "font-src 'self'",
             "frame-src 'none'",
-            "frame-ancestors 'self' https://meu-portifolio-sage-two.vercel.app",
+            "frame-ancestors 'self' https://meu-portifolio-sage-two.vercel.app https://hiagoalmeida.site https://www.hiagoalmeida.site",
             "form-action 'self'",
             "base-uri 'self'",
           ].join('; '),
