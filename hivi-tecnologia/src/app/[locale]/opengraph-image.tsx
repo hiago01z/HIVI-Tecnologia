@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'HIVI Tecnologia — Consultoria, Gestão de TI e Infraestrutura';
+export const alt = 'HIVI Tecnologia — Consultoria Estratégica de TI e Desenvolvimento Web';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -88,7 +88,7 @@ export default function Image() {
             maxWidth: '750px',
           }}
         >
-          Soluções tecnológicas que transformam negócios
+          Consultoria de TI e Desenvolvimento Web para empresas
         </div>
 
         {/* Subtitle */}
@@ -100,7 +100,7 @@ export default function Image() {
             letterSpacing: '0.5px',
           }}
         >
-          Consultoria • Gestão de TI • Infraestrutura • Desenvolvimento Web
+          Consultoria de TI • Desenvolvimento Web • Automação • Suporte
         </div>
       </div>
     ),

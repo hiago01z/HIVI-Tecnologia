@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { NAV_LINKS, FOOTER_LEGAL_LINKS } from '@/constants/navigation';
@@ -59,7 +60,14 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Col 1 — Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" aria-label="HIVI Tecnologia">
+            <Link href="/" aria-label="HIVI Tecnologia" className="flex items-center gap-2.5">
+              <Image
+                src="/logo.png"
+                alt="HIVI Tecnologia"
+                width={36}
+                height={36}
+                className="h-9 w-auto brightness-0 invert"
+              />
               <span className="text-2xl font-extrabold tracking-tight text-white">
                 HIVI<span className="text-[#5BA4E5]"> Tecnologia</span>
               </span>
