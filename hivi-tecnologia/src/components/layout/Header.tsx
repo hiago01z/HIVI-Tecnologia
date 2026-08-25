@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
@@ -6,8 +7,16 @@ import { NavLinks } from '@/components/layout/NavLinks';
 
 function HiviLogo({ label }: { label: string }) {
   return (
-    <Link href="/" aria-label={label}>
-      <span className="text-2xl font-extrabold tracking-tight">
+    <Link href="/" aria-label={label} className="flex items-center gap-2.5">
+      <Image
+        src="/logo.png"
+        alt="HIVI Tecnologia"
+        width={40}
+        height={40}
+        className="h-10 w-auto"
+        priority
+      />
+      <span className="text-xl font-extrabold tracking-tight">
         <span className="text-[#162268]">HIVI</span>
         <span className="text-[#1565C0]"> Tecnologia</span>
       </span>
