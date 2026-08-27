@@ -11,12 +11,12 @@ function HiviLogo({ label }: { label: string }) {
       <Image
         src="/logo.png"
         alt="HIVI Tecnologia"
-        width={56}
-        height={56}
-        className="h-14 w-auto"
+        width={72}
+        height={72}
+        className="h-16 w-auto"
         priority
       />
-      <span className="text-xl font-extrabold tracking-tight">
+      <span className="text-2xl font-extrabold tracking-tight">
         <span className="text-[#162268]">HIVI</span>
         <span className="text-[#1565C0]"> Tecnologia</span>
       </span>
@@ -28,7 +28,7 @@ export function Header() {
   const t = useTranslations();
 
   return (
-    <header className="sticky top-0 z-30 h-16 w-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
+    <header className="sticky top-0 z-30 h-20 w-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
         <HiviLogo label={t('common.homeLink')} />
 

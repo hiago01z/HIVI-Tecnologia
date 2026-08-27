@@ -64,9 +64,9 @@ export function Footer() {
               <Image
                 src="/logo.png"
                 alt="HIVI Tecnologia"
-                width={52}
-                height={52}
-                className="h-12 w-auto brightness-0 invert"
+                width={64}
+                height={64}
+                className="h-16 w-auto brightness-0 invert"
               />
               <span className="text-2xl font-extrabold tracking-tight text-white">
                 HIVI<span className="text-[#5BA4E5]"> Tecnologia</span>
