@@ -33,7 +33,6 @@ function ContactForm() {
   const t = useTranslations('contact.form');
   const locale = useLocale();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorDetail, setErrorDetail] = useState<string | null>(null);
   const schema = useContatoSchema();
 
   const {
@@ -55,20 +54,15 @@ function ContactForm() {
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        const msg = body.detail || body.error || `HTTP ${res.status}`;
-        console.error('[contato] API error:', msg, body);
-        setErrorDetail(msg);
+        console.error('[contato] API error: HTTP', res.status);
         setStatus('error');
         return;
       }
       setStatus('success');
-      setErrorDetail(null);
       reset();
       fireEvent({ tipo: 'click_contato', pagina: window.location.pathname, locale });
     } catch (err) {
       console.error('[contato] network error:', err);
-      setErrorDetail(null);
       setStatus('error');
     }
   };
@@ -205,9 +199,6 @@ function ContactForm() {
       {status === 'error' && (
         <div role="alert" className="mt-4 rounded-lg bg-[#FEF2F2] p-3 text-sm text-[#EF4444]">
           <p>{t('errorMessage')}</p>
-          {errorDetail && (
-            <p className="mt-1 font-mono text-xs opacity-80">{errorDetail}</p>
-          )}
         </div>
       )}
 

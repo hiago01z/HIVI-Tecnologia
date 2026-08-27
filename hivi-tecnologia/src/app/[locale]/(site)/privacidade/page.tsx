@@ -48,7 +48,7 @@ function PrivacidadeContent() {
         <h1 className="text-4xl font-extrabold text-[#0D1117]">{t('title')}</h1>
         <div className="mt-3 h-1 w-16 rounded-full bg-[#1565C0]" aria-hidden="true" />
         <p className="mt-4 text-sm text-[#4B5563]">
-          {t('lastUpdated')}: 2026-08-07
+          {t('lastUpdated')}: {t('lastUpdatedDate')}
         </p>
       </header>
 

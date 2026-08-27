@@ -51,6 +51,9 @@ function isAuthenticated(request: NextRequest): boolean {
 
 const SECURITY_HEADERS_BASE: [string, string][] = [
   ['X-Content-Type-Options', 'nosniff'],
+  ['Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload'],
+  ['Referrer-Policy', 'strict-origin-when-cross-origin'],
+  ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()'],
 ];
 
 function applySecurityHeaders(response: NextResponse, adminRoute = false): NextResponse {

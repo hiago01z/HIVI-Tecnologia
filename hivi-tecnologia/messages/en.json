@@ -177,6 +177,7 @@
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated",
+    "lastUpdatedDate": "August 7, 2026",
     "intro": "HIVI Tecnologia is committed to protecting your personal data, in compliance with the General Data Protection Law (LGPD — Law 13.709/2018).",
     "sections": {
       "dataController": {
